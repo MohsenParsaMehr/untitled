@@ -103,14 +103,21 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
               ),
-              child: const Text('Green Light'),
+              child: const Row(mainAxisAlignment: MainAxisAlignment.end,
+                  children: [  Icon( Icons.account_circle,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'Register User'),SizedBox(width: 10),Text('Guest'), Icon( Icons.settings,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'Register User') ]) ,
             ),
             ListTile(
               title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.verified_user,
+                  children: [Icon( Icons.account_circle,
                 color: Colors.black54,
                 size: 24.0,
-                semanticLabel: 'Register User') , Text('Register')]) ,
+                semanticLabel: 'Register User'),SizedBox(width: 10) , Text('Register')]) ,
               onTap: () {
                 // Update the state of the app.
                 // ...
@@ -121,7 +128,103 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [Icon( Icons.book,
                       color: Colors.black54,
                       size: 24.0,
-                      semanticLabel: 'Books') , Text('Books')]),
+                      semanticLabel: 'Books'),SizedBox(width: 10) , Text('Books')]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [Icon( Icons.speaker_group,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'Lectures'),SizedBox(width: 10) , Text('Lectures')]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [Icon( Icons.question_answer,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'FAQs'),SizedBox(width: 10) , Text('FAQs')]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [Icon( Icons.favorite,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'Favorites'),SizedBox(width: 10) , Text('Favorites')]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [Icon( Icons.photo_album,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'Gallery') ,SizedBox(width: 10), Text('Gallery')]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [Icon( Icons.interpreter_mode,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'Interprets'),SizedBox(width: 10) , Text('Interprets')]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [Icon( Icons.add_comment_rounded,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'Poems') ,SizedBox(width: 10), Text('Poems')]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [Icon( Icons.adjust,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'Concepts'),SizedBox(width: 10) , Text('Concepts')]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Icon( Icons.telegram,
+                      color: Colors.black54,
+                      size: 24.0,
+                      semanticLabel: 'Telegram'),SizedBox(width: 10) ,
+                    Icon( Icons.telegram,
+                        color: Colors.black54,
+                        size: 24.0,
+                        semanticLabel: 'Instagram'),SizedBox(width: 10) ,
+                    Icon( Icons.telegram,
+                        color: Colors.black54,
+                        size: 24.0,
+                        semanticLabel: 'Skyroom'),SizedBox(width: 10) ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
