@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:untitled/questionAndAnswers.dart';
 import 'Slideshow.dart';
+import 'home.dart';
 void main() {
   runApp(const GreenLightApp());
 }
@@ -44,13 +46,13 @@ class GreenLightApp extends StatelessWidget {
         //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         //useMaterial3: true,
       //)
-      ,home: const MyHomePage(title: 'Green Light'),
+      ,home: MyHomePage(title: 'Green Light'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  MyHomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -60,7 +62,7 @@ class MyHomePage extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
-
+  
   final String title;
 
   @override
@@ -153,7 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       semanticLabel: 'FAQs'),SizedBox(width: 10) , Text('FAQs')]),
               onTap: () {
                 // Update the state of the app.
-                // ...
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) =>  questionAndAnswers()));
               },
             ),
             ListTile(
@@ -247,10 +250,10 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: const Icon(Icons.search))],
       ),
       body:
-      const SafeArea(
+      SafeArea(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: SlideShow())    ,
+        child: home())    ,
       floatingActionButton: FloatingActionButton(
         onPressed: _onTipPressed,
         tooltip: 'نکته روز',
