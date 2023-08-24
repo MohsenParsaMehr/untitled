@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/data/QuestionsAndAnswers.dart';
+import 'package:untitled/data/lectures.dart';
 Widget lecturesWidget(){
   int currentQuestionIndex = 0;
   return Stack(children: <Widget>[ Card(
@@ -21,11 +21,11 @@ Widget lecturesWidget(){
                   IconButton.outlined(onPressed: (){/*TODO: Do Maximize here*/},
                       icon: const Icon(Icons.square_outlined,size: 18,color: Colors.black45))
                 ])],),
-            Text(QuestionAndAnswer.samples[currentQuestionIndex].question, textAlign: TextAlign.start,),
+            Text(lecture.samples[currentQuestionIndex].topic, textAlign: TextAlign.start,),
             Row(children: [ const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-              Text(QuestionAndAnswer.samples[currentQuestionIndex].answer),
-              const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)],)
-
+              Text(lecture.samples[currentQuestionIndex].body),
+              const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)],),
+            Text(lecture.samples[currentQuestionIndex].forDate.toString())
           ]
       ),
       )
