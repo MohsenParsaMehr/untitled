@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:untitled/questionAndAnswers.dart';
-import 'Slideshow.dart';
-import 'home.dart';
+import 'package:untitled/screens/questionAndAnswers.dart';
+import 'screens/home.dart';
 void main() {
   runApp(const GreenLightApp());
 }
@@ -25,6 +24,7 @@ class GreenLightApp extends StatelessWidget {
         Locale('en'), // English
         Locale('fa'), // farsi
       ],
+      locale: const Locale('fa', 'IR'),
       theme: theme.copyWith(colorScheme: theme.colorScheme.copyWith(primary: Colors.green[900],
       secondary: Colors.green[700]))
         //ThemeData(

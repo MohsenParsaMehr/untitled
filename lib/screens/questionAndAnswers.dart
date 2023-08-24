@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'data/QuestionsAndAnswers.dart';
+import '../data/QuestionsAndAnswers.dart';
 Widget questionAndAnswers(){
   return ListView.builder(itemCount: QuestionAndAnswer.samples.length,
       itemBuilder: (BuildContext context, int index)
