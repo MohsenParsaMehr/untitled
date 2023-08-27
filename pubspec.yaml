@@ -28,6 +28,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  media_kit: ^1.1.7
+  media_kit_video: ^1.1.8
+  media_kit_libs_video: ^1.0.1
   flutter:
     sdk: flutter
   flutter_image_slideshow: any
