@@ -42,7 +42,7 @@ class MyScreenState extends State<eulogyWidget> {
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.width * 9.0 / 16.0,
+        height: 200, //MediaQuery.of(context).size.width * 9.0 / 16.0,
         // Use [Video] widget to display video output.
         child: Video(controller: controller,),
       ),
