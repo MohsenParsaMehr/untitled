@@ -27,15 +27,10 @@ class photosWidgetState extends State<photosWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () => ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('Show Albums'))),
-        onHorizontalDragEnd: (DragEndDetails dragDetails) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Next Photo')));
-
-        },
-        child: Card(
+    return
+    ListView(
+      children:[
+        Card(
             elevation: 20,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -66,6 +61,9 @@ class photosWidgetState extends State<photosWidget> {
                 ),
                 const Text('Photo Album'),
               ])
-            ])));
+            ]
+            )
+        )
+      ]);
   }
 }

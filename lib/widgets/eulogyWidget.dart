@@ -34,7 +34,6 @@ class MyScreenState extends State<eulogyWidget> {
     player.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Card(
