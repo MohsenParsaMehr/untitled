@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
-class SlideShow extends StatelessWidget {
-  const SlideShow({super.key});
+class slideShowWidget extends StatelessWidget {
+  const slideShowWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

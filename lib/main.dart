@@ -250,10 +250,10 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: const Icon(Icons.search))],
       ),
       body:
-      SafeArea(
+      const SafeArea(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: home())    ,
+        child:   home( Key('1')))    ,
       floatingActionButton: FloatingActionButton(
         onPressed: _onTipPressed,
         tooltip: 'نکته روز',

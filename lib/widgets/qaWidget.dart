@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:untitled/data/QuestionsAndAnswers.dart';
 Widget qaWidget(){
   int currentQuestionIndex = 0;
-  return Stack(children: <Widget>[ Card(
+  return  Card(
+    color: Colors.teal,
       elevation: 7,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
       child: Padding(padding: const EdgeInsets.all(12), child:
@@ -27,6 +28,6 @@ Widget qaWidget(){
           ]
       ),
       )
-  ),const Align(alignment: AlignmentDirectional.centerEnd, child: FlutterLogo(),) ],) ;
+  );
 
 }

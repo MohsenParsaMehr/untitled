@@ -14,7 +14,8 @@ class eulogyCompactWidget extends StatefulWidget {
   MyAppState createState() => MyAppState();
 }
 
-class MyAppState extends State<eulogyCompactWidget> with WidgetsBindingObserver {
+class MyAppState extends State<eulogyCompactWidget>
+    with WidgetsBindingObserver {
   final _player = AudioPlayer();
 
   @override
@@ -35,8 +36,8 @@ class MyAppState extends State<eulogyCompactWidget> with WidgetsBindingObserver 
     // Listen to errors during playback.
     _player.playbackEventStream.listen((event) {},
         onError: (Object e, StackTrace stackTrace) {
-          print('A stream error occurred: $e');
-        });
+      print('A stream error occurred: $e');
+    });
     // Try to load audio from a source and catch any errors.
     try {
       await _player.setAudioSource(AudioSource.uri(Uri.parse(
@@ -72,35 +73,48 @@ class MyAppState extends State<eulogyCompactWidget> with WidgetsBindingObserver 
           _player.positionStream,
           _player.bufferedPositionStream,
           _player.durationStream,
-              (position, bufferedPosition, duration) => PositionData(
+          (position, bufferedPosition, duration) => PositionData(
               position, bufferedPosition, duration ?? Duration.zero));
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-            children: <Widget>[
-              Card( child:Column(children: <Widget>[
-              // Display play/pause button and volume/speed sliders.
-              ControlButtons(_player),
-              // Display seek bar. Using StreamBuilder, this widget rebuilds
-              // each time the position, buffered position or duration changes.
-              StreamBuilder<PositionData>(
-                stream: _positionDataStream,
-                builder: (context, snapshot) {
-                  final positionData = snapshot.data;
-                  return SeekBar(
-                    duration: positionData?.duration ?? Duration.zero,
-                    position: positionData?.position ?? Duration.zero,
-                    bufferedPosition:
+    return Stack(children: <Widget>[
+      Card(
+        color: Colors.brown,
+          child: Column(
+        children: <Widget>[
+          Row(mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Text("Eulogies", style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                IconButton.outlined(onPressed: (){/*TODO: Do download here*/},
+                    icon: const Icon(Icons.download,size: 18,color: Colors.black45,)),
+                IconButton.outlined(onPressed: (){/*TODO: Do share here*/},
+                    icon: const Icon(Icons.share,size: 18,color: Colors.black45,)),
+                IconButton.outlined(onPressed: (){/*TODO: Do bookmark here*/},
+                    icon: const Icon(Icons.bookmark,size: 18,color: Colors.black45)),
+                IconButton.outlined(onPressed: (){/*TODO: Do Maximize here*/},
+                    icon: const Icon(Icons.square_outlined,size: 18,color: Colors.black45))
+              ]),
+          // Display play/pause button and volume/speed sliders.
+          ControlButtons(_player),
+          // Display seek bar. Using StreamBuilder, this widget rebuilds
+          // each time the position, buffered position or duration changes.
+          StreamBuilder<PositionData>(
+            stream: _positionDataStream,
+            builder: (context, snapshot) {
+              final positionData = snapshot.data;
+              return SeekBar(
+                duration: positionData?.duration ?? Duration.zero,
+                position: positionData?.position ?? Duration.zero,
+                bufferedPosition:
                     positionData?.bufferedPosition ?? Duration.zero,
-                    onChangeEnd: _player.seek,
-
-                  );
-                },
-              ),
-            ],
-    )
-    )]);
+                onChangeEnd: _player.seek,
+              );
+            },
+          ),
+        ],
+      ))
+    ]);
   }
 }
 
@@ -117,7 +131,10 @@ class ControlButtons extends StatelessWidget {
       children: [
         // Opens volume slider dialog
         IconButton(
-          icon: const Icon(Icons.volume_up,),
+          icon: const Icon(
+            Icons.volume_up,
+          ),
+          color: Colors.black45,
           iconSize: 28,
           onPressed: () {
             showSliderDialog(
@@ -147,8 +164,8 @@ class ControlButtons extends StatelessWidget {
                 processingState == ProcessingState.buffering) {
               return Container(
                 margin: const EdgeInsets.all(8.0),
-                width: 64.0,
-                height: 64.0,
+                width: 30.0,
+                height: 30.0,
                 child: const CircularProgressIndicator(),
               );
             } else if (playing != true) {
@@ -156,17 +173,20 @@ class ControlButtons extends StatelessWidget {
                 icon: const Icon(Icons.play_arrow),
                 iconSize: 30.0,
                 onPressed: player.play,
+                color: Colors.black45,
               );
             } else if (processingState != ProcessingState.completed) {
               return IconButton(
                 icon: const Icon(Icons.pause),
-                iconSize: 64.0,
+                iconSize: 30.0,
                 onPressed: player.pause,
+                color: Colors.black45,
               );
             } else {
               return IconButton(
                 icon: const Icon(Icons.replay),
                 iconSize: 30.0,
+                color: Colors.black45,
                 onPressed: () => player.seek(Duration.zero),
               );
             }
