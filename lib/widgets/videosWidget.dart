@@ -46,7 +46,7 @@ class videosWidgetState extends State<videosWidget> {
           Column(children: <Widget>[
             Container(
               height: 150.0,
-
+              width: 150.0,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('images/sample.jpg'),
