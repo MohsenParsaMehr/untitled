@@ -14,13 +14,13 @@ surfaceTintColor: Colors.lightGreen,
             Row(mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton.outlined(onPressed: (){/*TODO: Do download here*/},
-                      icon: const Icon(Icons.download,size: 18,color: Colors.black45,)),
+                      icon: const Icon(Icons.download_rounded,size: 18,color: Colors.black45,)),
                   IconButton.outlined(onPressed: (){/*TODO: Do share here*/},
-                      icon: const Icon(Icons.share,size: 18,color: Colors.black45,)),
+                      icon: const Icon(Icons.share_rounded,size: 18,color: Colors.black45,)),
                   IconButton.outlined(onPressed: (){/*TODO: Do bookmark here*/},
-                      icon: const Icon(Icons.bookmark,size: 18,color: Colors.black45)),
+                      icon: const Icon(Icons.bookmark_add_rounded,size: 18,color: Colors.black45)),
                   IconButton.outlined(onPressed: (){/*TODO: Do Maximize here*/},
-                      icon: const Icon(Icons.square_outlined,size: 18,color: Colors.black45))
+                      icon: const Icon(Icons.crop_square_rounded,size: 18,color: Colors.black45))
                 ])],),
             Text(lecture.samples[currentQuestionIndex].topic, textAlign: TextAlign.start,),
             Row(children: [ const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),

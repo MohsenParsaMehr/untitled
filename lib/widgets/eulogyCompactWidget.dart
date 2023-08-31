@@ -87,13 +87,13 @@ class MyAppState extends State<eulogyCompactWidget>
               children: [
                 const Text("Eulogies", style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
                 IconButton.outlined(onPressed: (){/*TODO: Do download here*/},
-                    icon: const Icon(Icons.download,size: 18,color: Colors.black45,)),
+                    icon: const Icon(Icons.download_rounded,size: 18,color: Colors.black45,)),
                 IconButton.outlined(onPressed: (){/*TODO: Do share here*/},
-                    icon: const Icon(Icons.share,size: 18,color: Colors.black45,)),
+                    icon: const Icon(Icons.share_rounded,size: 18,color: Colors.black45,)),
                 IconButton.outlined(onPressed: (){/*TODO: Do bookmark here*/},
-                    icon: const Icon(Icons.bookmark,size: 18,color: Colors.black45)),
+                    icon: const Icon(Icons.bookmark_add_rounded,size: 18,color: Colors.black45)),
                 IconButton.outlined(onPressed: (){/*TODO: Do Maximize here*/},
-                    icon: const Icon(Icons.square_outlined,size: 18,color: Colors.black45))
+                    icon: const Icon(Icons.crop_square_rounded,size: 18,color: Colors.black45))
               ]),
           // Display play/pause button and volume/speed sliders.
           ControlButtons(_player),
@@ -103,7 +103,7 @@ class MyAppState extends State<eulogyCompactWidget>
             stream: _positionDataStream,
             builder: (context, snapshot) {
               final positionData = snapshot.data;
-              
+
               return SeekBar(
                 duration: positionData?.duration ?? Duration.zero,
                 position: positionData?.position ?? Duration.zero,
@@ -131,24 +131,14 @@ class ControlButtons extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Opens volume slider dialog
         IconButton(
           icon: const Icon(
-            Icons.volume_up,
+            Icons.skip_previous_rounded,
           ),
           color: Colors.black45,
           iconSize: 28,
           onPressed: () {
-            showSliderDialog(
-              context: context,
-              title: "Adjust volume",
-              divisions: 10,
-              min: 0.0,
-              max: 1.0,
-              value: player.volume,
-              stream: player.volumeStream,
-              onChanged: player.setVolume,
-            );
+
           },
         ),
 
@@ -172,26 +162,56 @@ class ControlButtons extends StatelessWidget {
               );
             } else if (playing != true) {
               return IconButton(
-                icon: const Icon(Icons.play_arrow),
+                icon: const Icon(Icons.play_circle_fill_rounded),
                 iconSize: 30.0,
                 onPressed: player.play,
                 color: Colors.black45,
               );
             } else if (processingState != ProcessingState.completed) {
               return IconButton(
-                icon: const Icon(Icons.pause),
+                icon: const Icon(Icons.pause_circle_filled_rounded),
                 iconSize: 30.0,
                 onPressed: player.pause,
                 color: Colors.black45,
               );
             } else {
               return IconButton(
-                icon: const Icon(Icons.replay),
+                icon: const Icon(Icons.replay_circle_filled_rounded),
                 iconSize: 30.0,
                 color: Colors.black45,
                 onPressed: () => player.seek(Duration.zero),
               );
             }
+          },
+        ),
+        IconButton(
+          icon: const Icon(
+            Icons.skip_next_rounded,
+          ),
+          color: Colors.black45,
+          iconSize: 28,
+          onPressed: () {
+
+          },
+        ),
+        // Opens volume slider dialog
+        IconButton(
+          icon: const Icon(
+            Icons.volume_up_rounded,
+          ),
+          color: Colors.black45,
+          iconSize: 20,
+          onPressed: () {
+            showSliderDialog(
+              context: context,
+              title: "Adjust volume",
+              divisions: 10,
+              min: 0.0,
+              max: 1.0,
+              value: player.volume,
+              stream: player.volumeStream,
+              onChanged: player.setVolume,
+            );
           },
         ),
         // Opens speed slider dialog
