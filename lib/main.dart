@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:untitled/screens/questionAndAnswers.dart';
 import 'screens/home.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() {
   runApp(const GreenLightApp());
 }
@@ -14,17 +15,20 @@ class GreenLightApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
     return MaterialApp(
-      title: 'Green Light',
+
       localizationsDelegates: const[
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const [
+      supportedLocales: AppLocalizations.supportedLocales,
+
+      /*supportedLocales: const [
         Locale('en'), // English
         Locale('fa'), // farsi
-      ],
-      locale: const Locale('fa', 'IR'),
+      ],*/
+      locale: const Locale('en', 'US'),
       theme: theme.copyWith(colorScheme: theme.colorScheme.copyWith(primary: Colors.green[900],
       secondary: Colors.green[700]))
         //ThemeData(
@@ -47,6 +51,7 @@ class GreenLightApp extends StatelessWidget {
         //useMaterial3: true,
       //)
       ,home: MyHomePage(title: 'Green Light'),
+
     );
   }
 }
@@ -115,11 +120,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       semanticLabel: 'Register User') ]) ,
             ),
             ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.account_circle,
+              title:  Row(mainAxisAlignment: MainAxisAlignment.start,
+                  children: [const Icon( Icons.account_circle,
                 color: Colors.black54,
                 size: 24.0,
-                semanticLabel: 'Register User'),SizedBox(width: 10) , Text('Register')]) ,
+
+                semanticLabel: 'Register User'),const SizedBox(width: 10) , Text(AppLocalizations.of(context)!.helloWorld )]) ,
               onTap: () {
                 // Update the state of the app.
                 // ...

@@ -103,12 +103,14 @@ class MyAppState extends State<eulogyCompactWidget>
             stream: _positionDataStream,
             builder: (context, snapshot) {
               final positionData = snapshot.data;
+              
               return SeekBar(
                 duration: positionData?.duration ?? Duration.zero,
                 position: positionData?.position ?? Duration.zero,
                 bufferedPosition:
                     positionData?.bufferedPosition ?? Duration.zero,
                 onChangeEnd: _player.seek,
+
               );
             },
           ),
