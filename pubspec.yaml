@@ -34,6 +34,8 @@ dependencies:
   just_audio: ^0.9.34
   rxdart: ^0.27.7
   flutter_carousel_slider: ^1.1.0
+  sqflite: ^2.3.0
+  path: ^1.8.3
   flutter:
     sdk: flutter
   flutter_image_slideshow: any
@@ -98,3 +100,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+

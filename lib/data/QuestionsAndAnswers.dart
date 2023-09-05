@@ -1,3 +1,6 @@
+import 'package:sqflite/sqflite.dart';
+import 'package:untitled/screens/questionAndAnswers.dart';
+import 'package:untitled/data/database.dart';
 class QuestionAndAnswer{
   int id = 0;
   String question;
@@ -12,7 +15,6 @@ class QuestionAndAnswer{
       QuestionAndAnswer(id:1, question: "sample question1", answer: "sample answer2")
     ];
 
-
   Map<String, dynamic> toMap() => {
     "id": id,
     "question": question,
@@ -23,4 +25,18 @@ class QuestionAndAnswer{
     question: json["question"],
     answer: json["answer"],
   );
+  Future<void> insertQA(QuestionAndAnswer qa) async {
+    // Get a reference to the database.
+    final db = await database.getDatabase();
+
+    // Insert the Dog into the correct table. You might also specify the
+    // `conflictAlgorithm` to use in case the same dog is inserted twice.
+    //
+    // In this case, replace any previous data.
+    await db.insert(
+      'QuestionAndAnswers',
+      toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
 }
