@@ -33,6 +33,7 @@ dependencies:
   media_kit_libs_video: ^1.0.1
   just_audio: ^0.9.34
   rxdart: ^0.27.7
+  flutter_carousel_slider: ^1.1.0
   flutter:
     sdk: flutter
   flutter_image_slideshow: any

@@ -27,7 +27,7 @@ class home extends StatelessWidget {
                 const eulogyCompactWidget(),
                 const Row(
                   children: <Widget>[
-                    //photosWidget(),
+                    photosWidget(),
                     Expanded(child: videosWidget())
                  // ],
                 //)

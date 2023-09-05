@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_slider/carousel_slider.dart';
 
 class photosWidget extends StatefulWidget {
   const photosWidget({Key? key}) : super(key: key);
@@ -6,6 +7,7 @@ class photosWidget extends StatefulWidget {
   @override
   photosWidgetState createState() => photosWidgetState();
 }
+bool _isPlaying = false;
 
 class photosWidgetState extends State<photosWidget> {
   @override
@@ -25,35 +27,62 @@ class photosWidgetState extends State<photosWidget> {
     //}
   }
 
+
+  List<Widget> getSliderItems(){
+    return [];
+  }
+  final List<Color> colors = [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+    Colors.indigo,
+    Colors.purple,
+  ];
+  final List<String> letters = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+  ];
   @override
   Widget build(BuildContext context) {
     return
-      /*Card(
-        elevation: 20,
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        child:*/
-        ListView(
-            physics: const BouncingScrollPhysics(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              Column(children: <Widget>[
-                Container(
-                  height: 150.0,
-                  width: 150.0,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('images/sample.jpg'),
-                      fit: BoxFit.fill,
-                    ),
-                    shape: BoxShape.rectangle,
-                  ),
+      //ListView(
+        //children: <Widget>[
+      Container(
+        //elevation: 20,
+        //height: 400,
+        //width: 400,
+        //shape:        RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child:
+        CarouselSlider.builder(
+            key: GlobalKey(),
+            unlimitedMode: true,
+            slideBuilder: (index) {
+              return Container(
+                alignment: Alignment.center,
+                color: colors[index],
+                child:
+                  //const Image(image: AssetImage('images/')
+                Text(
+                  letters[index],
+                  style: const TextStyle(fontSize: 200, color: Colors.white),
                 ),
-                const Text('Photo Album'), ]
-              ),
-              const Text('Next')
-            ]
-        );
+              );
+            },
+            slideTransform: const CubeTransform(),
+            slideIndicator: CircularSlideIndicator(
+              padding:   const EdgeInsets.only(bottom: 32),
+            ),
+            itemCount: getSliderItems().length),
+      );
+
+
+
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:media_kit/media_kit.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 
 class videosWidget extends StatefulWidget {
   const videosWidget({Key? key}) : super(key: key);
@@ -8,14 +10,33 @@ class videosWidget extends StatefulWidget {
 }
 
 class videosWidgetState extends State<videosWidget> {
+  late final player = Player();
+  // Create a [VideoController] to handle video output from [Player].
+  late final controller = VideoController(player,);
   @override
   void initState() {
     super.initState();
+    player.open(Media('https://user-images.githubusercontent.com/28951144/229373695-22f88f13-d18f-4288-9bf1-c3e078d83722.mp4'));
+    player.pause();
   }
 
   @override
   void dispose() {
+    player.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 10,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: //SizedBox(
+        //MediaQuery.of(context).size.width,
+        // MediaQuery.of(context).size.width * 9.0 / 16.0,
+        // Use [Video] widget to display video output.
+        Video(controller: controller,width: 300,height: 200),
+    );
   }
 
   @override
@@ -25,38 +46,4 @@ class videosWidgetState extends State<videosWidget> {
     //}
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        elevation: 20,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        child: Column(children: <Widget>[
-          /*Row(mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const Text("Eulogies", style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
-                    IconButton.outlined(onPressed: (){*/ /*TODO: Do download here*/ /*},
-                        icon: const Icon(Icons.download,size: 18,color: Colors.black45,)),
-                    IconButton.outlined(onPressed: (){*/ /*TODO: Do share here*/ /*},
-                        icon: const Icon(Icons.share,size: 18,color: Colors.black45,)),
-                    IconButton.outlined(onPressed: (){*/ /*TODO: Do bookmark here*/ /*},
-                        icon: const Icon(Icons.bookmark,size: 18,color: Colors.black45)),
-                    IconButton.outlined(onPressed: (){*/ /*TODO: Do Maximize here*/ /*},
-                        icon: const Icon(Icons.square_outlined,size: 18,color: Colors.black45))
-                  */
-          Column(children: <Widget>[
-            Container(
-              height: 150.0,
-              width: 150.0,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/sample.jpg'),
-                  fit: BoxFit.fill,
-                ),
-                shape: BoxShape.rectangle,
-              ),
-            ),
-            const Text('Video Album'),
-          ])
-        ]));
-  }
 }
