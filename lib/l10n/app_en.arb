@@ -1,5 +1,6 @@
 {
   "helloWorld": "Hello World!",
+  "videos": "Videos",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

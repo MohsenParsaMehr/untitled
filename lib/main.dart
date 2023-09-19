@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:untitled/screens/questionAndAnswers.dart';
+import 'package:untitled/screens/search.dart';
+import 'greenlight_theme.dart';
 import 'screens/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() {
-  runApp(const GreenLightApp());
+  runApp(GreenLightApp());
 }
-
+final theme  = GreenLightTheme.dark();
 class GreenLightApp extends StatelessWidget {
-  const GreenLightApp({super.key});
+  GreenLightApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -28,9 +30,8 @@ class GreenLightApp extends StatelessWidget {
         Locale('en'), // English
         Locale('fa'), // farsi
       ],*/
-      locale: const Locale('en', 'US'),
-      theme: theme.copyWith(colorScheme: theme.colorScheme.copyWith(primary: Colors.green[900],
-      secondary: Colors.green[700]))
+      locale: const Locale('fa', 'IR'),
+      theme: theme,// theme.copyWith(colorScheme: theme.colorScheme.copyWith(primary: Colors.green[900],      secondary: Colors.green[700]))
         //ThemeData(
         // This is the theme of your application.
         //
@@ -50,7 +51,7 @@ class GreenLightApp extends StatelessWidget {
         //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         //useMaterial3: true,
       //)
-      ,home: MyHomePage(title: 'Green Light'),
+      home: MyHomePage(title: 'Green Light'),
 
     );
   }
@@ -249,10 +250,12 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title:  Text(widget.title),
+
+        title:  Text(widget.title, style: theme.textTheme.bodyLarge,),
+
         actions: [IconButton(
             onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) =>  Container())),
+                .push(MaterialPageRoute(builder: (_) =>  const Search())),
             icon: const Icon(Icons.search))],
       ),
       body:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class videosWidget extends StatefulWidget {
   const videosWidget({Key? key}) : super(key: key);
 
@@ -31,11 +31,27 @@ class videosWidgetState extends State<videosWidget> {
     return Card(
       elevation: 10,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: //SizedBox(
+      child: Column(
+          children: <Widget>[
+      Row(mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(AppLocalizations.of(context)!.videos , style:const TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+            IconButton.outlined(onPressed: (){/*TODO: Do download here*/},
+                icon: const Icon(Icons.download_rounded,size: 18,color: Colors.black45,)),
+            IconButton.outlined(onPressed: (){/*TODO: Do share here*/},
+                icon: const Icon(Icons.share_rounded,size: 18,color: Colors.black45,)),
+            IconButton.outlined(onPressed: (){/*TODO: Do bookmark here*/},
+                icon: const Icon(Icons.bookmark_add_rounded,size: 18,color: Colors.black45)),
+            IconButton.outlined(onPressed: (){/*TODO: Do Maximize here*/},
+                icon: const Icon(Icons.crop_square_rounded,size: 18,color: Colors.black45))
+          ]),
+       //SizedBox(
         //MediaQuery.of(context).size.width,
         // MediaQuery.of(context).size.width * 9.0 / 16.0,
         // Use [Video] widget to display video output.
+
         Video(controller: controller,width: 300,height: 200),
+    ])
     );
   }
 
