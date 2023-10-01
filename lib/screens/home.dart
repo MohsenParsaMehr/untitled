@@ -21,7 +21,7 @@ class home extends StatelessWidget {
             children: <Widget>[
               //Column(children: <Widget>[
                 const slideShowWidget(),
-                qaWidget(),
+                qaWidget(Key('3')),
                 lecturesWidget(),
                 //const Text('Eulogy'),
                 const eulogyCompactWidget(),
