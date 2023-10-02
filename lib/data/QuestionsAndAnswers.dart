@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:untitled/screens/questionAndAnswers.dart';
 import 'package:untitled/data/database.dart';
+
+import '../network/qa_model.dart';
 class QuestionAndAnswer{
   int id = 0;
   String question;
@@ -14,7 +19,10 @@ class QuestionAndAnswer{
       QuestionAndAnswer(id:0, question: "sample question", answer: "sample answer"),
       QuestionAndAnswer(id:1, question: "sample question1", answer: "sample answer2")
     ];
-
+  Future loadQAs() async {
+    final jsonString = await rootBundle.loadString('assets/recipes1.json');
+      return APIQAQuery.fromJson(jsonDecode(jsonString));
+  }
   Map<String, dynamic> toMap() => {
     "id": id,
     "question": question,

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/data/QuestionsAndAnswers.dart';
+import 'package:untitled/network/green_light_service.dart';
 
 class qaWidget extends StatefulWidget {
   const qaWidget(Key key) : super(key: key);
-
   @override
   State<qaWidget> createState() => _qaWidgetState();
 }
 
 class _qaWidgetState extends State<qaWidget> {
+
+  Future<List<QuestionAndAnswer>> qas = GreenLightService().getQAs("",null,null);
   @override
   Widget build(BuildContext context) {
     int currentQuestionIndex = 0;
@@ -35,7 +37,6 @@ class _qaWidgetState extends State<qaWidget> {
                 Row(children: [ const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                   Text(QuestionAndAnswer.samples[currentQuestionIndex].answer),
                   const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)],)
-
               ]
           ),
           )
@@ -53,6 +54,10 @@ class _qaWidgetState extends State<qaWidget> {
          }
          else{
             --currentQuestionIndex;
+            const snackBar = SnackBar(
+              content: Text('to left'),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
          }
       },
     );
