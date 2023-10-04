@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart';
 import 'package:untitled/data/QuestionsAndAnswers.dart';
+import 'package:untitled/network/qa_model.dart';
 
 const String apiKey = '<Your Key>';
 const String apiId = '<your ID>';
@@ -8,18 +10,23 @@ const String apiUrl = 'https://localhost:44358/qa/GetAllQAs';
 
 class GreenLightService {
 
-  Future getData(String url) async {
-
+  Future<List<APIQAQuery>> getData(String url) async {
+    var qa;
     final response = await get(Uri.parse(url));
     if (response.statusCode == 200) {
-      return response.body;
+      var qaData = jsonDecode( response.body) ;
+      for(int i = 0; i < qaData.length; i++){
+        qa.add( APIQAQuery.fromJson(qaData[i]));
+      }
     } else {
-      log(response.body);
+        log(response.body);
     }
+    return qa;
   }
-  Future<List<QuestionAndAnswer>> getQAs(String query, int? from, int? to) async
+  Future<List<APIQAQuery>> getQAs(String query, int? from, int? to) async
   {
-    final qaData = await getData(apiUrl);//?app_id=$apiId&app_key=$apiKey&q=$query&from=$from??&to=$to??');
+    final qaData = await getData(apiUrl) ;//as List<QuestionAndAnswer>;//?app_id=$apiId&app_key=$apiKey&q=$query&from=$from??&to=$to??');
+
         return qaData;
-    }
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/data/QuestionsAndAnswers.dart';
 import 'package:untitled/network/green_light_service.dart';
+import 'package:untitled/network/qa_model.dart';
 
 class qaWidget extends StatefulWidget {
   const qaWidget(Key key) : super(key: key);
@@ -10,9 +11,10 @@ class qaWidget extends StatefulWidget {
 
 class _qaWidgetState extends State<qaWidget> {
 
-  Future<List<QuestionAndAnswer>> qas = GreenLightService().getQAs("",null,null);
+
   @override
   Widget build(BuildContext context) {
+
     int currentQuestionIndex = 0;
     return  GestureDetector(
       child: Card(
@@ -33,10 +35,19 @@ class _qaWidgetState extends State<qaWidget> {
                       IconButton.outlined(onPressed: (){/*TODO: Do Maximize here*/},
                           icon: const Icon(Icons.square_outlined,size: 18,color: Colors.black45))
                     ])],),
-                Text(QuestionAndAnswer.samples[currentQuestionIndex].question, textAlign: TextAlign.start,),
-                Row(children: [ const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-                  Text(QuestionAndAnswer.samples[currentQuestionIndex].answer),
-                  const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)],)
+                FutureBuilder<List<APIQAQuery>>(future: GreenLightService().getQAs("",null, null), builder: (BuildContext context, AsyncSnapshot<List<APIQAQuery>> snapshot){
+                  if(!snapshot.hasData){
+                    return const Center(child: CircularProgressIndicator(),);
+                  }
+                  else{
+                    Text(snapshot.data![currentQuestionIndex].Question, textAlign: TextAlign.start,);
+                    Row(children: [ const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                    Text(snapshot.data![currentQuestionIndex].Answer),
+                    const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)]);
+                  }
+                  throw Exception('');
+                })
+
               ]
           ),
           )
