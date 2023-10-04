@@ -12,14 +12,21 @@ class GreenLightService {
 
   Future<List<APIQAQuery>> getData(String url) async {
     var qa;
-    final response = await get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      var qaData = jsonDecode( response.body) ;
-      for(int i = 0; i < qaData.length; i++){
-        qa.add( APIQAQuery.fromJson(qaData[i]));
-      }
-    } else {
+    try {
+
+      final response = await get(Uri.https(url));
+      if (response.statusCode == 200) {
+        var qaData = jsonDecode(response.body);
+        for (int i = 0; i < qaData.length; i++) {
+          qa.add(APIQAQuery.fromJson(qaData[i]));
+        }
+      } else {
         log(response.body);
+      }
+
+    }
+    catch (e) {
+      print(e);
     }
     return qa;
   }
