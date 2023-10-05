@@ -11,11 +11,12 @@ class qaWidget extends StatefulWidget {
 
 class _qaWidgetState extends State<qaWidget> {
 
-
+  int _currentQuestionIndex = 0;
+  List<APIQAQuery> _qaSnapshotData =[];
   @override
   Widget build(BuildContext context) {
 
-    int currentQuestionIndex = 0;
+
     return  GestureDetector(
       child: Card(
           color: Colors.teal,
@@ -40,10 +41,14 @@ class _qaWidgetState extends State<qaWidget> {
                     return const Center(child: CircularProgressIndicator(),);
                   }
                   else{
-                    Text(snapshot.data![currentQuestionIndex].Question, textAlign: TextAlign.start,);
+                    _qaSnapshotData = snapshot.data!;
+                    return Row(children:[
+                    Text(snapshot.data![_currentQuestionIndex].question, textAlign: TextAlign.start,),
                     Row(children: [ const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-                    Text(snapshot.data![currentQuestionIndex].Answer),
-                    const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)]);
+                    Text(snapshot.data![_currentQuestionIndex].answer),
+                    const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)])
+                  ] );
+
                   }
                   throw Exception('');
                 })
@@ -55,20 +60,39 @@ class _qaWidgetState extends State<qaWidget> {
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context){ return Container(child: Text('QA Details or List Page'),);}));
       },
-      onPanUpdate: (details){
-         if(details.delta.dx > 0){
-            ++currentQuestionIndex;
+
+      onHorizontalDragEnd: (details){
+         if(!details.primaryVelocity!.isNegative){
             const snackBar = SnackBar(
               content: Text('to right'),
             );
            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+           setState(() {
+             if(_qaSnapshotData != null) {
+               if (_currentQuestionIndex < _qaSnapshotData.length-1) {
+                 ++_currentQuestionIndex;
+               }
+               else{
+                 _currentQuestionIndex=0;
+               }
+             }
+           });
          }
          else{
-            --currentQuestionIndex;
             const snackBar = SnackBar(
               content: Text('to left'),
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            setState(() {
+              if(_qaSnapshotData != null) {
+                if (_currentQuestionIndex > 0) {
+                  --_currentQuestionIndex;
+                }
+                else{
+                  _currentQuestionIndex = _qaSnapshotData.length-1;
+                }
+              }
+            });
          }
       },
     );

@@ -6,15 +6,19 @@ import 'package:untitled/network/qa_model.dart';
 
 const String apiKey = '<Your Key>';
 const String apiId = '<your ID>';
-const String apiUrl = 'https://localhost:44358/qa/GetAllQAs';
+const String apiUrl = 'localhost:44358';// /qa/GetAllQAs';
 
 class GreenLightService {
 
   Future<List<APIQAQuery>> getData(String url) async {
-    var qa;
+    List<APIQAQuery> qa = [];
     try {
-
-      final response = await get(Uri.https(url));
+      var headers = {
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      };
+      final response = await get(Uri.https(url,'qa/GetAllQAs'),headers: headers);
       if (response.statusCode == 200) {
         var qaData = jsonDecode(response.body);
         for (int i = 0; i < qaData.length; i++) {

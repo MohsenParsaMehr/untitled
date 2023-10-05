@@ -9,13 +9,13 @@ class APIQAQuery {
   Map<String, dynamic> toJson() => _$APIQAQueryToJson(this);
 
   //@JsonKey(name: 'Id')
-  int Id;
-  String Question;
-  String Answer;
+  int id;
+  String question;
+  String answer;
 
   APIQAQuery({
-    required this.Id,
-    required this.Question,
-    required this.Answer,
+    required this.id,
+    required this.question,
+    required this.answer,
   });
 }
