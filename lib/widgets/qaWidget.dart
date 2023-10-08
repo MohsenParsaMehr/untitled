@@ -38,7 +38,13 @@ class _qaWidgetState extends State<qaWidget> {
                     ])],),
                 FutureBuilder<List<APIQAQuery>>(future: GreenLightService().getQAs("",null, null), builder: (BuildContext context, AsyncSnapshot<List<APIQAQuery>> snapshot){
                   if(!snapshot.hasData){
-                    return const Center(child: CircularProgressIndicator(),);
+                    if(snapshot.data!.isEmpty){
+                      // load cashed QA data as internet connection is not available
+                      return const Text('List is empty');
+                    }
+                    else {
+                      return const Center(child: CircularProgressIndicator(),);
+                    }
                   }
                   else{
                     _qaSnapshotData = snapshot.data!;
@@ -48,11 +54,8 @@ class _qaWidgetState extends State<qaWidget> {
                     Text(snapshot.data![_currentQuestionIndex].answer),
                     const Text('"',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),)])
                   ] );
-
                   }
-                  throw Exception('');
                 })
-
               ]
           ),
           )

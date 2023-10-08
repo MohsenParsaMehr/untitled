@@ -19,6 +19,11 @@ class GreenLightService {
         'Accept': '*/*'
       };
       final response = await get(Uri.https(url,'qa/GetAllQAs'),headers: headers);
+
+      /// sample of envelope
+      ///Envelope<User> userInfoEnvelope = new Envelope<>(user,null, null, this, ++serviceRequestCounter, null, false, true, true, true, false, true);
+      ///    asyncNetworking = new AsyncNetworking(this, this, USER_SIGNUP_TASK, true, userInfoEnvelope, Integer.class);
+
       if (response.statusCode == 200) {
         var qaData = jsonDecode(response.body);
         for (int i = 0; i < qaData.length; i++) {
@@ -34,6 +39,7 @@ class GreenLightService {
     }
     return qa;
   }
+
   Future<List<APIQAQuery>> getQAs(String query, int? from, int? to) async
   {
     final qaData = await getData(apiUrl) ;//as List<QuestionAndAnswer>;//?app_id=$apiId&app_key=$apiKey&q=$query&from=$from??&to=$to??');
