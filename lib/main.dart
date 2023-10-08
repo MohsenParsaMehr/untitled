@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:untitled/constants.dart';
 import 'package:untitled/screens/questionAndAnswers.dart';
 import 'package:untitled/screens/search.dart';
 import 'greenlight_theme.dart';
@@ -17,7 +20,6 @@ class GreenLightApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
     return MaterialApp(
-
       localizationsDelegates: const[
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -89,6 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Dio dio = Dio();
+  static const String API_URL = 'https://localhost:44358';
+
+@override void initState(){
+  dio.interceptors.add(DioCacheManager(CacheConfig(baseUrl: Constants.apiUrl)).interceptor);
+  super.initState();
+}
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done

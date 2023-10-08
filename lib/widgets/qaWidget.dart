@@ -13,6 +13,10 @@ class _qaWidgetState extends State<qaWidget> {
 
   int _currentQuestionIndex = 0;
   List<APIQAQuery> _qaSnapshotData =[];
+  late Future<List<APIQAQuery>> qaApiData;
+  @override void initState(){
+    qaApiData =  GreenLightService().getDataDio();
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -36,15 +40,9 @@ class _qaWidgetState extends State<qaWidget> {
                       IconButton.outlined(onPressed: (){/*TODO: Do Maximize here*/},
                           icon: const Icon(Icons.square_outlined,size: 18,color: Colors.black45))
                     ])],),
-                FutureBuilder<List<APIQAQuery>>(future: GreenLightService().getQAs("",null, null), builder: (BuildContext context, AsyncSnapshot<List<APIQAQuery>> snapshot){
+                FutureBuilder<List<APIQAQuery>>(future: qaApiData, builder: (BuildContext context, AsyncSnapshot<List<APIQAQuery>> snapshot){
                   if(!snapshot.hasData){
-                    if(snapshot.data!.isEmpty){
-                      // load cashed QA data as internet connection is not available
-                      return const Text('List is empty');
-                    }
-                    else {
                       return const Center(child: CircularProgressIndicator(),);
-                    }
                   }
                   else{
                     _qaSnapshotData = snapshot.data!;
