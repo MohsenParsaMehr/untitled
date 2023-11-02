@@ -1,10 +1,12 @@
 import 'dart:core';
+import 'package:json_annotation/json_annotation.dart';
 import '../data/search_criterias.dart';
 import '../data/sort_criterias.dart';
 import '../utilities/encryption.dart';
 import '../utilities/helpers.dart';
 import '../utilities/user_management.dart';
 
+@JsonSerializable()
 class EmptyEnvelope {
   String? IpAddress;
   int Counter=1;
@@ -21,16 +23,20 @@ class EmptyEnvelope {
   String? DeviceIMEI;
   String? MACAddress;
   String? PhoneNo;
-
+  bool IsLoginRequired = true;
   SearchCriterias? searchCriterias;//
   SortCriterias? sortCriterias;
-
+  bool embedAppVersion = false;
+  bool embedDeviceInfo = false;
   String deviceInfo="";
+  bool EmbedIMEI = false;
+  bool EmbedMACAddress = false;
+  bool embedPhoneNo = false;
 
   EmptyEnvelope(SearchCriterias? this.searchCriterias, SortCriterias? this.sortCriterias,
-      int counter,String? additionalInfo, bool isLoginRequired,
-      bool embedAppVersion, bool embedDeviceInfo, bool embedIMEI
-      , bool embedMACAddress, bool embedPhoneNo) {
+  int Counter,String? AdditionalInfo, bool IsLoginRequired,
+      bool embedAppVersion, bool embedDeviceInfo, bool EmbedIMEI
+      , bool EmbedMACAddress, bool embedPhoneNo) {
   IpAddress = Helpers.getLocalIpAddress();
   if(embedDeviceInfo) {
   OsVersion ='os version here';//System.getProperty("os.version");
@@ -40,8 +46,8 @@ class EmptyEnvelope {
   Product = 'product here';//android.os.Build.PRODUCT ;
   deviceInfo = "$OsVersion|||$ApiLevel|||$Device|||$Model|||$Product";
   }
-  Counter = counter;
-  if(isLoginRequired) {
+  //Counter = counter;
+  if(IsLoginRequired) {
   if(!UserManagement.isUserLoggedIn()) {
     throw Exception("Login Required");
   }
@@ -59,7 +65,7 @@ class EmptyEnvelope {
   //ignore exception, it's not so important
   }
   }
-AdditionalInfo = additionalInfo;
+
   if(embedIMEI){
   //TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
   DeviceIMEI = '';//telephonyManager.getDeviceId();
