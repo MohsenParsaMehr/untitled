@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/data/QuestionsAndAnswers.dart';
 import 'package:untitled/network/green_light_service.dart';
 import 'package:untitled/network/qa_model.dart';
 
@@ -61,7 +60,7 @@ class _qaWidgetState extends State<qaWidget> {
           )
       ),
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context){ return Container(child: Text('QA Details or List Page'),);}));
+        Navigator.push(context, MaterialPageRoute(builder: (context){ return const Scaffold(body: Text('QA Details or List Page'),);}));
       },
 
       onHorizontalDragEnd: (details){
@@ -71,13 +70,11 @@ class _qaWidgetState extends State<qaWidget> {
             );
            ScaffoldMessenger.of(context).showSnackBar(snackBar);
            setState(() {
-             if(_qaSnapshotData != null) {
-               if (_currentQuestionIndex < _qaSnapshotData.length-1) {
-                 ++_currentQuestionIndex;
-               }
-               else{
-                 _currentQuestionIndex=0;
-               }
+             if (_currentQuestionIndex < _qaSnapshotData.length-1) {
+               ++_currentQuestionIndex;
+             }
+             else{
+               _currentQuestionIndex=0;
              }
            });
          }
@@ -87,13 +84,11 @@ class _qaWidgetState extends State<qaWidget> {
             );
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
             setState(() {
-              if(_qaSnapshotData != null) {
-                if (_currentQuestionIndex > 0) {
-                  --_currentQuestionIndex;
-                }
-                else{
-                  _currentQuestionIndex = _qaSnapshotData.length-1;
-                }
+              if (_currentQuestionIndex > 0) {
+                --_currentQuestionIndex;
+              }
+              else{
+                _currentQuestionIndex = _qaSnapshotData.length-1;
               }
             });
          }

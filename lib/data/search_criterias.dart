@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'entity.dart';
 
 @JsonSerializable()
 class SearchCriterias{

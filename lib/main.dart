@@ -6,11 +6,11 @@ import 'greenlight_theme.dart';
 import 'screens/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() {
-  runApp(GreenLightApp());
+  runApp(const GreenLightApp());
 }
 final theme  = GreenLightTheme.dark();
 class GreenLightApp extends StatelessWidget {
-  GreenLightApp({super.key});
+  const GreenLightApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -51,14 +51,14 @@ class GreenLightApp extends StatelessWidget {
         //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         //useMaterial3: true,
       //)
-      home: MyHomePage(title: 'Green Light'),
+      home: const MyHomePage(title: 'Green Light'),
 
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect

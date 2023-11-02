@@ -1,4 +1,3 @@
-import 'dart:io';
 import '../data/User.dart';
 import 'encryption.dart';
 import 'file_io_helper.dart';
@@ -8,7 +7,7 @@ class UserManagement {
   static const String USER_LOGIN_INFO_FILE_NAME = "user_info.jsd";
   static User? _loggedInUserInfo ;
   //private static UserLoginResult loggedInUserInfo = null;
-  static bool _isLoggedIn = false;
+  static const bool _isLoggedIn = false;
   //static List<Comment> comments = [];
 
   static UserManagement getInstance(){
@@ -21,9 +20,7 @@ class UserManagement {
   }
 
   static User? getLoggedInUserInfo(){
-    if(_loggedInUserInfo == null) {
-      _loggedInUserInfo = User();
-    }
+    _loggedInUserInfo ??= User();
     return _loggedInUserInfo;
   }
 

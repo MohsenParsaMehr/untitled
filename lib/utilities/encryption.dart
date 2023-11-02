@@ -1,4 +1,3 @@
-import 'package:crypto/crypto.dart';
 
 class Encryption {
   static String toSha1(String value) {

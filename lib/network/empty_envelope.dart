@@ -27,8 +27,8 @@ class EmptyEnvelope {
 
   String deviceInfo="";
 
-  EmptyEnvelope(SearchCriterias this.searchCriterias, SortCriterias this.sortCriterias,
-      int counter,String additionalInfo, bool isLoginRequired,
+  EmptyEnvelope(SearchCriterias? this.searchCriterias, SortCriterias? this.sortCriterias,
+      int counter,String? additionalInfo, bool isLoginRequired,
       bool embedAppVersion, bool embedDeviceInfo, bool embedIMEI
       , bool embedMACAddress, bool embedPhoneNo) {
   IpAddress = Helpers.getLocalIpAddress();
@@ -54,14 +54,12 @@ class EmptyEnvelope {
   //PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
   AppVersion = 1;//pInfo.versionCode;
   }
-  on Exception catch (nnfe) {
+  on Exception {
   embedAppVersion = false;
   //ignore exception, it's not so important
   }
   }
-  if(additionalInfo != null){
-  AdditionalInfo = additionalInfo;
-  }
+AdditionalInfo = additionalInfo;
   if(embedIMEI){
   //TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
   DeviceIMEI = '';//telephonyManager.getDeviceId();

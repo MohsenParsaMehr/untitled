@@ -7,7 +7,7 @@ class Envelope<T> extends EmptyEnvelope {
 
   String entityJson;
 
-   Envelope(T entity, SearchCriterias searchCriterias, SortCriterias sortCriterias, int counter, String additionalInfo, bool isLoginRequired,
+   Envelope(T? entity, SearchCriterias? searchCriterias, SortCriterias? sortCriterias, int counter, String? additionalInfo, bool isLoginRequired,
       bool embedAppVersion, bool embedDeviceInfo, bool embedIMEI, bool embedMACAddress, bool embedPhoneNo, this.entityJson):
     super(searchCriterias, sortCriterias, counter,additionalInfo,isLoginRequired,embedAppVersion,embedDeviceInfo,embedIMEI,embedMACAddress,embedPhoneNo)
    {

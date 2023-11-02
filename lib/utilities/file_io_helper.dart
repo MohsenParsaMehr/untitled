@@ -1,4 +1,20 @@
+import 'dart:io';
+import 'dart:convert'; //to convert json to maps and vice versa
+import 'package:path_provider/path_provider.dart';
 class FileIOHelper {
+  File? jsonFile ;
+  Directory? dir ;
+  String fileName = "myJSONFile.json";
+  bool fileExists = false;
+  Map<String, String>? fileContent ;
+  FileIOHelper(){
+    getApplicationDocumentsDirectory().then((Directory directory) {
+      dir = directory;
+      jsonFile = File("${dir?.path}/$fileName");
+      fileExists = jsonFile!.existsSync();
+      ///if (fileExists) ( fileContent = JsonDecoder(jsonFile.readAsStringSync());
+    });
+  }
    static bool writeToFile(String fileName,String content) {
     /*try {
       OutputStreamWriter out = OutputStreamWriter(context.openFileOutput(
