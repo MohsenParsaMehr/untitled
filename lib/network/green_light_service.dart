@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:untitled/data/simple_request.dart';
 import 'package:untitled/network/qa_model.dart';
 import 'package:untitled/network/envelope.dart';
 
-import '../data/entity.dart';
 const String apiKey = '<Your Key>';
 const String apiId = '<your ID>';
 const String apiUrl = 'localhost:44358';// /qa/GetAllQAs';
@@ -25,18 +23,18 @@ class GreenLightService {
       Envelope<SimpleRequest> qaEnvelope = Envelope(SimpleRequest(-1,"en-US"), null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
       final postResponse = await post(Uri.https(url,'qa/GetQAs'),
         headers: headers,
-        body: '' ,);
+        body: qaEnvelope.toJson() ,);
       /// sample of envelope
       ///Envelope<User> userInfoEnvelope = new Envelope<>(user,null, null, this, ++serviceRequestCounter, null, false, true, true, true, false, true);
       ///    asyncNetworking = new AsyncNetworking(this, this, USER_SIGNUP_TASK, true, userInfoEnvelope, Integer.class);
 
-      if (response.statusCode == 200) {
-        var qaData = jsonDecode(response.body);
+      if (postResponse.statusCode == 200) {
+        var qaData = jsonDecode(postResponse.body);
         for (int i = 0; i < qaData.length; i++) {
           qa.add(APIQAQuery.fromJson(qaData[i]));
         }
       } else {
-        log(response.body);
+        log(postResponse.body);
       }
 
     }

@@ -6,6 +6,7 @@ import '../utilities/encryption.dart';
 import '../utilities/helpers.dart';
 import '../utilities/user_management.dart';
 
+part 'empty_envelope.g.dart';
 @JsonSerializable()
 class EmptyEnvelope {
   String? IpAddress;
@@ -23,20 +24,20 @@ class EmptyEnvelope {
   String? DeviceIMEI;
   String? MACAddress;
   String? PhoneNo;
-  bool IsLoginRequired = true;
+  bool isLoginRequired = true;
   SearchCriterias? searchCriterias;//
   SortCriterias? sortCriterias;
   bool embedAppVersion = false;
   bool embedDeviceInfo = false;
   String deviceInfo="";
-  bool EmbedIMEI = false;
-  bool EmbedMACAddress = false;
+  bool embedIMEI = false;
+  bool embedMACAddress = false;
   bool embedPhoneNo = false;
 
-  EmptyEnvelope(SearchCriterias? this.searchCriterias, SortCriterias? this.sortCriterias,
-  int Counter,String? AdditionalInfo, bool IsLoginRequired,
-      bool embedAppVersion, bool embedDeviceInfo, bool EmbedIMEI
-      , bool EmbedMACAddress, bool embedPhoneNo) {
+  EmptyEnvelope(this.searchCriterias, this.sortCriterias,
+  int Counter,String? AdditionalInfo, bool isLoginRequired,
+      bool embedAppVersion, bool embedDeviceInfo, bool embedIMEI
+      , bool embedMACAddress, bool embedPhoneNo) {
   IpAddress = Helpers.getLocalIpAddress();
   if(embedDeviceInfo) {
   OsVersion ='os version here';//System.getProperty("os.version");
@@ -47,7 +48,7 @@ class EmptyEnvelope {
   deviceInfo = "$OsVersion|||$ApiLevel|||$Device|||$Model|||$Product";
   }
   //Counter = counter;
-  if(IsLoginRequired) {
+  if(isLoginRequired) {
   if(!UserManagement.isUserLoggedIn()) {
     throw Exception("Login Required");
   }
@@ -80,4 +81,6 @@ class EmptyEnvelope {
   }
   Credentials = Encryption.toSha256("$IpAddress|||${embedDeviceInfo ? "$deviceInfo|||" : ""}$Counter${isLoginRequired ? "$Username|||$Password|||" : ""}${embedAppVersion ? "$AppVersion|||" : ""}${AdditionalInfo != null ? "$AdditionalInfo|||" : ""}${embedIMEI?"$DeviceIMEI|||":""}${embedMACAddress?"$MACAddress|||":""}${embedPhoneNo?(PhoneNo!=null?PhoneNo!:''):""}${searchCriterias==null?"":"$searchCriterias|||"}${sortCriterias == null?"":"$sortCriterias|||"}");
 }
+  factory EmptyEnvelope.fromJson(Map<String, dynamic> json) => _$EmptyEnvelopeFromJson(json);
+  Map<String, dynamic> toJson() => _$EmptyEnvelopeToJson(this);
 }
