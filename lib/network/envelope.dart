@@ -19,6 +19,6 @@ class Envelope<T> extends EmptyEnvelope {
    {
     Credentials = Encryption.toSha256("$IpAddress|||${embedDeviceInfo ? "$deviceInfo|||" : ""}$Counter${isLoginRequired ? "${Username!= null?Username!:''}|||${Password != null?Password!:''}|||" : ""}${embedAppVersion ? "$AppVersion|||" : ""}${AdditionalInfo != null ? "$AdditionalInfo|||" : ""}${embedIMEI? "$DeviceIMEI|||":""}${embedMACAddress?"$MACAddress|||":""}${embedPhoneNo?"$PhoneNo|||":""}${searchCriterias==null?"":"$searchCriterias|||"}${sortCriterias == null?"":"$sortCriterias|||"}$entityJson");
    }
-  factory Envelope.fromJson(Map<String, dynamic> json) => _$EnvelopeFromJson(json);
-  Map<String, dynamic> toJson() => _$EnvelopeToJson(this);
+  factory Envelope.fromJson(Map<String, dynamic> json, T Function(Object?) fromJsonT) => _$EnvelopeFromJson(json,fromJsonT);
+  Map<String, dynamic> ToJson(Object? Function(T) toJsonT) => _$EnvelopeToJson(this,toJsonT);
 }

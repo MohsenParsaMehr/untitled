@@ -20,10 +20,11 @@ class GreenLightService {
         'Accept': '*/*'
       };
       final response = await get(Uri.https(url,'qa/GetAllQAs'),headers: headers);
-      Envelope<SimpleRequest> qaEnvelope = Envelope(SimpleRequest(-1,"en-US"), null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+      SimpleRequest simpleRequest = SimpleRequest(-1, "en-US");
+      Envelope<SimpleRequest> qaEnvelope = Envelope(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
       final postResponse = await post(Uri.https(url,'qa/GetQAs'),
         headers: headers,
-        body: qaEnvelope.toJson() ,);
+        body: jsonEncode(qaEnvelope.ToJson((data) => simpleRequest.toJson(data)) ,));
       /// sample of envelope
       ///Envelope<User> userInfoEnvelope = new Envelope<>(user,null, null, this, ++serviceRequestCounter, null, false, true, true, true, false, true);
       ///    asyncNetworking = new AsyncNetworking(this, this, USER_SIGNUP_TASK, true, userInfoEnvelope, Integer.class);
