@@ -20,16 +20,15 @@ class home extends StatelessWidget {
             shrinkWrap: true,
             children: <Widget>[
               //Column(children: <Widget>[
-                const slideShowWidget(),
-                const qaWidget(Key('3')),
-                lecturesWidget(),
-                //const Text('Eulogy'),
-                const eulogyCompactWidget(),
-                const Row(
-                  children: <Widget>[
-                    photosWidget(),
-                    Expanded(child: videosWidget())
-                 // ],
+              const slideShowWidget(),
+              const qaWidget(Key('3')),
+              lecturesWidget(Key('4')),
+              //const Text('Eulogy'),
+              const eulogyCompactWidget(),
+              const Row(children: <Widget>[
+                photosWidget(),
+                Expanded(child: videosWidget())
+                // ],
                 //)
               ])
             ]));
