@@ -66,7 +66,7 @@ class _qaWidgetState extends State<qaWidget> {
                       }
                     } else {
                       _qaSnapshotData = snapshot.data!;
-                      return Row(children: [
+                      return Column(children: [
                         Text(
                           snapshot.data![_currentQuestionIndex].question,
                           textAlign: TextAlign.start,

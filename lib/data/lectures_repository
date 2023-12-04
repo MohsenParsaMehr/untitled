@@ -18,10 +18,10 @@ static int serviceRequestCounter = 0;
         'Content-Type': 'application/json',
         'Accept': '*/*'
       };
-      final response = await get(Uri.https(url,'lecture/GetAllLectures'),headers: headers);
+      //final response = await get(Uri.https(url,'lecture/GetAllLectures'),headers: headers);
       SimpleRequest simpleRequest = SimpleRequest(-1, "en-US");
       Envelope<SimpleRequest> qaEnvelope = Envelope(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
-      final postResponse = await post(Uri.https(url,'lecture/GetLectures'),
+      final postResponse = await post(Uri.https(url,apiUrl+'/lecture/GetLectures'),
         headers: headers,
         body: jsonEncode(qaEnvelope.ToJson((data) => simpleRequest.toJson(data)) ,));
       /// sample of envelope

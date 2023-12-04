@@ -9,13 +9,20 @@ class APILecturesQuery {
   Map<String, dynamic> toJson() => _$APILecturesQueryToJson(this);
 
   //@JsonKey(name: 'Id')
-  int id;
-  String question;
-  String answer;
+  int? id;
+  String? status;
+  bool? isBookmarked;
+  String topic;
+  String body;
+  String? description;
+  String? locale;
+  String? mediaUrl;
+  DateTime? forDate;
+  String? operatorName;
 
   APILecturesQuery({
-    required this.id,
-    required this.question,
-    required this.answer,
+    this.id,
+    required this.topic,
+    required this.body,
   });
 }

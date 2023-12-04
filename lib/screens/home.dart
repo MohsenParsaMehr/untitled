@@ -18,14 +18,14 @@ class home extends StatelessWidget {
             scrollDirection: Axis.vertical,
             primary: true,
             shrinkWrap: true,
-            children: <Widget>[
+            children: const <Widget>[
               //Column(children: <Widget>[
-              const slideShowWidget(),
-              const qaWidget(Key('3')),
+              slideShowWidget(),
+              qaWidget(Key('3')),
               lecturesWidget(Key('4')),
               //const Text('Eulogy'),
-              const eulogyCompactWidget(),
-              const Row(children: <Widget>[
+              eulogyCompactWidget(),
+              Row(children: <Widget>[
                 photosWidget(),
                 Expanded(child: videosWidget())
                 // ],

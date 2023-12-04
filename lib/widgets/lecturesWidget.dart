@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/data/APILecturesQuery.dart';
-import 'package:untitled/data/lectures.dart';
 import 'package:untitled/data/lectures_repository';
 
 class lecturesWidget extends StatefulWidget {
@@ -75,9 +74,9 @@ class _lecturesWidgetState extends State<lecturesWidget> {
                       }
                     } else {
                       _lecturesSnapshotData = snapshot.data!;
-                      return Row(children: [
+                      return Column(children: [
                         Text(
-                          snapshot.data![currentLectureIndex].question,
+                          snapshot.data![currentLectureIndex].topic,
                           textAlign: TextAlign.start,
                         ),
                         Row(children: [
@@ -86,7 +85,7 @@ class _lecturesWidgetState extends State<lecturesWidget> {
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold),
                           ),
-                          Text(snapshot.data![currentLectureIndex].answer),
+                          Text(snapshot.data![currentLectureIndex].body),
                           const Text(
                             '"',
                             style: TextStyle(
@@ -96,26 +95,6 @@ class _lecturesWidgetState extends State<lecturesWidget> {
                       ]);
                     }
                   })
-              /* Text(
-                  lecture.samples[currentLectureIndex].topic,
-                  textAlign: TextAlign.start,
-                ),
-                Row(
-                  children: [
-                    const Text(
-                      '"',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    Text(lecture.samples[currentLectureIndex].body),
-                    const Text(
-                      '"',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                Text(lecture.samples[currentLectureIndex].forDate.toString())*/
             ]),
           )),
       onTap: () {
