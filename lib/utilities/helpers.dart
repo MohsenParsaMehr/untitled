@@ -1,13 +1,28 @@
-class Helpers {
+import 'dart:io';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
+import 'package:untitled/utilities/constants.dart';
 
-  static bool isNetworkAvailable() {
-    /*ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();*/
-    return true;
+class Helpers {
+  static Future<bool> isNetworkAvailable() async {
+    try {
+      final result = await InternetAddress.lookup(Constants.baseUrl);
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+    return false;
   }
-  static String? getLocalIpAddress(){
+
+  static Jalali convertToJalali(DateTime gregorianDateTime) {
+    var gregorianDate = Gregorian(
+        gregorianDateTime.year, gregorianDateTime.month, gregorianDateTime.day);
+    var shamsiDate = gregorianDate.toJalali();
+    return shamsiDate;
+  }
+
+  static String? getLocalIpAddress() {
     /*try {
       for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
       en.hasMoreElements();) {
@@ -25,11 +40,10 @@ class Helpers {
     }*/
     return null;
   }
-  static String getUserPhoneNumber()
-  {
+
+  static String getUserPhoneNumber() {
     /*return ((TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE))
     .getLine1Number();*/
     return '';
   }
-
 }

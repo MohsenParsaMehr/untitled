@@ -4,9 +4,10 @@ import 'package:http/http.dart';
 import 'package:untitled/data/simple_request.dart';
 import 'package:untitled/network/envelope.dart';
 import 'package:untitled/data/APILecturesQuery.dart';
+import 'package:untitled/utilities/constants.dart';
 const String apiKey = '<Your Key>';
 const String apiId = '<your ID>';
-const String apiUrl = 'localhost:44358';// /qa/GetAllQAs';
+//const String apiUrl = 'localhost:44358';// /qa/GetAllQAs';
 
 class LecturesRepository {
 static int serviceRequestCounter = 0;
@@ -21,7 +22,7 @@ static int serviceRequestCounter = 0;
       //final response = await get(Uri.https(url,'lecture/GetAllLectures'),headers: headers);
       SimpleRequest simpleRequest = SimpleRequest(-1, "en-US");
       Envelope<SimpleRequest> qaEnvelope = Envelope(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
-      final postResponse = await post(Uri.https(url,apiUrl+'/lecture/GetLectures'),
+      final postResponse = await post(Uri.https(Constants.baseUrl,'lecture/GetLectures'),
         headers: headers,
         body: jsonEncode(qaEnvelope.ToJson((data) => simpleRequest.toJson(data)) ,));
       /// sample of envelope

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/data/lectures_repository';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class lecturesWidget extends StatefulWidget {
-  const lecturesWidget(Key key) : super(key: key);
+class LecturesWidget extends StatefulWidget {
+  const LecturesWidget(Key key) : super(key: key);
   @override
-  State<lecturesWidget> createState() => _lecturesWidgetState();
+  State<LecturesWidget> createState() => _LecturesWidgetState();
 }
 
-class _lecturesWidgetState extends State<lecturesWidget> {
+class _LecturesWidgetState extends State<LecturesWidget> {
   int currentLectureIndex = 0;
   List<APILecturesQuery> _lecturesSnapshotData = [];
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Card(
-          color: Colors.green,
+          color: Colors.green.withOpacity(0.8),
           surfaceTintColor: Colors.lightGreen,
           elevation: 7,
           shape: const RoundedRectangleBorder(
@@ -27,34 +28,34 @@ class _lecturesWidgetState extends State<lecturesWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Lectures",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  Text(
+                    AppLocalizations.of(context)!.lectures,
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.bold),
                   ),
-                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    IconButton.outlined(
-                        onPressed: () {/*TODO: Do download here*/},
-                        icon: const Icon(
-                          Icons.download_rounded,
-                          size: 18,
-                          color: Colors.black45,
-                        )),
-                    IconButton.outlined(
-                        onPressed: () {/*TODO: Do share here*/},
-                        icon: const Icon(
-                          Icons.share_rounded,
-                          size: 18,
-                          color: Colors.black45,
-                        )),
-                    IconButton.outlined(
-                        onPressed: () {/*TODO: Do bookmark here*/},
-                        icon: const Icon(Icons.bookmark_add_rounded,
-                            size: 18, color: Colors.black45)),
-                    IconButton.outlined(
-                        onPressed: () {/*TODO: Do Maximize here*/},
-                        icon: const Icon(Icons.crop_square_rounded,
-                            size: 18, color: Colors.black45))
-                  ])
+                  Expanded(
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                        IconButton.outlined(
+                            onPressed: () {/*TODO: Do download here*/},
+                            icon: const Icon(
+                              Icons.download_rounded,
+                              size: 18,
+                              color: Colors.black45,
+                            )),
+                        IconButton.outlined(
+                            onPressed: () {/*TODO: Do share here*/},
+                            icon: const Icon(
+                              Icons.share_rounded,
+                              size: 18,
+                              color: Colors.black45,
+                            )),
+                        IconButton.outlined(
+                            onPressed: () {/*TODO: Do bookmark here*/},
+                            icon: const Icon(Icons.favorite_rounded,
+                                size: 18, color: Colors.black45)),
+                      ]))
                 ],
               ),
               FutureBuilder<List<APILecturesQuery>>(
@@ -66,7 +67,7 @@ class _lecturesWidgetState extends State<lecturesWidget> {
                         (snapshot.data != null && snapshot.data!.isEmpty)) {
                       if (snapshot.data != null && snapshot.data!.isEmpty) {
                         // load cashed QA data as internet connection is not available
-                        return const Text('List is empty');
+                        return Text(AppLocalizations.of(context)!.listIsEmpty);
                       } else {
                         return const Center(
                           child: CircularProgressIndicator(),

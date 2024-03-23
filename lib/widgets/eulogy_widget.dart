@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 // * media_kit
 // * media_kit_video
 // * media_kit_libs_video
-import 'package:media_kit/media_kit.dart';                      // Provides [Player], [Media], [Playlist] etc.
+import 'package:media_kit/media_kit.dart'; // Provides [Player], [Media], [Playlist] etc.
 import 'package:media_kit_video/media_kit_video.dart';
-class eulogyWidget extends StatefulWidget {
-  const eulogyWidget({Key? key}) : super(key: key);
+
+class EulogyWidget extends StatefulWidget {
+  const EulogyWidget({Key? key}) : super(key: key);
   @override
-  State<eulogyWidget> createState() => MyScreenState();
+  State<EulogyWidget> createState() => MyScreenState();
 }
-class MyScreenState extends State<eulogyWidget> {
+
+class MyScreenState extends State<EulogyWidget> {
   // Create a [Player] to control playback.
-  late final player = Player(configuration: const PlayerConfiguration(title: 'Hello world'));
+  late final player =
+      Player(configuration: const PlayerConfiguration(title: 'Hello world'));
 
   // Create a [VideoController] to handle video output from [Player].
   late final controller = VideoController(player);
@@ -22,11 +25,14 @@ class MyScreenState extends State<eulogyWidget> {
     super.initState();
     // Play a [Media] or [Playlist].
     //player.setVideoTrack(VideoTrack.no());
-    player.open(Media('https://dl.rozmusic.com/Music/1402/06/03/Roozbeh%20Bemani%20-%20Bad%20Az%20Raftan.mp3',extras:
-    {
-      'artist':'Dr.',
-      'Year':'2015',
-    }),play: false);
+    player.open(
+        Media(
+            'https://dl.rozmusic.com/Music/1402/06/03/Roozbeh%20Bemani%20-%20Bad%20Az%20Raftan.mp3',
+            extras: {
+              'artist': 'Dr.',
+              'Year': '2015',
+            }),
+        play: false);
   }
 
   @override
@@ -34,16 +40,20 @@ class MyScreenState extends State<eulogyWidget> {
     player.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 7,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5))),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 200, //MediaQuery.of(context).size.width * 9.0 / 16.0,
         // Use [Video] widget to display video output.
-        child: Video(controller: controller,),
+        child: Video(
+          controller: controller,
+        ),
       ),
     );
   }

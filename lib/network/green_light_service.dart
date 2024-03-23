@@ -7,7 +7,7 @@ import 'package:untitled/network/envelope.dart';
 
 const String apiKey = '<Your Key>';
 const String apiId = '<your ID>';
-const String apiUrl = 'localhost:44358';// /qa/GetAllQAs';
+const String apiUrl = 'localhost:44358'; // /qa/GetAllQAs';
 
 class GreenLightService {
   static int serviceRequestCounter = 0;
@@ -19,15 +19,27 @@ class GreenLightService {
         'Content-Type': 'application/json',
         'Accept': '*/*'
       };
-      final response = await get(Uri.https(url,'qa/GetAllQAs'),headers: headers);
-      SimpleRequest simpleRequest = SimpleRequest(-1, "en-US");
-      Envelope<SimpleRequest> qaEnvelope = Envelope(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
-      final postResponse = await post(Uri.https(url,'qa/GetQAs'),
-        headers: headers,
-        body: jsonEncode(qaEnvelope.ToJson((data) => simpleRequest.toJson(data)) ,));
-      /// sample of envelope
-      ///Envelope<User> userInfoEnvelope = new Envelope<>(user,null, null, this, ++serviceRequestCounter, null, false, true, true, true, false, true);
-      ///    asyncNetworking = new AsyncNetworking(this, this, USER_SIGNUP_TASK, true, userInfoEnvelope, Integer.class);
+      //final response =
+      // await get(Uri.https(url, 'qa/GetAllQAs'), headers: headers);
+      SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
+      Envelope<SimpleRequest> qaEnvelope = Envelope(
+          simpleRequest,
+          null,
+          null,
+          ++serviceRequestCounter,
+          null,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          '');
+      final postResponse = await post(Uri.https(url, 'qa/GetQAs'),
+          headers: headers,
+          body: jsonEncode(
+            qaEnvelope.ToJson((data) => simpleRequest.toJson(data)),
+          ));
 
       if (postResponse.statusCode == 200) {
         var qaData = jsonDecode(postResponse.body);
@@ -37,18 +49,20 @@ class GreenLightService {
       } else {
         log(postResponse.body);
       }
+    } catch (e) {
+      List<APIQAQuery> errorQa = []; //= <APIQAQuery>{};
+      errorQa.add(APIQAQuery(id: -1, question: e.toString(), answer: 'Error'));
+      return Future.value(errorQa);
 
-    }
-    catch (e) {
-      print(e);
+      // print(e);
     }
     return qa;
   }
 
-  Future<List<APIQAQuery>> getQAs(String query, int? from, int? to) async
-  {
-    final qaData = await getData(apiUrl) ;//as List<QuestionAndAnswer>;//?app_id=$apiId&app_key=$apiKey&q=$query&from=$from??&to=$to??');
+  Future<List<APIQAQuery>> getQAs(String query, int? from, int? to) async {
+    final qaData = await getData(
+        query); //as List<QuestionAndAnswer>;//?app_id=$apiId&app_key=$apiKey&q=$query&from=$from??&to=$to??');
 
-        return qaData;
+    return qaData;
   }
 }

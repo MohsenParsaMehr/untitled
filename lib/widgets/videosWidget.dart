@@ -61,12 +61,8 @@ class videosWidgetState extends State<videosWidget> {
                 )),
             IconButton.outlined(
                 onPressed: () {/*TODO: Do bookmark here*/},
-                icon: const Icon(Icons.bookmark_add_rounded,
+                icon: const Icon(Icons.favorite_rounded,
                     size: 18, color: Colors.black45)),
-            IconButton.outlined(
-                onPressed: () {/*TODO: Do Maximize here*/},
-                icon: const Icon(Icons.crop_square_rounded,
-                    size: 18, color: Colors.black45))
           ]),
           //SizedBox(
           //MediaQuery.of(context).size.width,

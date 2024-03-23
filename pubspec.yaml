@@ -34,7 +34,7 @@ dependencies:
   just_audio: ^0.9.34
   rxdart: ^0.27.7
   flutter_carousel_slider: ^1.1.0
-  google_fonts: ^4.0.1
+  #google_fonts: ^4.0.1
   sqflite: ^2.3.0
   path: ^1.8.3
   path_provider: any
@@ -44,12 +44,17 @@ dependencies:
     sdk: flutter
   flutter_image_slideshow: any
   cupertino_icons: ^1.0.2
+  cached_network_image: ^3.3.1
+  persian_number_utility: ^1.1.4
+  persian_fonts: ^1.0.5
+  persian_datetime_picker: ^2.6.0
     # The following adds the Cupertino Icons font to your application.
     # Use with the CupertinoIcons class for iOS style icons.
 
   flutter_localizations:
     sdk: flutter
   intl: any
+  expandable_text: ^2.3.0
 
 dev_dependencies:
   flutter_test:

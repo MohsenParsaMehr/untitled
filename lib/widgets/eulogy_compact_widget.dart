@@ -4,17 +4,18 @@ import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:untitled/commonAudio.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 ///void main() => runApp(const MyApp());
 
-class eulogyCompactWidget extends StatefulWidget {
-  const eulogyCompactWidget({Key? key}) : super(key: key);
+class EulogyCompactWidget extends StatefulWidget {
+  const EulogyCompactWidget({Key? key}) : super(key: key);
 
   @override
   MyAppState createState() => MyAppState();
 }
 
-class MyAppState extends State<eulogyCompactWidget>
+class MyAppState extends State<EulogyCompactWidget>
     with WidgetsBindingObserver {
   final _player = AudioPlayer();
 
@@ -40,8 +41,8 @@ class MyAppState extends State<eulogyCompactWidget>
     });
     // Try to load audio from a source and catch any errors.
     try {
-      await _player.setAudioSource(AudioSource.uri(Uri.parse(
-          "https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.aac")));
+      await _player.setAudioSource(AudioSource.uri(
+          Uri.parse("https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.aa")));
     } catch (e) {
       print("Error loading audio source: $e");
     }
@@ -80,42 +81,63 @@ class MyAppState extends State<eulogyCompactWidget>
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
       Card(
-        color: Colors.brown,
-          child: Column(
-        children: <Widget>[
-          Row(mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Text("Eulogies", style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
-                IconButton.outlined(onPressed: (){/*TODO: Do download here*/},
-                    icon: const Icon(Icons.download_rounded,size: 18,color: Colors.black45,)),
-                IconButton.outlined(onPressed: (){/*TODO: Do share here*/},
-                    icon: const Icon(Icons.share_rounded,size: 18,color: Colors.black45,)),
-                IconButton.outlined(onPressed: (){/*TODO: Do bookmark here*/},
-                    icon: const Icon(Icons.bookmark_add_rounded,size: 18,color: Colors.black45)),
-                IconButton.outlined(onPressed: (){/*TODO: Do Maximize here*/},
-                    icon: const Icon(Icons.crop_square_rounded,size: 18,color: Colors.black45))
-              ]),
-          // Display play/pause button and volume/speed sliders.
-          ControlButtons(_player),
-          // Display seek bar. Using StreamBuilder, this widget rebuilds
-          // each time the position, buffered position or duration changes.
-          StreamBuilder<PositionData>(
-            stream: _positionDataStream,
-            builder: (context, snapshot) {
-              final positionData = snapshot.data;
+          color: Colors.white38.withOpacity(0.8),
+          elevation: 7,
+          shadowColor: Colors.black,
+          child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                children: <Widget>[
+                  Row(children: [
+                    Text(
+                      AppLocalizations.of(context)!.eulogies,
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    Expanded(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                          IconButton.outlined(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.download_rounded,
+                                size: 18,
+                                color: Colors.black45,
+                              )),
+                          IconButton.outlined(
+                              onPressed: () {/*TODO: Do share here*/},
+                              icon: const Icon(
+                                Icons.share_rounded,
+                                size: 18,
+                                color: Colors.black45,
+                              )),
+                          IconButton.outlined(
+                              onPressed: () {/*TODO: Do bookmark here*/},
+                              icon: const Icon(Icons.favorite_rounded,
+                                  size: 18, color: Colors.black45))
+                        ])),
+                  ]),
+                  // Display play/pause button and volume/speed sliders.
+                  ControlButtons(_player),
+                  // Display seek bar. Using StreamBuilder, this widget rebuilds
+                  // each time the position, buffered position or duration changes.
+                  StreamBuilder<PositionData>(
+                    stream: _positionDataStream,
+                    builder: (context, snapshot) {
+                      final positionData = snapshot.data;
 
-              return SeekBar(
-                duration: positionData?.duration ?? Duration.zero,
-                position: positionData?.position ?? Duration.zero,
-                bufferedPosition:
-                    positionData?.bufferedPosition ?? Duration.zero,
-                onChangeEnd: _player.seek,
-
-              );
-            },
-          ),
-        ],
-      ))
+                      return SeekBar(
+                        duration: positionData?.duration ?? Duration.zero,
+                        position: positionData?.position ?? Duration.zero,
+                        bufferedPosition:
+                            positionData?.bufferedPosition ?? Duration.zero,
+                        onChangeEnd: _player.seek,
+                      );
+                    },
+                  ),
+                ],
+              )))
     ]);
   }
 }
@@ -137,9 +159,7 @@ class ControlButtons extends StatelessWidget {
           ),
           color: Colors.black45,
           iconSize: 28,
-          onPressed: () {
-
-          },
+          onPressed: () {},
         ),
 
         /// This StreamBuilder rebuilds whenever the player state changes, which
@@ -190,9 +210,7 @@ class ControlButtons extends StatelessWidget {
           ),
           color: Colors.black45,
           iconSize: 28,
-          onPressed: () {
-
-          },
+          onPressed: () {},
         ),
         // Opens volume slider dialog
         IconButton(

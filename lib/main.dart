@@ -1,37 +1,66 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:untitled/screens/questionAndAnswers.dart';
 import 'package:untitled/screens/search.dart';
+import 'package:untitled/settings/settings_controller.dart';
+import 'package:untitled/settings/settings_service.dart';
+import 'package:untitled/settings/settings_view.dart';
 import 'greenlight_theme.dart';
 import 'screens/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-void main() {
-  runApp(const GreenLightApp());
-}
-final theme  = GreenLightTheme.dark();
-class GreenLightApp extends StatelessWidget {
-  const GreenLightApp({super.key});
 
+void main() async {
+  final settingsController = SettingsController(SettingsService());
+
+  // Load the user's preferred theme while the splash screen is displayed.
+  // This prevents a sudden theme change when the app is first displayed.
+  await settingsController.loadSettings();
+
+  // Run the app and pass in the SettingsController. The app listens to the
+  // SettingsController for changes, then passes it further down to the
+  // SettingsView.
+  HttpOverrides.global = MyHttpOverrides();
+  runApp(GreenLightApp(settingsController: settingsController));
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
+final theme = GreenLightTheme.light();
+
+class GreenLightApp extends StatefulWidget {
+  const GreenLightApp({
+    super.key,
+    required this.settingsController,
+  });
+  static const routeName = '/';
+  final SettingsController settingsController;
+  @override
+  State<GreenLightApp> createState() => _GreenLightAppState();
+}
+
+class _GreenLightAppState extends State<GreenLightApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = ThemeData();
     return MaterialApp(
-
-      localizationsDelegates: const[
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: AppLocalizations.supportedLocales,
-
-      /*supportedLocales: const [
-        Locale('en'), // English
-        Locale('fa'), // farsi
-      ],*/
-      locale: const Locale('fa', 'IR'),
-      theme: theme,// theme.copyWith(colorScheme: theme.colorScheme.copyWith(primary: Colors.green[900],      secondary: Colors.green[700]))
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('fa', 'IR'), // const Locale('en', 'US'), //
+        theme:
+            theme, // theme.copyWith(colorScheme: theme.colorScheme.copyWith(primary: Colors.green[900],      secondary: Colors.green[700]))
         //ThemeData(
         // This is the theme of your application.
         //
@@ -50,25 +79,31 @@ class GreenLightApp extends StatelessWidget {
         // tested with just a hot reload.
         //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         //useMaterial3: true,
-      //)
-      home: const MyHomePage(title: 'Green Light'),
-
-    );
+        //)
+        home: const MyHomePage(title: 'New App'),
+        onGenerateRoute: (RouteSettings routeSettings) {
+          return MaterialPageRoute<void>(
+            settings: routeSettings,
+            builder: (BuildContext context) {
+              switch (routeSettings.name) {
+                case SettingsView.routeName:
+                  return SettingsView(controller: widget.settingsController);
+                default:
+                  return SettingsView(controller: widget.settingsController);
+              }
+            },
+          );
+        });
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
   // This class is the configuration for the state. It holds the values (in this
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
-  
+
   final String title;
 
   @override
@@ -79,14 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //int _counter = 0;
 
   void _onTipPressed() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      //_counter++;
-    });
+    setState(() {});
   }
 
   @override
@@ -99,147 +127,182 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-
           // Important: Remove any padding from the ListView.
           padding: const EdgeInsets.all(0),
           children: [
-             DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
               ),
-              child: const Row(mainAxisAlignment: MainAxisAlignment.end,
-                  children: [  Icon( Icons.account_circle,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Register User'),SizedBox(width: 10),Text('Guest'), Icon( Icons.settings,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Register User') ]) ,
+              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                Icon(Icons.account_circle,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Register User'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.guest),
+                IconButton.outlined(
+                    onPressed: () => {
+                          Navigator.restorablePushNamed(
+                              context, SettingsView.routeName)
+                        },
+                    icon: const Icon(Icons.settings_rounded)),
+              ]),
             ),
             ListTile(
-              title:  Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [const Icon( Icons.account_circle,
-                color: Colors.black54,
-                size: 24.0,
-
-                semanticLabel: 'Register User'),const SizedBox(width: 10) , Text(AppLocalizations.of(context)!.helloWorld )]) ,
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.account_circle,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Register User'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.signUp)
+              ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.book,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Books'),SizedBox(width: 10) , Text('Books')]),
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.book,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Books'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.settings)
+              ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.speaker_group,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Lectures'),SizedBox(width: 10) , Text('Lectures')]),
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.speaker_group,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Lectures'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.lectures)
+              ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.question_answer,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'FAQs'),SizedBox(width: 10) , Text('FAQs')]),
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.question_answer,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'FAQs'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.faqs)
+              ]),
               onTap: () {
                 // Update the state of the app.
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) =>  questionAndAnswers()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => questionAndAnswers()));
               },
             ),
             ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.favorite,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Favorites'),SizedBox(width: 10) , Text('Favorites')]),
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.favorite,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Favourites'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.favourites)
+              ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.photo_album,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Gallery') ,SizedBox(width: 10), Text('Gallery')]),
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.photo_album,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Gallery'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.gallery)
+              ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.interpreter_mode,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Interprets'),SizedBox(width: 10) , Text('Interprets')]),
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.interpreter_mode,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Interprets'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.interprets)
+              ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.add_comment_rounded,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Poems') ,SizedBox(width: 10), Text('Poems')]),
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.add_comment_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Poems'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.poems)
+              ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Icon( Icons.adjust,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Concepts'),SizedBox(width: 10) , Text('Concepts')]),
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.adjust,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Concepts'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.concepts)
+              ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
-            ListTile(
-              title: const Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Icon( Icons.telegram,
-                      color: Colors.black54,
-                      size: 24.0,
-                      semanticLabel: 'Telegram'),SizedBox(width: 10) ,
-                    Icon( Icons.telegram,
-                        color: Colors.black54,
-                        size: 24.0,
-                        semanticLabel: 'Instagram'),SizedBox(width: 10) ,
-                    Icon( Icons.telegram,
-                        color: Colors.black54,
-                        size: 24.0,
-                        semanticLabel: 'Skyroom'),SizedBox(width: 10) ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
+            //ListTile(
+            //title:
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              IconButton.outlined(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.telegram_rounded,
+                    color: Theme.of(context).primaryColor,
+                  )),
+              const SizedBox(width: 10),
+              IconButton.outlined(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.telegram_rounded,
+                    color: Theme.of(context).primaryColor,
+                  )),
+              const SizedBox(width: 10),
+              IconButton.outlined(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.share_rounded,
+                    color: Theme.of(context).primaryColor,
+                  )),
+              const SizedBox(width: 10)
+            ]),
+            //onTap: () {                 },
           ],
         ),
       ),
@@ -251,18 +314,22 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
 
-        title:  Text(widget.title, style: theme.textTheme.bodyLarge,),
+        title: Text(
+          AppLocalizations.of(context)!.greenLight,
+          style: theme.textTheme.bodyLarge,
+        ),
 
-        actions: [IconButton(
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) =>  const Search())),
-            icon: const Icon(Icons.search))],
+        actions: [
+          IconButton(
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => const Search())),
+              icon: const Icon(Icons.search))
+        ],
       ),
-      body:
-      const SafeArea(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child:   home( Key('1')))    ,
+      body: const SafeArea(
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: Home(Key('1'))),
       floatingActionButton: FloatingActionButton(
         onPressed: _onTipPressed,
         tooltip: 'نکته روز',

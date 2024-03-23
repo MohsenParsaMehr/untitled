@@ -1,6 +1,21 @@
 {
   "helloWorld": "Hello World!",
+   "greenLight": "Sadeghieh",
   "videos": "Videos",
+  "guest": "Guest",
+  "signUp": "Sign Up",  
+  "books": "Books",
+  "lectures": "Lectures",
+  "faqs": "FAQs",
+  "favourites": "Favourites",
+  "gallery": "Gallery",
+  "interprets": "Interprets of Quran",
+  "concepts": "Concepts",
+  "questionAndAnswers": "Question and Answers",
+  "listIsEmpty": "List is Empty",
+  "eulogies": "Eulogies",
+  "poems": "Poems",
+  "settings": "Settings",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

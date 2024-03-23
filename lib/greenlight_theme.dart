@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:persian_fonts/persian_fonts.dart';
 
 class GreenLightTheme {
   static TextTheme lightTextTheme = TextTheme(
-    bodyLarge: GoogleFonts.openSans(
+    bodyLarge: PersianFonts.Samim.copyWith(
       fontSize: 14.0,
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
-    displayLarge: GoogleFonts.openSans(
+    displayLarge: PersianFonts.Samim.copyWith(
       fontSize: 32.0,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),
-    displayMedium: GoogleFonts.openSans(
+    displayMedium: PersianFonts.Samim.copyWith(
       fontSize: 21.0,
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
-    displaySmall: GoogleFonts.openSans(
+    displaySmall: PersianFonts.Samim.copyWith(
       fontSize: 16.0,
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
-    titleLarge: GoogleFonts.openSans(
+    titleLarge: PersianFonts.Samim.copyWith(
       fontSize: 20.0,
       fontWeight: FontWeight.w600,
       color: Colors.black,
@@ -31,27 +31,28 @@ class GreenLightTheme {
   );
 
   static TextTheme darkTextTheme = TextTheme(
-    bodyLarge: GoogleFonts.openSans(
+    bodyLarge: PersianFonts.Samim.copyWith(
       fontSize: 14.0,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     ),
-    displayLarge: GoogleFonts.openSans(
+    displayLarge: PersianFonts.Samim.copyWith(
       fontSize: 32.0,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    displayMedium: GoogleFonts.openSans(
+    displayMedium: PersianFonts.Samim.copyWith(
       fontSize: 21.0,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     ),
-    displaySmall: GoogleFonts.openSans(
+    displaySmall: PersianFonts.Samim.copyWith(
       fontSize: 16.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
-    titleLarge: GoogleFonts.openSans(
+    titleLarge: PersianFonts.Samim.copyWith(
+      //GoogleFonts.openSans(
       fontSize: 20.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
@@ -60,6 +61,22 @@ class GreenLightTheme {
 
   static ThemeData light() {
     return ThemeData(
+      colorScheme: const ColorScheme(
+        brightness: Brightness.light,
+        primary: Colors.green,
+        onPrimary: Colors.black,
+        // Colors that are not relevant to AppBar in LIGHT mode:
+        secondary: Colors.grey,
+        onSecondary: Colors.grey,
+        background: Colors.grey,
+        onBackground: Colors.grey,
+        surface: Colors.grey,
+        onSurface: Colors.grey,
+        error: Colors.grey,
+        onError: Colors.grey,
+      ),
+      fontFamily: PersianFonts.Yekan.fontFamily,
+      primaryColor: Colors.green,
       brightness: Brightness.light,
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStateColor.resolveWith(
@@ -70,7 +87,7 @@ class GreenLightTheme {
       ),
       appBarTheme: const AppBarTheme(
         foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
@@ -85,10 +102,28 @@ class GreenLightTheme {
 
   static ThemeData dark() {
     return ThemeData(
+      colorScheme: const ColorScheme(
+        brightness: Brightness.dark,
+        surface: Colors.green,
+        onSurface: Colors.black,
+        // Colors that are not relevant to AppBar in DARK mode:
+        primary: Colors.grey,
+        onPrimary: Colors.grey,
+
+        secondary: Colors.grey,
+
+        onSecondary: Colors.grey,
+        background: Colors.grey,
+        onBackground: Colors.grey,
+        error: Colors.grey,
+        onError: Colors.grey,
+      ),
+      fontFamily: PersianFonts.Yekan.fontFamily,
+      primaryColor: Colors.green,
       brightness: Brightness.dark,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Colors.green,
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,

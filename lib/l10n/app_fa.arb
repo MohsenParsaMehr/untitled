@@ -1,4 +1,19 @@
 {
     "helloWorld": "سلام",
-    "videos": "ویدیوها"
+    "greenLight": "اپلیکیشن",
+    "videos": "ویدیوها",
+    "guest": "مهمان",
+    "signUp": "ثبت نام کاربری",
+    "books": "کتاب‌ها",
+    "lectures": "سخنرانی‌ها",
+    "faqs": "پرسش‌های متداول",
+    "favourites": "علاقه‌مندی‌ها",
+    "gallery": "گالری تصاویر",
+    "interprets": "تفاسیر کلام‌الله",
+    "poems": "اشعار",
+    "concepts": "مفاهیم طریقت",
+    "questionAndAnswers": "پرسش‌ها و پاسخ‌ها",
+    "listIsEmpty": "لیست خالی است",
+    "eulogies": "مداحی‌ها",
+    "settings": "تنظیمات"
 }

@@ -1,13 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:untitled/utilities/constants.dart';
 
-class slideShowWidget extends StatelessWidget {
-  const slideShowWidget({super.key});
+class SlideShowWidget extends StatelessWidget {
+  const SlideShowWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ImageSlideshow(
-
+    return Card(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: ImageSlideshow(
           /// Width of the [ImageSlideshow].
           width: double.infinity,
 
@@ -22,34 +26,47 @@ class slideShowWidget extends StatelessWidget {
 
           /// The color to paint behind th indicator.
           indicatorBackgroundColor: Colors.grey,
-      /// Called whenever the page in the center of the viewport changes.
-      onPageChanged: (value) {
-        //print('Page changed: $value');
-      },
 
-      /// Auto scroll interval.
-      /// Do not auto scroll with null or 0.
-      autoPlayInterval: 3000,
+          /// Called whenever the page in the center of the viewport changes.
+          onPageChanged: (value) {
+            //print('Page changed: $value');
+          },
 
-      /// Loops back to first slide.
-      isLoop: true,
+          /// Auto scroll interval.
+          /// Do not auto scroll with null or 0.
+          autoPlayInterval: 3000,
+
+          /// Loops back to first slide.
+          isLoop: true,
+
           /// The widgets to display in the [ImageSlideshow].
           /// Add the sample image file into the images folder
           children: [
-            Image.asset(
-              'images/sample_image_1.jpg',
-              fit: BoxFit.cover,
+            CachedNetworkImage(
+              alignment: Alignment.topCenter,
+              imageUrl:
+                  "${Constants.protocol}://${Constants.baseUrl}/images/logo.jpg",
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              imageBuilder: (context, imageProvider) {
+                return Ink.image(
+                    image: imageProvider,
+                    //fit: BoxFit.contain,
+                    width: 480,
+                    height: 260);
+              },
+              placeholder: (context, url) => const CircularProgressIndicator(),
             ),
             Image.asset(
-              'images/sample_image_2.jpg',
-              fit: BoxFit.cover,
+              'assets/images/library.png',
+              width: 480,
+              height: 260,
+              //fit: BoxFit.cover,
             ),
             Image.asset(
-              'images/sample_image_3.jpg',
-              fit: BoxFit.cover,
+              'assets/images/speeches.png',
+              //fit: BoxFit.cover,
             ),
           ],
-
-    );
+        ));
   }
 }
