@@ -31,6 +31,11 @@ class _QaWidgetState extends State<QaWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  const Icon(
+                    Icons.question_answer_rounded,
+                    color: Colors.black26,
+                  ),
+                  const Padding(padding: EdgeInsets.only(left: 5)),
                   Text(AppLocalizations.of(context)!.questionAndAnswers,
                       style: const TextStyle(
                         fontSize: 14,
@@ -74,37 +79,50 @@ class _QaWidgetState extends State<QaWidget> {
                     } else {
                       _qaSnapshotData = snapshot.data!;
                       return Column(children: [
-                        Text(
-                          snapshot.data![_currentQuestionIndex].question,
-                          textAlign: TextAlign.right,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        ExpandableText(
-                          textAlign: TextAlign.justify,
-                          style: PersianFonts.Samim.copyWith(fontSize: 13),
-                          snapshot.data![_currentQuestionIndex].answer,
-                          expandText: 'نمایش بیشتر',
-                          maxLines: 4,
-                          linkColor: Colors.deepPurple,
-                          animation: true,
-                          collapseOnTextTap: true,
-                          //prefixText: 'Pref',
-                          onPrefixTap: () => {},
-                          prefixStyle:
-                              const TextStyle(fontWeight: FontWeight.bold),
-                          onHashtagTap: (name) => {},
-                          hashtagStyle: const TextStyle(
-                            color: Color(0xFF30B6F9),
+                        Row(children: [
+                          const Icon(
+                            Icons.question_mark_rounded,
+                            color: Colors.black26,
                           ),
-                          onMentionTap: (username) => {},
-                          mentionStyle: const TextStyle(
-                            fontWeight: FontWeight.w600,
+                          const Padding(padding: EdgeInsets.only(left: 5)),
+                          Text(
+                            snapshot.data![_currentQuestionIndex].question,
+                            textAlign: TextAlign.right,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          onUrlTap: (url) => {},
-                          urlStyle: const TextStyle(
-                            decoration: TextDecoration.underline,
-                          ),
-                        )
+                        ]),
+                        Row(children: [
+                          const Icon(Icons.mark_chat_read_rounded,
+                              color: Colors.black26),
+                          const Padding(padding: EdgeInsets.only(left: 5)),
+                          Expanded(
+                              child: ExpandableText(
+                            textAlign: TextAlign.justify,
+                            style: PersianFonts.Samim.copyWith(fontSize: 13),
+                            snapshot.data![_currentQuestionIndex].answer,
+                            expandText: 'نمایش بیشتر',
+                            maxLines: 4,
+                            linkColor: Colors.deepPurple,
+                            animation: true,
+                            collapseOnTextTap: true,
+                            //prefixText: 'Pref',
+                            onPrefixTap: () => {},
+                            prefixStyle:
+                                const TextStyle(fontWeight: FontWeight.bold),
+                            onHashtagTap: (name) => {},
+                            hashtagStyle: const TextStyle(
+                              color: Color(0xFF30B6F9),
+                            ),
+                            onMentionTap: (username) => {},
+                            mentionStyle: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                            ),
+                            onUrlTap: (url) => {},
+                            urlStyle: const TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
+                          ))
+                        ])
                         //])
                       ]);
                     }
@@ -120,10 +138,10 @@ class _QaWidgetState extends State<QaWidget> {
       },
       onHorizontalDragEnd: (details) {
         if (!details.primaryVelocity!.isNegative) {
-          const snackBar = SnackBar(
-            content: Text('to right'),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          // const snackBar = SnackBar(
+          //   content: Text('to right'),
+          // );
+          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
           setState(() {
             if (_currentQuestionIndex < _qaSnapshotData.length - 1) {
               ++_currentQuestionIndex;
@@ -132,10 +150,10 @@ class _QaWidgetState extends State<QaWidget> {
             }
           });
         } else {
-          const snackBar = SnackBar(
-            content: Text('to left'),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          // const snackBar = SnackBar(
+          //   content: Text('to left'),
+          // );
+          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
           setState(() {
             if (_currentQuestionIndex > 0) {
               --_currentQuestionIndex;
