@@ -20,7 +20,7 @@ static int serviceRequestCounter = 0;
         'Accept': '*/*'
       };
       //final response = await get(Uri.https(url,'lecture/GetAllLectures'),headers: headers);
-      SimpleRequest simpleRequest = SimpleRequest(-1, "en-US");
+      SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
       Envelope<SimpleRequest> qaEnvelope = Envelope(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
       final postResponse = await post(Uri.https(Constants.baseUrl,'lecture/GetLectures'),
         headers: headers,

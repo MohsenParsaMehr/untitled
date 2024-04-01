@@ -1,4 +1,6 @@
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/data/lectures_repository';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,6 +30,11 @@ class _LecturesWidgetState extends State<LecturesWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  const Icon(
+                    Icons.mic_external_on,
+                    color: Colors.black26,
+                  ),
+                  const Padding(padding: EdgeInsets.only(left: 5)),
                   Text(
                     AppLocalizations.of(context)!.lectures,
                     style: const TextStyle(
@@ -53,7 +60,7 @@ class _LecturesWidgetState extends State<LecturesWidget> {
                             )),
                         IconButton.outlined(
                             onPressed: () {/*TODO: Do bookmark here*/},
-                            icon: const Icon(Icons.favorite_rounded,
+                            icon: const Icon(Icons.favorite_outline_rounded,
                                 size: 18, color: Colors.black45)),
                       ]))
                 ],
@@ -75,23 +82,45 @@ class _LecturesWidgetState extends State<LecturesWidget> {
                       }
                     } else {
                       _lecturesSnapshotData = snapshot.data!;
+
                       return Column(children: [
                         Text(
                           snapshot.data![currentLectureIndex].topic,
                           textAlign: TextAlign.start,
                         ),
                         Row(children: [
-                          const Text(
-                            '"',
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
+                          const Icon(
+                            Icons.mic_rounded,
+                            color: Colors.black26,
                           ),
-                          Text(snapshot.data![currentLectureIndex].body),
-                          const Text(
-                            '"',
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          )
+                          const Padding(padding: EdgeInsets.only(left: 5)),
+                          Expanded(
+                              child: ExpandableText(
+                            textAlign: TextAlign.justify,
+                            style: PersianFonts.Samim.copyWith(fontSize: 13),
+                            snapshot.data![currentLectureIndex].body,
+                            expandText: 'نمایش بیشتر',
+                            maxLines: 4,
+                            linkColor: Colors.deepPurple,
+                            animation: true,
+                            collapseOnTextTap: true,
+                            //prefixText: 'Pref',
+                            onPrefixTap: () => {},
+                            prefixStyle:
+                                const TextStyle(fontWeight: FontWeight.bold),
+                            onHashtagTap: (name) => {},
+                            hashtagStyle: const TextStyle(
+                              color: Color(0xFF30B6F9),
+                            ),
+                            onMentionTap: (username) => {},
+                            mentionStyle: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                            ),
+                            onUrlTap: (url) => {},
+                            urlStyle: const TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
+                          )),
                         ])
                       ]);
                     }

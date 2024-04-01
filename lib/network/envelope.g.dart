@@ -12,14 +12,8 @@ Envelope<T> _$EnvelopeFromJson<T>(
 ) =>
     Envelope<T>(
       _$nullableGenericFromJson(json['entity'], fromJsonT),
-      json['searchCriterias'] == null
-          ? null
-          : SearchCriterias.fromJson(
-              json['searchCriterias'] as Map<String, dynamic>),
-      json['sortCriterias'] == null
-          ? null
-          : SortCriterias.fromJson(
-              json['sortCriterias'] as Map<String, dynamic>),
+      _$nullableGenericFromJson(json['searchCriterias'], fromJsonT),
+      _$nullableGenericFromJson(json['sortCriterias'], fromJsonT),
       json['counter'] as int,
       json['additionalInfo'] as String?,
       json['isLoginRequired'] as bool,
@@ -30,6 +24,9 @@ Envelope<T> _$EnvelopeFromJson<T>(
       json['embedPhoneNo'] as bool,
       json['entityJson'] as String,
     )
+      ..Locale = json['Locale'] as String?
+      ..From = json['From'] as int?
+      ..PageCount = json['PageCount'] as int?
       ..IpAddress = json['IpAddress'] as String?
       ..Counter = json['Counter'] as int
       ..Username = json['Username'] as String?
@@ -52,6 +49,9 @@ Map<String, dynamic> _$EnvelopeToJson<T>(
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
+      'Locale': instance.Locale,
+      'From': instance.From,
+      'PageCount': instance.PageCount,
       'IpAddress': instance.IpAddress,
       'Counter': instance.Counter,
       'Username': instance.Username,
@@ -67,9 +67,10 @@ Map<String, dynamic> _$EnvelopeToJson<T>(
       'DeviceIMEI': instance.DeviceIMEI,
       'MACAddress': instance.MACAddress,
       'PhoneNo': instance.PhoneNo,
-      'searchCriterias': instance.searchCriterias,
-      'sortCriterias': instance.sortCriterias,
       'deviceInfo': instance.deviceInfo,
+      'searchCriterias':
+          _$nullableGenericToJson(instance.searchCriterias, toJsonT),
+      'sortCriterias': _$nullableGenericToJson(instance.sortCriterias, toJsonT),
       'entityJson': instance.entityJson,
       'entity': _$nullableGenericToJson(instance.entity, toJsonT),
       'counter': instance.counter,

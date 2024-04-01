@@ -8,14 +8,6 @@ part of 'empty_envelope.dart';
 
 EmptyEnvelope _$EmptyEnvelopeFromJson(Map<String, dynamic> json) =>
     EmptyEnvelope(
-      json['searchCriterias'] == null
-          ? null
-          : SearchCriterias.fromJson(
-              json['searchCriterias'] as Map<String, dynamic>),
-      json['sortCriterias'] == null
-          ? null
-          : SortCriterias.fromJson(
-              json['sortCriterias'] as Map<String, dynamic>),
       json['Counter'] as int,
       json['AdditionalInfo'] as String?,
       json['isLoginRequired'] as bool,
@@ -25,6 +17,9 @@ EmptyEnvelope _$EmptyEnvelopeFromJson(Map<String, dynamic> json) =>
       json['embedMACAddress'] as bool,
       json['embedPhoneNo'] as bool,
     )
+      ..Locale = json['Locale'] as String?
+      ..From = json['From'] as int?
+      ..PageCount = json['PageCount'] as int?
       ..IpAddress = json['IpAddress'] as String?
       ..Username = json['Username'] as String?
       ..Password = json['Password'] as String?
@@ -42,6 +37,9 @@ EmptyEnvelope _$EmptyEnvelopeFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$EmptyEnvelopeToJson(EmptyEnvelope instance) =>
     <String, dynamic>{
+      'Locale': instance.Locale,
+      'From': instance.From,
+      'PageCount': instance.PageCount,
       'IpAddress': instance.IpAddress,
       'Counter': instance.Counter,
       'Username': instance.Username,
@@ -58,8 +56,6 @@ Map<String, dynamic> _$EmptyEnvelopeToJson(EmptyEnvelope instance) =>
       'MACAddress': instance.MACAddress,
       'PhoneNo': instance.PhoneNo,
       'isLoginRequired': instance.isLoginRequired,
-      'searchCriterias': instance.searchCriterias,
-      'sortCriterias': instance.sortCriterias,
       'embedAppVersion': instance.embedAppVersion,
       'embedDeviceInfo': instance.embedDeviceInfo,
       'deviceInfo': instance.deviceInfo,

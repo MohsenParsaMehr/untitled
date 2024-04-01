@@ -55,7 +55,7 @@ class _QaWidgetState extends State<QaWidget> {
                             )),
                         IconButton.outlined(
                             onPressed: () {},
-                            icon: const Icon(Icons.favorite_rounded,
+                            icon: const Icon(Icons.favorite_outline_rounded,
                                 size: 18, color: Colors.black45)),
                       ]))
                 ],
