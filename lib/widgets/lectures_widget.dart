@@ -6,14 +6,20 @@ import 'package:untitled/data/lectures_repository';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LecturesWidget extends StatefulWidget {
-  const LecturesWidget(Key key) : super(key: key);
+  final LectureType type;
+  const LecturesWidget(Key key, this.type) : super(key: key);
   @override
-  State<LecturesWidget> createState() => _LecturesWidgetState();
+  State<LecturesWidget> createState() => _LecturesWidgetState(type);
 }
+
+enum LectureType { lecture, book, poem, quran }
 
 class _LecturesWidgetState extends State<LecturesWidget> {
   int currentLectureIndex = 0;
   List<APILecturesQuery> _lecturesSnapshotData = [];
+  _LecturesWidgetState(this._type);
+  final LectureType _type;
+  String? _selectedBookItem;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -35,31 +41,56 @@ class _LecturesWidgetState extends State<LecturesWidget> {
                     color: Colors.black26,
                   ),
                   const Padding(padding: EdgeInsets.only(left: 5)),
+                  // (_type == LectureType.book
+                  //     ? DropdownButton<String>(
+                  //         // hint: const Text('نام کتاب را انتخاب نمایید'),
+                  //         isExpanded: true,
+                  //         style:
+                  //             PersianFonts.Yekan.copyWith(color: Colors.teal),
+                  //         alignment: Alignment.topRight,
+                  //         value: _selectedBookItem,
+                  //         items: <String>[
+                  //           'کتاب 4',
+                  //           'کتاب 3',
+                  //           'کتاب 2',
+                  //           'کتاب 1'
+                  //         ].map((String value) {
+                  //           return DropdownMenuItem<String>(
+                  //             value: value,
+                  //             child: Text(value),
+                  //           );
+                  //         }).toList(),
+                  //         onChanged: (String? value) => setState(() {
+                  //           _selectedBookItem = value ?? "";
+                  //         }),
+                  //       )
+                  //     :
                   Text(
                     AppLocalizations.of(context)!.lectures,
                     style: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.bold),
+                    //)
                   ),
                   Expanded(
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                         IconButton.outlined(
-                            onPressed: () {/*TODO: Do download here*/},
+                            onPressed: () {},
                             icon: const Icon(
                               Icons.download_rounded,
                               size: 18,
                               color: Colors.black45,
                             )),
                         IconButton.outlined(
-                            onPressed: () {/*TODO: Do share here*/},
+                            onPressed: () {},
                             icon: const Icon(
                               Icons.share_rounded,
                               size: 18,
                               color: Colors.black45,
                             )),
                         IconButton.outlined(
-                            onPressed: () {/*TODO: Do bookmark here*/},
+                            onPressed: () {},
                             icon: const Icon(Icons.favorite_outline_rounded,
                                 size: 18, color: Colors.black45)),
                       ]))
@@ -84,9 +115,35 @@ class _LecturesWidgetState extends State<LecturesWidget> {
                       _lecturesSnapshotData = snapshot.data!;
 
                       return Column(children: [
-                        Text(
-                          snapshot.data![currentLectureIndex].topic,
+                        //Expanded(
+                        //child:
+                        ExpandableText(
                           textAlign: TextAlign.start,
+                          style: PersianFonts.Samim.copyWith(fontSize: 13),
+                          snapshot.data![currentLectureIndex].topic,
+                          expandText: AppLocalizations.of(context)!.viewMore,
+                          maxLines: 4,
+                          linkColor: Colors.deepPurple,
+                          animation: true,
+                          collapseOnTextTap: true,
+                          //prefixText:
+                          // (_type == LectureType.lecture ? 'سخنرانی' : ''),
+                          onPrefixTap: () => {},
+                          prefixStyle:
+                              const TextStyle(fontWeight: FontWeight.bold),
+                          onHashtagTap: (name) => {},
+                          hashtagStyle: const TextStyle(
+                            color: Color(0xFF30B6F9),
+                          ),
+                          onMentionTap: (username) => {},
+                          mentionStyle: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                          ),
+                          onUrlTap: (url) => {},
+                          urlStyle: const TextStyle(
+                            decoration: TextDecoration.underline,
+                          ),
+                          //)
                         ),
                         Row(children: [
                           const Icon(

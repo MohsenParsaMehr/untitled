@@ -16,6 +16,7 @@
   "eulogies": "Eulogies",
   "poems": "Poems",
   "settings": "Settings",
+  "viewMore": "View More",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

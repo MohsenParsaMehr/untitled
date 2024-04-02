@@ -130,11 +130,11 @@ class _QaWidgetState extends State<QaWidget> {
             ]),
           )),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const Scaffold(
-            body: Text('QA Details or List Page'),
-          );
-        }));
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        // return const Scaffold(
+        //   body: Text('QA Details or List Page'),
+        // );
+        //}));
       },
       onHorizontalDragEnd: (details) {
         if (!details.primaryVelocity!.isNegative) {
