@@ -1,8 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:untitled/data/serializable_class.dart';
 part 'APILecturesQuery.g.dart';
 
 @JsonSerializable()
-class APILecturesQuery {
+class APILecturesQuery extends SerializableClass {
+  @override
+  SerializableClass fromJson(Map<String, dynamic> json) {
+    return APILecturesQuery.fromJson(json);
+  }
+
   factory APILecturesQuery.fromJson(Map<String, dynamic> json) =>
       _$APILecturesQueryFromJson(json);
 

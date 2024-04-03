@@ -8,10 +8,12 @@ import 'package:untitled/utilities/constants.dart';
 const String apiKey = '<Your Key>';
 const String apiId = '<your ID>';
 //const String apiUrl = 'localhost:44358';// /qa/GetAllQAs';
-
-class LecturesRepository {
+abstract class SerializableClass {
+  SerializableClass fromJson(Map<String, dynamic> json);
+}
+class LecturesRepository<T extends SerializableClass> {
 static int serviceRequestCounter = 0;
-  Future<List<APILecturesQuery>> getData(String url) async {
+  Future<List<APILecturesQuery>> getLectures(String url, {APILecturesQuery request=null}) async {
     List<APILecturesQuery> lectures = [];
     try {
       var headers = {
@@ -19,16 +21,20 @@ static int serviceRequestCounter = 0;
         'Content-Type': 'application/json',
         'Accept': '*/*'
       };
-      //final response = await get(Uri.https(url,'lecture/GetAllLectures'),headers: headers);
+      Envelope envelope;
       SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
-      Envelope<SimpleRequest> qaEnvelope = Envelope(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
-      final postResponse = await post(Uri.https(Constants.baseUrl,'lecture/GetLectures'),
+      //final response = await get(Uri.https(url,'lecture/GetAllLectures'),headers: headers);
+      if(request == null){
+        
+        envelope = Envelope<SimpleRequest>(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+      }
+      else{
+        envelope = Envelope<APILecturesQuery>(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+      }
+      final postResponse = await post(Uri.https(Constants.baseUrl,url),
         headers: headers,
-        body: jsonEncode(qaEnvelope.ToJson((data) => simpleRequest.toJson(data)) ,));
-      /// sample of envelope
-      ///Envelope<User> userInfoEnvelope = new Envelope<>(user,null, null, this, ++serviceRequestCounter, null, false, true, true, true, false, true);
-      ///    asyncNetworking = new AsyncNetworking(this, this, USER_SIGNUP_TASK, true, userInfoEnvelope, Integer.class);
-
+        body: jsonEncode(envelope.ToJson((data) => simpleRequest.toJson(data)) ,));
+   
       if (postResponse.statusCode == 200) {
         var qaData = jsonDecode(postResponse.body);
         for (int i = 0; i < qaData.length; i++) {
@@ -43,5 +49,37 @@ static int serviceRequestCounter = 0;
       print(e);
     }
     return lectures;
+  }
+  T? fromJson(T? proto,Map<String, dynamic> json ) => proto!.fromJson(json) as T?;
+  Future<List<T?>> getList(String url) async {
+    List<T?> list = [];
+    try {
+      var headers = {
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      };
+      //final response = await get(Uri.https(url,'lecture/GetAllLectures'),headers: headers);
+      SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
+      Envelope<SimpleRequest> envelope = Envelope(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+      final postResponse = await post(Uri.https(Constants.baseUrl, url ), //'lecture/GetLectures'
+        headers: headers,
+        body: jsonEncode(envelope.ToJson((data) => simpleRequest.toJson(data)) ,));
+  
+      if (postResponse.statusCode == 200) {
+        var responseBody = jsonDecode(postResponse.body);
+        T? t = null;
+        for (int i = 0; i < responseBody.length; i++) {
+          list.add(fromJson(t, responseBody[i]));// T.fromJson(responseBody[i]));
+        }
+      } else {
+        log(postResponse.body);
+      }
+
+    }
+    catch (e) {
+      print(e);
+    }
+    return list;
   }
 }

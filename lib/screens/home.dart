@@ -28,14 +28,22 @@ class _HomeState extends State<Home> {
                 scrollDirection: Axis.vertical,
                 primary: true,
                 shrinkWrap: true,
-                children: const <Widget>[
+                children: <Widget>[
                   //Column(children: <Widget>[
-                  SlideShowWidget(),
-                  QaWidget(Key('3')),
-                  LecturesWidget(Key('4'), LectureType.book),
+                  const SlideShowWidget(),
+                  const QaWidget(Key('3')),
+                  LecturesWidget(const Key('4'), LectureType.lecture,
+                      Colors.green.withOpacity(0.8), Colors.lightGreen),
+                  LecturesWidget(const Key('5'), LectureType.book,
+                      Colors.orange.withOpacity(0.8), Colors.orange),
+                  LecturesWidget(
+                      const Key('6'),
+                      LectureType.poem,
+                      Colors.orangeAccent.withOpacity(0.8),
+                      Colors.orangeAccent),
                   //const Text('Eulogy'),
-                  EulogyCompactWidget(),
-                  Row(children: <Widget>[
+                  const EulogyCompactWidget(),
+                  const Row(children: <Widget>[
                     photosWidget(),
                     //Expanded(child: videosWidget())
                     // ],
