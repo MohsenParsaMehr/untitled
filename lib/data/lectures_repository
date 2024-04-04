@@ -13,7 +13,7 @@ abstract class SerializableClass {
 }
 class LecturesRepository<T extends SerializableClass> {
 static int serviceRequestCounter = 0;
-  Future<List<APILecturesQuery>> getLectures(String url, {APILecturesQuery request=null}) async {
+  Future<List<APILecturesQuery>> getLecturesSimple(String url) async {
     List<APILecturesQuery> lectures = [];
     try {
       var headers = {
@@ -21,19 +21,45 @@ static int serviceRequestCounter = 0;
         'Content-Type': 'application/json',
         'Accept': '*/*'
       };
-      Envelope envelope;
       SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
-      //final response = await get(Uri.https(url,'lecture/GetAllLectures'),headers: headers);
-      if(request == null){
-        
-        envelope = Envelope<SimpleRequest>(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+      Envelope envelope = Envelope<SimpleRequest>(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+           
+      Map<String,dynamic> json = envelope.ToJson((data) => simpleRequest.toJson(data)) ;
+           
+      final postResponse = await post(Uri.https(Constants.baseUrl, url),
+        headers: headers,
+        body: jsonEncode(json ));
+   
+      if (postResponse.statusCode == 200) {
+        var qaData = jsonDecode(postResponse.body);
+        for (int i = 0; i < qaData.length; i++) {
+          lectures.add(APILecturesQuery.fromJson(qaData[i]));
+        }
+      } else {
+        log(postResponse.body);
       }
-      else{
-        envelope = Envelope<APILecturesQuery>(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
-      }
+    }
+    catch (e) {
+      print(e);
+    }
+    return lectures;
+  }
+
+  Future<List<APILecturesQuery>> getLectures(String url, APILecturesQuery request) async {
+    List<APILecturesQuery> lectures = [];
+    try {
+      var headers = {
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      };                 
+      
+        Envelope<APILecturesQuery> envelope = Envelope<APILecturesQuery>(request, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+        Map<String,dynamic> json = envelope.ToJson((data) => request.toJson(data));
+      
       final postResponse = await post(Uri.https(Constants.baseUrl,url),
         headers: headers,
-        body: jsonEncode(envelope.ToJson((data) => simpleRequest.toJson(data)) ,));
+        body: jsonEncode(json ));
    
       if (postResponse.statusCode == 200) {
         var qaData = jsonDecode(postResponse.body);
@@ -50,6 +76,7 @@ static int serviceRequestCounter = 0;
     }
     return lectures;
   }
+
   T? fromJson(T? proto,Map<String, dynamic> json ) => proto!.fromJson(json) as T?;
   Future<List<T?>> getList(String url) async {
     List<T?> list = [];
