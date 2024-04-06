@@ -23,12 +23,30 @@ class APILecturesQuery extends SerializableClass {
   String? description;
   String? locale;
   String? mediaUrl;
-  DateTime? forDate;
+  DateTime? publishDate;
+  String? lectureBody;
+  String? type;
+  String? author;
+  String? captionImageUrl;
+  DateTime? insertDate;
+  DateTime updateDate;
   String? operatorName;
 
-  APILecturesQuery({
-    this.id,
-    required this.topic,
-    required this.body,
-  });
+  APILecturesQuery(
+      {this.id,
+      required this.topic,
+      required this.body,
+      this.lectureBody,
+      this.type,
+      this.author,
+      this.captionImageUrl,
+      this.description,
+      this.locale,
+      this.status,
+      this.isBookmarked,
+      this.publishDate,
+      this.mediaUrl,
+      this.operatorName,
+      this.insertDate,
+      required this.updateDate});
 }

@@ -45,7 +45,7 @@ static int serviceRequestCounter = 0;
     return lectures;
   }
 
-  Future<List<APILecturesQuery>> getLectures(String url, APILecturesQuery request ,{APILecturesQuery? searchCriterias = null,APILecturesQuery? sortCriterias=null, int from=0, int pageCount=100, bool isShuffled = false}) async {
+  Future<List<APILecturesQuery>> getLectures(String url, APILecturesQuery request ,APILecturesQuery? searchCriterias, {APILecturesQuery? sortCriterias = null, int from = 0, int pageCount = 100, bool isShuffled = false}) async {
     List<APILecturesQuery> lectures = [];
     try {
       var headers = {
