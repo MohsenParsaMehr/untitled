@@ -22,7 +22,7 @@ static int serviceRequestCounter = 0;
         'Accept': '*/*'
       };
       SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
-      Envelope envelope = Envelope<SimpleRequest>(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+      Envelope envelope = Envelope<SimpleRequest>(simpleRequest, null, null,null,null,false, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
            
       Map<String,dynamic> json = envelope.ToJson((data) => simpleRequest.toJson(data)) ;
            
@@ -45,7 +45,7 @@ static int serviceRequestCounter = 0;
     return lectures;
   }
 
-  Future<List<APILecturesQuery>> getLectures(String url, APILecturesQuery request) async {
+  Future<List<APILecturesQuery>> getLectures(String url, APILecturesQuery request ,{APILecturesQuery? searchCriterias = null,APILecturesQuery? sortCriterias=null, int from=0, int pageCount=100, bool isShuffled = false}) async {
     List<APILecturesQuery> lectures = [];
     try {
       var headers = {
@@ -54,8 +54,8 @@ static int serviceRequestCounter = 0;
         'Accept': '*/*'
       };                 
       
-        Envelope<APILecturesQuery> envelope = Envelope<APILecturesQuery>(request, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
-        Map<String,dynamic> json = envelope.ToJson((data) => request.toJson(data));
+        Envelope<APILecturesQuery> envelope = Envelope<APILecturesQuery>(request, searchCriterias, sortCriterias,from,pageCount,isShuffled, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+        Map<String,dynamic> json = envelope.ToJson((data) => request.toJson());
       
       final postResponse = await post(Uri.https(Constants.baseUrl,url),
         headers: headers,
@@ -88,7 +88,7 @@ static int serviceRequestCounter = 0;
       };
       //final response = await get(Uri.https(url,'lecture/GetAllLectures'),headers: headers);
       SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
-      Envelope<SimpleRequest> envelope = Envelope(simpleRequest, null, null, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
+      Envelope<SimpleRequest> envelope = Envelope(simpleRequest, null, null,null,null,false, ++serviceRequestCounter, null, false, false, false, false, false, false, '');
       final postResponse = await post(Uri.https(Constants.baseUrl, url ), //'lecture/GetLectures'
         headers: headers,
         body: jsonEncode(envelope.ToJson((data) => simpleRequest.toJson(data)) ,));

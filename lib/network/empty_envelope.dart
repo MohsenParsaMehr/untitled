@@ -8,25 +8,26 @@ part 'empty_envelope.g.dart';
 
 @JsonSerializable()
 class EmptyEnvelope {
-  String? Locale;
-  int? From;
-  int? PageCount;
-  String? IpAddress;
-  int Counter = 1;
-  String? Username;
-  String? Password;
-  int? AppVersion;
-  String? AdditionalInfo;
-  String? Credentials;
-  String? OsVersion;
-  String? ApiLevel;
-  String? Device;
-  String? Model;
-  String? Product;
-  String? DeviceIMEI;
-  String? MACAddress;
-  String? PhoneNo;
-  bool isLoginRequired = true;
+  String? locale;
+  int? from;
+  int? pageCount;
+  bool? isShuffled;
+  String? ipAddress;
+  int counter = 1;
+  String? username;
+  String? password;
+  int? appVersion;
+  String? additionalInfo;
+  String? credentials;
+  String? osVersion;
+  String? apiLevel;
+  String? device;
+  String? model;
+  String? product;
+  String? deviceIMEI;
+  String? macAddress;
+  String? phoneNo;
+  bool isLoginRequired = false;
   //SearchCriterias? searchCriterias;//
   //SortCriterias? sortCriterias;
   bool embedAppVersion = false;
@@ -37,22 +38,25 @@ class EmptyEnvelope {
   bool embedPhoneNo = false;
 
   EmptyEnvelope(
-      int Counter,
-      String? AdditionalInfo,
-      bool isLoginRequired,
-      bool embedAppVersion,
-      bool embedDeviceInfo,
-      bool embedIMEI,
-      bool embedMACAddress,
-      bool embedPhoneNo) {
-    IpAddress = Helpers.getLocalIpAddress();
+      this.from,
+      this.pageCount,
+      this.counter,
+      this.additionalInfo,
+      this.isLoginRequired,
+      this.isShuffled,
+      this.embedAppVersion,
+      this.embedDeviceInfo,
+      this.embedIMEI,
+      this.embedMACAddress,
+      this.embedPhoneNo) {
+    ipAddress = Helpers.getLocalIpAddress();
     if (embedDeviceInfo) {
-      OsVersion = 'os version here';
-      ApiLevel = 'api level here';
-      Device = 'device here';
-      Model = 'model here';
-      Product = 'product here';
-      deviceInfo = "$OsVersion|||$ApiLevel|||$Device|||$Model|||$Product";
+      osVersion = 'os version here';
+      apiLevel = 'api level here';
+      device = 'device here';
+      model = 'model here';
+      product = 'product here';
+      deviceInfo = "$osVersion|||$apiLevel|||$device|||$model|||$product";
     }
     //Counter = counter;
     if (isLoginRequired) {
@@ -60,13 +64,13 @@ class EmptyEnvelope {
         throw Exception("Login Required");
       }
 
-      Username = UserManagement.getLoggedInUserInfo()?.Username;
-      Password = UserManagement.getLoggedInUserInfo()?.Password;
+      username = UserManagement.getLoggedInUserInfo()?.Username;
+      password = UserManagement.getLoggedInUserInfo()?.Password;
     }
     if (embedAppVersion) {
       try {
         //PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-        AppVersion = 1; //pInfo.versionCode;
+        appVersion = 1; //pInfo.versionCode;
       } on Exception {
         embedAppVersion = false;
         //ignore exception, it's not so important
@@ -75,17 +79,17 @@ class EmptyEnvelope {
 
     if (embedIMEI) {
       //TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-      DeviceIMEI = ''; //telephonyManager.getDeviceId();
+      deviceIMEI = ''; //telephonyManager.getDeviceId();
     }
     if (embedMACAddress) {
       //WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-      MACAddress = ''; //manager.getConnectionInfo().getMacAddress();
+      macAddress = ''; //manager.getConnectionInfo().getMacAddress();
     }
     if (embedPhoneNo) {
-      PhoneNo = Helpers.getUserPhoneNumber();
+      phoneNo = Helpers.getUserPhoneNumber();
     }
-    Credentials = Encryption.toSha256(
-        "$IpAddress|||${embedDeviceInfo ? "$deviceInfo|||" : ""}$Counter${isLoginRequired ? "$Username|||$Password|||" : ""}${embedAppVersion ? "$AppVersion|||" : ""}${AdditionalInfo != null ? "$AdditionalInfo|||" : ""}${embedIMEI ? "$DeviceIMEI|||" : ""}${embedMACAddress ? "$MACAddress|||" : ""}${embedPhoneNo ? (PhoneNo != null ? PhoneNo! : '') : ""}"); //${searchCriterias==null?"":"$searchCriterias|||"}${sortCriterias == null?"":"$sortCriterias|||"}");
+    credentials = Encryption.toSha256(
+        "$ipAddress|||${embedDeviceInfo ? "$deviceInfo|||" : ""}$counter${isLoginRequired ? "$username|||$password|||" : ""}${embedAppVersion ? "$appVersion|||" : ""}${additionalInfo != null ? "$additionalInfo|||" : ""}${embedIMEI ? "$deviceIMEI|||" : ""}${embedMACAddress ? "$macAddress|||" : ""}${embedPhoneNo ? (phoneNo != null ? phoneNo! : '') : ""}"); //${searchCriterias==null?"":"$searchCriterias|||"}${sortCriterias == null?"":"$sortCriterias|||"}");
   }
   factory EmptyEnvelope.fromJson(Map<String, dynamic> json) =>
       _$EmptyEnvelopeFromJson(json);

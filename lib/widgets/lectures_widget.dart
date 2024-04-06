@@ -21,7 +21,8 @@ enum LectureType { lecture, book, poem, quran }
 class _LecturesWidgetState extends State<LecturesWidget> {
   int _currentLectureIndex = 0;
   //Future<List<APILecturesQuery>> _lectures = Future.value([]);
-  var _lectures = LecturesRepository().getLectures(Constants.getLecturesUrl);
+  var _lectures = LecturesRepository().getLectures(
+      Constants.getLecturesUrl, APILecturesQuery(topic: 'topic', body: 'body'));
   List<APILecturesQuery> _lecturesSnapshotData = [];
   final Color _color, _tintColor;
   _LecturesWidgetState(this._type, this._color, this._tintColor) {
@@ -29,7 +30,8 @@ class _LecturesWidgetState extends State<LecturesWidget> {
       case LectureType.lecture:
       case LectureType.book:
       case LectureType.poem:
-        _lectures = LecturesRepository().getLectures(Constants.getLecturesUrl);
+        _lectures = LecturesRepository().getLectures(Constants.getLecturesUrl,
+            APILecturesQuery(topic: 'topic', body: 'body'));
       default:
         break;
     }

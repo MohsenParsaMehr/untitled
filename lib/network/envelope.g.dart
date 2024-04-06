@@ -14,6 +14,9 @@ Envelope<T> _$EnvelopeFromJson<T>(
       _$nullableGenericFromJson(json['entity'], fromJsonT),
       _$nullableGenericFromJson(json['searchCriterias'], fromJsonT),
       _$nullableGenericFromJson(json['sortCriterias'], fromJsonT),
+      json['from'] as int?,
+      json['pageCount'] as int?,
+      json['isShuffled'] as bool?,
       json['counter'] as int,
       json['additionalInfo'] as String?,
       json['isLoginRequired'] as bool,
@@ -22,26 +25,22 @@ Envelope<T> _$EnvelopeFromJson<T>(
       json['embedIMEI'] as bool,
       json['embedMACAddress'] as bool,
       json['embedPhoneNo'] as bool,
-      json['entityJson'] as String,
+      json['entityJson'] as String?,
     )
-      ..Locale = json['Locale'] as String?
-      ..From = json['From'] as int?
-      ..PageCount = json['PageCount'] as int?
-      ..IpAddress = json['IpAddress'] as String?
-      ..Counter = json['Counter'] as int
-      ..Username = json['Username'] as String?
-      ..Password = json['Password'] as String?
-      ..AppVersion = json['AppVersion'] as int?
-      ..AdditionalInfo = json['AdditionalInfo'] as String?
-      ..Credentials = json['Credentials'] as String?
-      ..OsVersion = json['OsVersion'] as String?
-      ..ApiLevel = json['ApiLevel'] as String?
-      ..Device = json['Device'] as String?
-      ..Model = json['Model'] as String?
-      ..Product = json['Product'] as String?
-      ..DeviceIMEI = json['DeviceIMEI'] as String?
-      ..MACAddress = json['MACAddress'] as String?
-      ..PhoneNo = json['PhoneNo'] as String?
+      ..locale = json['locale'] as String?
+      ..ipAddress = json['ipAddress'] as String?
+      ..username = json['username'] as String?
+      ..password = json['password'] as String?
+      ..appVersion = json['appVersion'] as int?
+      ..credentials = json['credentials'] as String?
+      ..osVersion = json['osVersion'] as String?
+      ..apiLevel = json['apiLevel'] as String?
+      ..device = json['device'] as String?
+      ..model = json['model'] as String?
+      ..product = json['product'] as String?
+      ..deviceIMEI = json['deviceIMEI'] as String?
+      ..macAddress = json['macAddress'] as String?
+      ..phoneNo = json['phoneNo'] as String?
       ..deviceInfo = json['deviceInfo'] as String;
 
 Map<String, dynamic> _$EnvelopeToJson<T>(
@@ -49,24 +48,23 @@ Map<String, dynamic> _$EnvelopeToJson<T>(
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
-      'Locale': instance.Locale,
-      'From': instance.From,
-      'PageCount': instance.PageCount,
-      'IpAddress': instance.IpAddress,
-      'Counter': instance.Counter,
-      'Username': instance.Username,
-      'Password': instance.Password,
-      'AppVersion': instance.AppVersion,
-      'AdditionalInfo': instance.AdditionalInfo,
-      'Credentials': instance.Credentials,
-      'OsVersion': instance.OsVersion,
-      'ApiLevel': instance.ApiLevel,
-      'Device': instance.Device,
-      'Model': instance.Model,
-      'Product': instance.Product,
-      'DeviceIMEI': instance.DeviceIMEI,
-      'MACAddress': instance.MACAddress,
-      'PhoneNo': instance.PhoneNo,
+      'locale': instance.locale,
+      'from': instance.from,
+      'pageCount': instance.pageCount,
+      'isShuffled': instance.isShuffled,
+      'ipAddress': instance.ipAddress,
+      'username': instance.username,
+      'password': instance.password,
+      'appVersion': instance.appVersion,
+      'credentials': instance.credentials,
+      'osVersion': instance.osVersion,
+      'apiLevel': instance.apiLevel,
+      'device': instance.device,
+      'model': instance.model,
+      'product': instance.product,
+      'deviceIMEI': instance.deviceIMEI,
+      'macAddress': instance.macAddress,
+      'phoneNo': instance.phoneNo,
       'deviceInfo': instance.deviceInfo,
       'searchCriterias':
           _$nullableGenericToJson(instance.searchCriterias, toJsonT),

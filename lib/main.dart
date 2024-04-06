@@ -152,35 +152,22 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.account_circle,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Register User'),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.signUp)
-              ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.book,
+                Icon(Icons.menu_book_rounded,
                     color: Theme.of(context).primaryColor,
                     size: 24.0,
                     semanticLabel: 'Books'),
                 const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.settings)
+                Text(AppLocalizations.of(context)!.books)
               ]),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
+
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.speaker_group,
+                Icon(Icons.mic_external_on_rounded,
                     color: Theme.of(context).primaryColor,
                     size: 24.0,
                     semanticLabel: 'Lectures'),
@@ -194,12 +181,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.question_answer,
+                Icon(Icons.question_answer_rounded,
                     color: Theme.of(context).primaryColor,
                     size: 24.0,
                     semanticLabel: 'FAQs'),
                 const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.faqs)
+                Text(AppLocalizations.of(context)!.questionAndAnswers)
               ]),
               onTap: () {
                 // Update the state of the app.
@@ -209,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.favorite,
+                Icon(Icons.favorite_rounded,
                     color: Theme.of(context).primaryColor,
                     size: 24.0,
                     semanticLabel: 'Favourites'),
@@ -221,23 +208,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 // ...
               },
             ),
+
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.photo_album,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Gallery'),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.gallery)
-              ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.interpreter_mode,
+                Icon(Icons.interpreter_mode_rounded,
                     color: Theme.of(context).primaryColor,
                     size: 24.0,
                     semanticLabel: 'Interprets'),
@@ -265,7 +239,21 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.adjust,
+                Icon(Icons.photo_album_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Gallery'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.gallery)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.pix_outlined,
                     color: Theme.of(context).primaryColor,
                     size: 24.0,
                     semanticLabel: 'Concepts'),
