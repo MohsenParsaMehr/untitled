@@ -23,7 +23,7 @@ class _LecturesWidgetState extends State<LecturesWidget> {
   //Future<List<APILecturesQuery>> _lectures = Future.value([]);
   var _lectures = LecturesRepository().getLectures(
       Constants.getLecturesUrl,
-      APILecturesQuery(topic: '', body: ''),
+      APILecturesQuery(topic: '', body: '' ]),
       APILecturesQuery(topic: '', body: ''));
   List<APILecturesQuery> _lecturesSnapshotData = [];
   final Color _color, _tintColor;

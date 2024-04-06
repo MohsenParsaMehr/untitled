@@ -29,7 +29,7 @@ class APILecturesQuery extends SerializableClass {
   String? author;
   String? captionImageUrl;
   DateTime? insertDate;
-  DateTime updateDate;
+  DateTime? updateDate;
   String? operatorName;
 
   APILecturesQuery(
@@ -48,5 +48,5 @@ class APILecturesQuery extends SerializableClass {
       this.mediaUrl,
       this.operatorName,
       this.insertDate,
-      required this.updateDate});
+      this.updateDate});
 }
