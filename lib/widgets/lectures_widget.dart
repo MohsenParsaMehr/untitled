@@ -1,5 +1,6 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/data/lectures_repository';
@@ -16,26 +17,26 @@ class LecturesWidget extends StatefulWidget {
       _LecturesWidgetState(type, _color, _tintColor);
 }
 
-enum LectureType { lecture, book, poem, quran }
+enum LectureType { narration, book, poem, quran }
 
 class _LecturesWidgetState extends State<LecturesWidget> {
   int _currentLectureIndex = 0;
-  //Future<List<APILecturesQuery>> _lectures = Future.value([]);
-  var _lectures = LecturesRepository().getLectures(
-      Constants.getLecturesUrl,
-      APILecturesQuery(topic: '', body: '' ]),
-      APILecturesQuery(topic: '', body: ''));
+  Future<List<APILecturesQuery>> _lectures = Future.value([]);
+  //var _lectures = LecturesRepository().getLectures(
+  //Constants.getLecturesUrl,
+  //APILecturesQuery(topic: '', body: ''),
+  //APILecturesQuery(topic: '', body: ''));
   List<APILecturesQuery> _lecturesSnapshotData = [];
   final Color _color, _tintColor;
   _LecturesWidgetState(this._type, this._color, this._tintColor) {
     switch (_type) {
-      case LectureType.lecture:
+      case LectureType.narration:
       case LectureType.book:
       case LectureType.poem:
         _lectures = LecturesRepository().getLectures(
             Constants.getLecturesUrl,
             APILecturesQuery(topic: '', body: ''),
-            APILecturesQuery(topic: '', body: ''));
+            APILecturesQuery(topic: '', body: '', type: _type.name));
       default:
         break;
     }
