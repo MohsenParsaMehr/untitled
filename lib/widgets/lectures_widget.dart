@@ -1,5 +1,6 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/data/lectures_repository.dart';
@@ -19,6 +20,8 @@ class LecturesWidget extends StatefulWidget {
 
 enum LectureType { narration, book, poem, quran }
 
+enum LectureType { narration, book, poem, quran }
+
 class _LecturesWidgetState extends State<LecturesWidget> {
   int _currentLectureIndex = 0;
   //Future<List<APILecturesQuery>> _lectures = Future.value([]);
@@ -30,6 +33,7 @@ class _LecturesWidgetState extends State<LecturesWidget> {
   final Color _color, _tintColor;
   _LecturesWidgetState(this._type, this._color, this._tintColor) {
     switch (_type) {
+      case LectureType.narration:
       case LectureType.narration:
       case LectureType.book:
       case LectureType.poem:
