@@ -33,7 +33,7 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-final theme = GreenLightTheme.light();
+final theme = GreenLightTheme.dark();
 
 class GreenLightApp extends StatefulWidget {
   const GreenLightApp({

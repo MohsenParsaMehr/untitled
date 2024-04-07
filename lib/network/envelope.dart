@@ -1,11 +1,12 @@
 import "package:json_annotation/json_annotation.dart";
+
 import "../utilities/encryption.dart";
 import "empty_envelope.dart";
 part 'envelope.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
-class Envelope<T> extends EmptyEnvelope {
-  T? searchCriterias;
+class Envelope<T, U> extends EmptyEnvelope {
+  U? searchCriterias;
   T? sortCriterias;
   String? entityJson;
   T? entity;
@@ -49,9 +50,10 @@ class Envelope<T> extends EmptyEnvelope {
     credentials = Encryption.toSha256(
         "$ipAddress|||${embedDeviceInfo ? "$deviceInfo|||" : ""}$counter${isLoginRequired ? "${username != null ? username! : ''}|||${password != null ? password! : ''}|||" : ""}${embedAppVersion ? "$appVersion|||" : ""}${additionalInfo != null ? "$additionalInfo|||" : ""}${embedIMEI ? "$deviceIMEI|||" : ""}${embedMACAddress ? "$macAddress|||" : ""}${embedPhoneNo ? "$phoneNo|||" : ""}$entityJson");
   }
-  factory Envelope.fromJson(
-          Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
-      _$EnvelopeFromJson(json, fromJsonT);
-  Map<String, dynamic> ToJson(Object? Function(T) toJsonT) =>
-      _$EnvelopeToJson(this, toJsonT);
+  factory Envelope.fromJson(Map<String, dynamic> json,
+          T Function(Object?) fromJsonT, U Function(Object?) fromJsonU) =>
+      _$EnvelopeFromJson(json, fromJsonT, fromJsonU);
+  Map<String, dynamic> ToJson(
+          Object? Function(T) toJsonT, Object? Function(U) toJsonU) =>
+      _$EnvelopeToJson(this, toJsonT, toJsonU);
 }

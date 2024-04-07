@@ -6,13 +6,14 @@ part of 'envelope.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Envelope<T> _$EnvelopeFromJson<T>(
+Envelope<T, U> _$EnvelopeFromJson<T, U>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
+  U Function(Object? json) fromJsonU,
 ) =>
-    Envelope<T>(
+    Envelope<T, U>(
       _$nullableGenericFromJson(json['entity'], fromJsonT),
-      _$nullableGenericFromJson(json['searchCriterias'], fromJsonT),
+      _$nullableGenericFromJson(json['searchCriterias'], fromJsonU),
       _$nullableGenericFromJson(json['sortCriterias'], fromJsonT),
       json['from'] as int?,
       json['pageCount'] as int?,
@@ -43,9 +44,10 @@ Envelope<T> _$EnvelopeFromJson<T>(
       ..phoneNo = json['phoneNo'] as String?
       ..deviceInfo = json['deviceInfo'] as String;
 
-Map<String, dynamic> _$EnvelopeToJson<T>(
-  Envelope<T> instance,
+Map<String, dynamic> _$EnvelopeToJson<T, U>(
+  Envelope<T, U> instance,
   Object? Function(T value) toJsonT,
+  Object? Function(U value) toJsonU,
 ) =>
     <String, dynamic>{
       'locale': instance.locale,
@@ -75,7 +77,7 @@ Map<String, dynamic> _$EnvelopeToJson<T>(
       'embedMACAddress': instance.embedMACAddress,
       'embedPhoneNo': instance.embedPhoneNo,
       'searchCriterias':
-          _$nullableGenericToJson(instance.searchCriterias, toJsonT),
+          _$nullableGenericToJson(instance.searchCriterias, toJsonU),
       'sortCriterias': _$nullableGenericToJson(instance.sortCriterias, toJsonT),
       'entityJson': instance.entityJson,
       'entity': _$nullableGenericToJson(instance.entity, toJsonT),

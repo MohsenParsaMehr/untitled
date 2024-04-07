@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:untitled/data/QuestionsAndAnswers.dart';
+import 'package:untitled/data/api_lecture_search_criterias.dart';
 import 'package:untitled/data/simple_request.dart';
 import 'package:untitled/network/qa_model.dart';
 import 'package:untitled/network/envelope.dart';
@@ -22,7 +25,7 @@ class GreenLightService {
       //final response =
       // await get(Uri.https(url, 'qa/GetAllQAs'), headers: headers);
       SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
-      Envelope<SimpleRequest> qaEnvelope = Envelope(
+      Envelope<SimpleRequest, SimpleRequest> qaEnvelope = Envelope(
           simpleRequest,
           null,
           null,
@@ -41,7 +44,8 @@ class GreenLightService {
       final postResponse = await post(Uri.https(url, 'qa/GetQAs'),
           headers: headers,
           body: jsonEncode(
-            qaEnvelope.ToJson((data) => simpleRequest.toJson(data)),
+            qaEnvelope.ToJson((data) => simpleRequest.toJson(data),
+                (d2) => simpleRequest.toJson(d2)),
           ));
 
       if (postResponse.statusCode == 200) {
