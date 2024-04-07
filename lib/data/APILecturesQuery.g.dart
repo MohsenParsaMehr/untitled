@@ -10,7 +10,6 @@ APILecturesQuery _$APILecturesQueryFromJson(Map<String, dynamic> json) =>
     APILecturesQuery(
       id: json['id'] as int?,
       topic: json['topic'] as String,
-      body: json['body'] as String,
       lectureBody: json['lectureBody'] as String?,
       type: json['type'] as String?,
       author: json['author'] as String?,
@@ -38,7 +37,6 @@ Map<String, dynamic> _$APILecturesQueryToJson(APILecturesQuery instance) =>
       'status': instance.status,
       'isBookmarked': instance.isBookmarked,
       'topic': instance.topic,
-      'body': instance.body,
       'description': instance.description,
       'locale': instance.locale,
       'mediaUrl': instance.mediaUrl,

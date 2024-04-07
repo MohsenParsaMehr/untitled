@@ -133,22 +133,31 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                Icon(Icons.account_circle,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Register User'),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.guest),
-                IconButton.outlined(
-                    onPressed: () => {
-                          Navigator.restorablePushNamed(
-                              context, SettingsView.routeName)
-                        },
-                    icon: const Icon(Icons.settings_rounded)),
-              ]),
+                  color: Theme.of(context).colorScheme.primary,
+                  image: const DecorationImage(
+                      isAntiAlias: true,
+                      image: AssetImage('assets/images/logo.png'))),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    IconButton.outlined(
+                      onPressed: () => {
+                        Navigator.restorablePushNamed(
+                            context, SettingsView.routeName)
+                      },
+                      icon: const Icon(Icons.account_circle_rounded),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(AppLocalizations.of(context)!.guest),
+                    IconButton.outlined(
+                      onPressed: () => {
+                        Navigator.restorablePushNamed(
+                            context, SettingsView.routeName)
+                      },
+                      icon: const Icon(Icons.settings_rounded),
+                    ),
+                  ]),
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [

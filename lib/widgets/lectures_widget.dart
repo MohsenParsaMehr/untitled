@@ -5,7 +5,7 @@ import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/data/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:untitled/utilities/constants.dart';
+import 'package:untitled/utilities/settings.dart';
 import "package:untitled/data/api_lecture_search_criterias.dart";
 
 class LecturesWidget extends StatefulWidget {
@@ -20,27 +20,28 @@ class LecturesWidget extends StatefulWidget {
 
 enum LectureType { narration, book, poem, quran }
 
-enum LectureType { narration, book, poem, quran }
-
 class _LecturesWidgetState extends State<LecturesWidget> {
   int _currentLectureIndex = 0;
-  //Future<List<APILecturesQuery>> _lectures = Future.value([]);
-  var _lectures = LecturesRepository<APILectureSearchCriterias>().getLectures(
-      Constants.getLecturesUrl,
-      APILecturesQuery(topic: '', body: ''),
-      APILectureSearchCriterias());
+  Future<List<APILecturesQuery>> _lectures = Future.value([]);
+//  var _lectures = LecturesRepository<APILectureSearchCriterias>().getLectures(
+  //     Settings.getLecturesUrl,
+  //    APILecturesQuery(topic: ''),
+  //    APILectureSearchCriterias());
   List<APILecturesQuery> _lecturesSnapshotData = [];
   final Color _color, _tintColor;
   _LecturesWidgetState(this._type, this._color, this._tintColor) {
     switch (_type) {
       case LectureType.narration:
-      case LectureType.narration:
+      case LectureType.quran:
       case LectureType.book:
       case LectureType.poem:
         _lectures = LecturesRepository().getLectures(
-            Constants.getLecturesUrl,
-            APILecturesQuery(topic: '', body: ''),
-            APILectureSearchCriterias(type: _type.toString()));
+            Settings.getLecturesUrl,
+            APILecturesQuery(topic: ''),
+            LectureSearchCriterias(
+                type: _type
+                    .toString()
+                    .replaceFirst(RegExp(r'LectureType.'), '')));
       default:
         break;
     }
@@ -127,6 +128,10 @@ class _LecturesWidgetState extends State<LecturesWidget> {
                             onPressed: () {},
                             icon: const Icon(Icons.favorite_outline_rounded,
                                 size: 18, color: Colors.black45)),
+                        IconButton.outlined(
+                            onPressed: () {},
+                            icon: const Icon(Icons.shuffle_rounded,
+                                size: 18, color: Colors.black45)),
                       ]))
                 ],
               ),
@@ -189,7 +194,7 @@ class _LecturesWidgetState extends State<LecturesWidget> {
                               child: ExpandableText(
                             textAlign: TextAlign.justify,
                             style: PersianFonts.Samim.copyWith(fontSize: 13),
-                            snapshot.data![_currentLectureIndex].body,
+                            snapshot.data![_currentLectureIndex].lectureBody!,
                             expandText: 'نمایش بیشتر',
                             maxLines: 4,
                             linkColor: Colors.deepPurple,

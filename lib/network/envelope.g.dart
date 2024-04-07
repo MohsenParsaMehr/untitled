@@ -15,6 +15,7 @@ Envelope<T, U> _$EnvelopeFromJson<T, U>(
       _$nullableGenericFromJson(json['entity'], fromJsonT),
       _$nullableGenericFromJson(json['searchCriterias'], fromJsonU),
       _$nullableGenericFromJson(json['sortCriterias'], fromJsonT),
+      json['locale'] as String?,
       json['from'] as int?,
       json['pageCount'] as int?,
       json['isShuffled'] as bool?,
@@ -28,7 +29,6 @@ Envelope<T, U> _$EnvelopeFromJson<T, U>(
       json['embedPhoneNo'] as bool,
       json['entityJson'] as String?,
     )
-      ..locale = json['locale'] as String?
       ..ipAddress = json['ipAddress'] as String?
       ..username = json['username'] as String?
       ..password = json['password'] as String?

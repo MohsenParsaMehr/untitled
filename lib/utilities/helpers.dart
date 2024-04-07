@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
-import 'package:untitled/utilities/constants.dart';
+import 'package:untitled/utilities/settings.dart';
 
 class Helpers {
   static Future<bool> isNetworkAvailable() async {
     try {
-      final result = await InternetAddress.lookup(Constants.baseUrl);
+      final result = await InternetAddress.lookup(Settings.baseUrl);
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         return true;
       }

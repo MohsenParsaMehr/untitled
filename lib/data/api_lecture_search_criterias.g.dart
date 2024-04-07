@@ -6,9 +6,9 @@ part of 'api_lecture_search_criterias.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-APILectureSearchCriterias _$APILectureSearchCriteriasFromJson(
+LectureSearchCriterias _$APILectureSearchCriteriasFromJson(
         Map<String, dynamic> json) =>
-    APILectureSearchCriterias(
+    LectureSearchCriterias(
       id: json['id'] as int?,
       locale: json['locale'] as String?,
       type: json['type'] as String?,
@@ -40,7 +40,7 @@ APILectureSearchCriterias _$APILectureSearchCriteriasFromJson(
     );
 
 Map<String, dynamic> _$APILectureSearchCriteriasToJson(
-        APILectureSearchCriterias instance) =>
+        LectureSearchCriterias instance) =>
     <String, dynamic>{
       'id': instance.id,
       'locale': instance.locale,

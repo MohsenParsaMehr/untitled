@@ -23,6 +23,7 @@ class Envelope<T, U> extends EmptyEnvelope {
       T? entity,
       this.searchCriterias,
       this.sortCriterias,
+      String? locale,
       int? from,
       int? pageCount,
       bool? isShuffled,
@@ -36,6 +37,7 @@ class Envelope<T, U> extends EmptyEnvelope {
       bool embedPhoneNo,
       this.entityJson)
       : super(
+            locale,
             from,
             pageCount,
             counter,

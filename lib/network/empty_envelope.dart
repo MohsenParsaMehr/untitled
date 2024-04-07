@@ -38,6 +38,7 @@ class EmptyEnvelope {
   bool embedPhoneNo = false;
 
   EmptyEnvelope(
+      this.locale,
       this.from,
       this.pageCount,
       this.counter,

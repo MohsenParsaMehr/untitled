@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-import 'package:untitled/utilities/constants.dart';
+import 'package:untitled/utilities/settings.dart';
 
 class SlideShowWidget extends StatelessWidget {
   const SlideShowWidget({super.key});
@@ -45,7 +45,7 @@ class SlideShowWidget extends StatelessWidget {
             CachedNetworkImage(
               alignment: Alignment.topCenter,
               imageUrl:
-                  "${Constants.protocol}://${Constants.baseUrl}/images/logo.jpg",
+                  "${Settings.protocol}://${Settings.baseUrl}/images/logo.jpg",
               errorWidget: (context, url, error) => const Icon(Icons.error),
               imageBuilder: (context, imageProvider) {
                 return Ink.image(

@@ -5,7 +5,7 @@ import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/network/green_light_service.dart';
 import 'package:untitled/network/qa_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:untitled/utilities/constants.dart';
+import 'package:untitled/utilities/settings.dart';
 
 class QaWidget extends StatefulWidget {
   const QaWidget(Key key) : super(key: key);
@@ -57,12 +57,16 @@ class _QaWidgetState extends State<QaWidget> {
                             onPressed: () {},
                             icon: const Icon(Icons.favorite_outline_rounded,
                                 size: 18, color: Colors.black45)),
+                        IconButton.outlined(
+                            onPressed: () {},
+                            icon: const Icon(Icons.shuffle_rounded,
+                                size: 18, color: Colors.black45)),
                       ]))
                 ],
               ),
               FutureBuilder<List<APIQAQuery>>(
                   future:
-                      GreenLightService().getQAs(Constants.baseUrl, null, null),
+                      GreenLightService().getQAs(Settings.baseUrl, null, null),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<APIQAQuery>> snapshot) {
                     if (!snapshot.hasData ||

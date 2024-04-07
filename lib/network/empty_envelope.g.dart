@@ -8,6 +8,7 @@ part of 'empty_envelope.dart';
 
 EmptyEnvelope _$EmptyEnvelopeFromJson(Map<String, dynamic> json) =>
     EmptyEnvelope(
+      json['locale'] as String?,
       json['from'] as int?,
       json['pageCount'] as int?,
       json['counter'] as int,
@@ -20,7 +21,6 @@ EmptyEnvelope _$EmptyEnvelopeFromJson(Map<String, dynamic> json) =>
       json['embedMACAddress'] as bool,
       json['embedPhoneNo'] as bool,
     )
-      ..locale = json['locale'] as String?
       ..ipAddress = json['ipAddress'] as String?
       ..username = json['username'] as String?
       ..password = json['password'] as String?

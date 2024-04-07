@@ -3,13 +3,13 @@ import 'package:untitled/data/serializable_class.dart';
 part 'api_lecture_search_criterias.g.dart';
 
 @JsonSerializable()
-class APILectureSearchCriterias {
+class LectureSearchCriterias {
   // @override
   // SerializableClass fromJson(Map<String, dynamic> json) {
   //   return APILectureParagraph.fromJson(json);
   // }
 
-  factory APILectureSearchCriterias.fromJson(Map<String, dynamic> json) =>
+  factory LectureSearchCriterias.fromJson(Map<String, dynamic> json) =>
       _$APILectureSearchCriteriasFromJson(json);
 
   Map<String, dynamic> toJson() => _$APILectureSearchCriteriasToJson(this);
@@ -31,7 +31,7 @@ class APILectureSearchCriterias {
   String? updateDateSearchOperator;
   DateTime? updateDateTo;
   int? bookPageNumber;
-  APILectureSearchCriterias(
+  LectureSearchCriterias(
       {this.id,
       this.locale,
       this.type,

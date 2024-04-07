@@ -19,7 +19,6 @@ class APILecturesQuery extends SerializableClass {
   String? status;
   bool? isBookmarked;
   String topic;
-  String body;
   String? description;
   String? locale;
   String? mediaUrl;
@@ -35,7 +34,6 @@ class APILecturesQuery extends SerializableClass {
   APILecturesQuery(
       {this.id,
       required this.topic,
-      required this.body,
       this.lectureBody,
       this.type,
       this.author,
