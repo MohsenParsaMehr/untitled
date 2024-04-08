@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/widgets/lectures_generic.dart';
 import 'package:untitled/widgets/slideshowWidget.dart';
 import 'package:untitled/widgets/eulogy_compact_widget.dart';
 import 'package:untitled/widgets/lectures_widget.dart';
-import 'package:untitled/widgets/videosWidget.dart';
 import '../widgets/qa_widget.dart';
 import 'package:untitled/widgets/photosWidget.dart';
 
@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
                   const QaWidget(Key('3')),
                   LecturesWidget(const Key('4'), LectureType.narration,
                       Colors.green.withOpacity(0.8), Colors.lightGreen),
-                  LecturesWidget(const Key('5'), LectureType.book,
+                  LecturesGenericWidget(const Key('5'), LectureType.book,
                       Colors.orange.withOpacity(0.8), Colors.orange),
                   LecturesWidget(
                       const Key('6'),
