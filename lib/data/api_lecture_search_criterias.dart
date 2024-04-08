@@ -10,9 +10,9 @@ class LectureSearchCriterias {
   // }
 
   factory LectureSearchCriterias.fromJson(Map<String, dynamic> json) =>
-      _$APILectureSearchCriteriasFromJson(json);
+      _$LectureSearchCriteriasFromJson(json);
 
-  Map<String, dynamic> toJson() => _$APILectureSearchCriteriasToJson(this);
+  Map<String, dynamic> toJson() => _$LectureSearchCriteriasToJson(this);
 
   //@JsonKey(name: 'Id')
   int? id;

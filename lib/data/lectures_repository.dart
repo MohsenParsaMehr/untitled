@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart';
+import 'package:untitled/data/lecture_dto.dart';
 import 'package:untitled/data/simple_request.dart';
 import 'package:untitled/network/envelope.dart';
 import 'package:untitled/data/APILecturesQuery.dart';
@@ -66,13 +67,13 @@ class LecturesRepository<T> /*extends SerializableClass*/ {
     return lectures;
   }
 
-  Future<List<APILecturesQuery>> getLectures(String url,
-      APILecturesQuery request, LectureSearchCriterias searchCriterias,
-      {APILecturesQuery? sortCriterias,
+  Future<List<LectureDto>> getLectures(
+      String url, LectureDto request, LectureSearchCriterias searchCriterias,
+      {LectureDto? sortCriterias,
       int from = 0,
       int pageCount = 100,
       bool isShuffled = false}) async {
-    List<APILecturesQuery> lectures = [];
+    List<LectureDto> lectures = [];
     //try {
     var headers = {
       "Access-Control-Allow-Origin": "*",
@@ -80,8 +81,8 @@ class LecturesRepository<T> /*extends SerializableClass*/ {
       'Accept': '*/*'
     };
 
-    Envelope<APILecturesQuery, LectureSearchCriterias> envelope =
-        Envelope<APILecturesQuery, LectureSearchCriterias>(
+    Envelope<LectureDto, LectureSearchCriterias> envelope =
+        Envelope<LectureDto, LectureSearchCriterias>(
             request,
             searchCriterias,
             sortCriterias,
@@ -107,7 +108,7 @@ class LecturesRepository<T> /*extends SerializableClass*/ {
     if (postResponse.statusCode == 200) {
       var qaData = jsonDecode(postResponse.body);
       for (int i = 0; i < qaData.length; i++) {
-        lectures.add(APILecturesQuery.fromJson(qaData[i]));
+        lectures.add(LectureDto.fromJson(qaData[i]));
       }
     } else {
       log(postResponse.body);

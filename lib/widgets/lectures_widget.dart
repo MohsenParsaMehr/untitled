@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/data/APILecturesQuery.dart';
+import 'package:untitled/data/lecture_dto.dart';
 import 'package:untitled/data/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:untitled/utilities/settings.dart';
@@ -22,12 +23,12 @@ enum LectureType { narration, book, poem, quran }
 
 class _LecturesWidgetState extends State<LecturesWidget> {
   int _currentLectureIndex = 0;
-  Future<List<APILecturesQuery>> _lectures = Future.value([]);
+  Future<List<LectureDto>> _lectures = Future.value([]);
 //  var _lectures = LecturesRepository<APILectureSearchCriterias>().getLectures(
   //     Settings.getLecturesUrl,
   //    APILecturesQuery(topic: ''),
   //    APILectureSearchCriterias());
-  List<APILecturesQuery> _lecturesSnapshotData = [];
+  List<LectureDto> _lecturesSnapshotData = [];
   final Color _color, _tintColor;
   _LecturesWidgetState(this._type, this._color, this._tintColor) {
     switch (_type) {
@@ -37,7 +38,7 @@ class _LecturesWidgetState extends State<LecturesWidget> {
       case LectureType.poem:
         _lectures = LecturesRepository().getLectures(
             Settings.getLecturesUrl,
-            APILecturesQuery(topic: ''),
+            LectureDto(),
             LectureSearchCriterias(
                 type: _type
                     .toString()
@@ -135,10 +136,10 @@ class _LecturesWidgetState extends State<LecturesWidget> {
                       ]))
                 ],
               ),
-              FutureBuilder<List<APILecturesQuery>>(
+              FutureBuilder<List<LectureDto>>(
                   future: _lectures, // LecturesRepository().getData(""),
                   builder: (BuildContext context,
-                      AsyncSnapshot<List<APILecturesQuery>> snapshot) {
+                      AsyncSnapshot<List<LectureDto>> snapshot) {
                     if (!snapshot.hasData ||
                         snapshot.data == null ||
                         (snapshot.data != null && snapshot.data!.isEmpty)) {
