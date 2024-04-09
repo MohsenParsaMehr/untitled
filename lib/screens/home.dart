@@ -32,11 +32,11 @@ class _HomeState extends State<Home> {
                   //Column(children: <Widget>[
                   const SlideShowWidget(),
                   const QaWidget(Key('3')),
-                  LecturesWidget(const Key('4'), LectureType.narration,
+                  LecturesGenericWidget(const Key('4'), LectureType.narration,
                       Colors.green.withOpacity(0.8), Colors.lightGreen),
                   LecturesGenericWidget(const Key('5'), LectureType.book,
                       Colors.orange.withOpacity(0.8), Colors.orange),
-                  LecturesWidget(
+                  LecturesGenericWidget(
                       const Key('6'),
                       LectureType.poem,
                       Colors.orangeAccent.withOpacity(0.8),

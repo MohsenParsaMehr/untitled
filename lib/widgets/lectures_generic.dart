@@ -42,6 +42,7 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                 type: _type
                     .toString()
                     .replaceFirst(RegExp(r'LectureType.'), '')));
+
       default:
         break;
     }
@@ -70,27 +71,39 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                   ),
                   const Padding(padding: EdgeInsets.only(left: 5)),
                   (_type == LectureType.book || _type == LectureType.poem
-                      ? DropdownButton<String>(
-                          hint: const Text('کتاب 1'),
-                          //isExpanded: true,
-                          style:
-                              PersianFonts.Yekan.copyWith(color: Colors.teal),
-                          alignment: Alignment.topRight,
-                          value: _selectedBookItem,
-                          items: <String>[
-                            'کتاب 4',
-                            'کتاب 3',
-                            'کتاب 2',
-                            'کتاب 1'
-                          ].map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) => setState(() {
-                            _selectedBookItem = value ?? "";
-                          }),
+                      ? FutureBuilder<List<LectureDto>>(
+                          future: _lectures,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              var data = snapshot.data!;
+                              return DropdownButton<String>(
+                                hint: Text(_selectedBookItem ?? 'انتخاب کتاب'),
+                                //isExpanded: true,
+                                style: PersianFonts.Yekan.copyWith(
+                                    color: Colors.teal),
+                                alignment: Alignment.topRight,
+                                value: _selectedBookItem,
+                                items: data
+                                    .map((e) => e.topic)
+                                    //  <String>[
+                                    //   'کتاب 4',
+                                    //   'کتاب 3',
+                                    //   'کتاب 2',
+                                    //   'کتاب 1'   ]
+                                    .map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (String? value) => setState(() {
+                                  _selectedBookItem = value ?? "";
+                                }),
+                              );
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          },
                         )
                       : Text(
                           AppLocalizations.of(context)!.lectures,
@@ -159,7 +172,11 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                         ExpandableText(
                           textAlign: TextAlign.start,
                           style: PersianFonts.Samim.copyWith(fontSize: 13),
-                          snapshot.data![_currentLectureIndex].topic,
+                          snapshot
+                                  .data![0]
+                                  .lectureParagraphs![_currentLectureIndex]
+                                  .lectureParagraphBody ??
+                              '',
                           expandText: AppLocalizations.of(context)!.viewMore,
                           maxLines: 4,
                           linkColor: Colors.deepPurple,
@@ -186,7 +203,7 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                         ),
                         Row(children: [
                           const Icon(
-                            Icons.mic_rounded,
+                            Icons.text_snippet_rounded,
                             color: Colors.black26,
                           ),
                           const Padding(padding: EdgeInsets.only(left: 5)),
@@ -194,7 +211,10 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                               child: ExpandableText(
                             textAlign: TextAlign.justify,
                             style: PersianFonts.Samim.copyWith(fontSize: 13),
-                            snapshot.data![_currentLectureIndex].lectureBody!,
+                            snapshot
+                                .data![0]
+                                .lectureParagraphs![_currentLectureIndex]
+                                .lectureParagraphTitle!,
                             expandText: 'نمایش بیشتر',
                             maxLines: 4,
                             linkColor: Colors.deepPurple,

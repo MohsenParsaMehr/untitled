@@ -74,48 +74,48 @@ class LecturesRepository<T> /*extends SerializableClass*/ {
       int pageCount = 100,
       bool isShuffled = false}) async {
     List<LectureDto> lectures = [];
-    //try {
-    var headers = {
-      "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-      'Accept': '*/*'
-    };
+    try {
+      var headers = {
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        'Accept': '*/*'
+      };
 
-    Envelope<LectureDto, LectureSearchCriterias> envelope =
-        Envelope<LectureDto, LectureSearchCriterias>(
-            request,
-            searchCriterias,
-            sortCriterias,
-            Settings.locale,
-            from,
-            pageCount,
-            isShuffled,
-            ++serviceRequestCounter,
-            null,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            '');
-    Map<String, dynamic> json = envelope.ToJson(
-        (data) => request.toJson(), (data2) => searchCriterias.toJson());
+      Envelope<LectureDto, LectureSearchCriterias> envelope =
+          Envelope<LectureDto, LectureSearchCriterias>(
+              request,
+              searchCriterias,
+              sortCriterias,
+              Settings.locale,
+              from,
+              pageCount,
+              isShuffled,
+              ++serviceRequestCounter,
+              null,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              '');
+      Map<String, dynamic> json = envelope.ToJson(
+          (data) => request.toJson(), (data2) => searchCriterias.toJson());
 
-    final postResponse = await post(Uri.https(Settings.baseUrl, url),
-        headers: headers, body: jsonEncode(json));
+      final postResponse = await post(Uri.https(Settings.baseUrl, url),
+          headers: headers, body: jsonEncode(json));
 
-    if (postResponse.statusCode == 200) {
-      var qaData = jsonDecode(postResponse.body);
-      for (int i = 0; i < qaData.length; i++) {
-        lectures.add(LectureDto.fromJson(qaData[i]));
+      if (postResponse.statusCode == 200) {
+        var qaData = jsonDecode(postResponse.body);
+        for (int i = 0; i < qaData.length; i++) {
+          lectures.add(LectureDto.fromJson(qaData[i]));
+        }
+      } else {
+        log(postResponse.body);
       }
-    } else {
-      log(postResponse.body);
+    } catch (e) {
+      print(e);
     }
-    //} catch (e) {
-    // print(e);
-    //}
     return lectures;
   }
 
