@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/widgets/books_widget.dart';
 import 'package:untitled/widgets/lectures_generic.dart';
+import 'package:untitled/widgets/narrations_widget.dart';
+import 'package:untitled/widgets/poems_widget.dart';
 import 'package:untitled/widgets/slideshowWidget.dart';
 import 'package:untitled/widgets/eulogy_compact_widget.dart';
 import 'package:untitled/widgets/lectures_widget.dart';
@@ -28,22 +31,16 @@ class _HomeState extends State<Home> {
                 scrollDirection: Axis.vertical,
                 primary: true,
                 shrinkWrap: true,
-                children: <Widget>[
+                children: const <Widget>[
                   //Column(children: <Widget>[
-                  const SlideShowWidget(),
-                  const QaWidget(Key('3')),
-                  LecturesGenericWidget(const Key('4'), LectureType.narration,
-                      Colors.green.withOpacity(0.8), Colors.lightGreen),
-                  LecturesGenericWidget(const Key('5'), LectureType.book,
-                      Colors.orange.withOpacity(0.8), Colors.orange),
-                  LecturesGenericWidget(
-                      const Key('6'),
-                      LectureType.poem,
-                      Colors.orangeAccent.withOpacity(0.8),
-                      Colors.orangeAccent),
+                  SlideShowWidget(),
+                  QaWidget(Key('3')),
+                  NarrationsWidget(Key('4')),
+                  BooksWidget(Key('5')),
+                  PoemsWidget(Key('6')),
                   //const Text('Eulogy'),
-                  const EulogyCompactWidget(),
-                  const Row(children: <Widget>[
+                  EulogyCompactWidget(),
+                  Row(children: <Widget>[
                     photosWidget(),
                     //Expanded(child: videosWidget())
                     // ],

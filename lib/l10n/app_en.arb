@@ -17,6 +17,9 @@
   "poems": "Poems",
   "settings": "Settings",
   "viewMore": "View More",
+  "selectNarration": "Select Narration",
+  "selectBook": "Select Book",
+  "selectPoemBook": "Select Poem Book",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

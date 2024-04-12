@@ -16,5 +16,8 @@
     "listIsEmpty": "لیست خالی است",
     "eulogies": "مداحی‌ها",
     "settings": "تنظیمات",
-    "viewMore": "مشاهده ادامه"
+    "viewMore": "مشاهده ادامه",
+    "selectNarration": "انتخاب سخنرانی",
+    "selectBook": "انتخاب کتاب",
+    "selectPoemBook": "انتخاب کتاب شعر"
 }

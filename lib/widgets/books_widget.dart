@@ -1,8 +1,6 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:persian_fonts/persian_fonts.dart';
-import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/data/lecture_dto.dart';
 import 'package:untitled/data/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -10,51 +8,37 @@ import 'package:untitled/utilities/settings.dart';
 import "package:untitled/data/api_lecture_search_criterias.dart";
 import 'package:untitled/widgets/lectures_widget.dart';
 
-class LecturesGenericWidget extends StatefulWidget {
-  final LectureType type;
-  final Color _color, _tintColor;
-  const LecturesGenericWidget(Key key, this.type, this._color, this._tintColor)
-      : super(key: key);
+class BooksWidget extends StatefulWidget {
+  const BooksWidget(Key key) : super(key: key);
   @override
-  State<LecturesGenericWidget> createState() =>
-      _LecturesGenericWidgetState(type, _color, _tintColor);
+  State<BooksWidget> createState() => _BooksWidgetState();
 }
 
-class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
-  int _currentLectureIndex = 0;
+class _BooksWidgetState extends State<BooksWidget> {
+  int _currentLectureIndex = 0, _currentLectureParagraphIndex = 0;
   Future<List<LectureDto>> _lectures = Future.value([]);
 //  var _lectures = LecturesRepository<APILectureSearchCriterias>().getLectures(
   //     Settings.getLecturesUrl,
   //    APILecturesQuery(topic: ''),
   //    APILectureSearchCriterias());
   List<LectureDto> _lecturesSnapshotData = [];
-  final Color _color, _tintColor;
-  _LecturesGenericWidgetState(this._type, this._color, this._tintColor) {
-    switch (_type) {
-      case LectureType.narration:
-      case LectureType.quran:
-      case LectureType.book:
-      case LectureType.poem:
-        _lectures = LecturesRepository().getLectures(
-            Settings.getLecturesUrl,
-            LectureDto(),
-            LectureSearchCriterias(
-                type: _type
-                    .toString()
-                    .replaceFirst(RegExp(r'LectureType.'), '')));
 
-      default:
-        break;
-    }
+  _BooksWidgetState() {
+    _lectures = LecturesRepository().getLectures(
+        Settings.getLecturesUrl,
+        LectureDto(),
+        LectureSearchCriterias(
+            type: LectureType.book
+                .toString()
+                .replaceFirst(RegExp(r'LectureType.'), '')));
   }
-  final LectureType _type;
   String? _selectedBookItem;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Card(
-          color: _color,
-          surfaceTintColor: _tintColor,
+          color: Colors.orange.withOpacity(0.8),
+          surfaceTintColor: Colors.orange,
           elevation: 7,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -66,50 +50,53 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const Icon(
-                    Icons.menu_book_rounded,
+                    Icons.menu_book_sharp,
                     color: Colors.black26,
                   ),
                   const Padding(padding: EdgeInsets.only(left: 5)),
-                  (_type == LectureType.book || _type == LectureType.poem
-                      ? FutureBuilder<List<LectureDto>>(
-                          future: _lectures,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              var data = snapshot.data!;
-                              return DropdownButton<String>(
-                                hint: Text(_selectedBookItem ?? 'انتخاب کتاب'),
-                                //isExpanded: true,
-                                style: PersianFonts.Yekan.copyWith(
-                                    color: Colors.teal),
-                                alignment: Alignment.topRight,
-                                value: _selectedBookItem,
-                                items: data
-                                    .map((e) => e.topic)
-                                    //  <String>[
-                                    //   'کتاب 4',
-                                    //   'کتاب 3',
-                                    //   'کتاب 2',
-                                    //   'کتاب 1'   ]
-                                    .map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (String? value) => setState(() {
-                                  _selectedBookItem = value ?? "";
-                                }),
-                              );
-                            } else {
-                              return const CircularProgressIndicator();
-                            }
-                          },
-                        )
-                      : Text(
-                          AppLocalizations.of(context)!.lectures,
-                          style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                        )),
+                  // (_type == LectureType.book || _type == LectureType.poem
+                  // ?
+                  FutureBuilder<List<LectureDto>>(
+                    future: _lectures,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        var data = snapshot.data!;
+                        return DropdownButton<String>(
+                          hint: Text(_selectedBookItem ??
+                              AppLocalizations.of(context)!.selectBook),
+                          //isExpanded: true,
+                          style:
+                              PersianFonts.Yekan.copyWith(color: Colors.teal),
+                          alignment: Alignment.topRight,
+                          value: _selectedBookItem,
+                          items: data
+                              .map((e) => e.topic)
+                              //  <String>[
+                              //   'کتاب 4',
+                              //   'کتاب 3',
+                              //   'کتاب 2',
+                              //   'کتاب 1'   ]
+                              .map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String? value) => setState(() {
+                            _selectedBookItem = value ?? "";
+                          }),
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                  )
+                  //  : Text(
+                  //      AppLocalizations.of(context)!.lectures,
+                  //      style: const TextStyle(
+                  //          fontSize: 14, fontWeight: FontWeight.bold),
+                  //   ))
+                  ,
                   Expanded(
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -158,6 +145,14 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                       if (snapshot.data != null && snapshot.data!.isEmpty) {
                         // load cashed QA data as internet connection is not available
                         return Text(AppLocalizations.of(context)!.listIsEmpty);
+                      } else if (snapshot.data != null &&
+                          snapshot.data!.isNotEmpty &&
+                          snapshot.data![_currentLectureIndex]
+                                  .lectureParagraphs !=
+                              null &&
+                          snapshot.data![_currentLectureIndex]
+                              .lectureParagraphs!.isEmpty) {
+                        return Text(AppLocalizations.of(context)!.listIsEmpty);
                       } else {
                         return const Center(
                           child: CircularProgressIndicator(),
@@ -172,11 +167,19 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                         ExpandableText(
                           textAlign: TextAlign.start,
                           style: PersianFonts.Samim.copyWith(fontSize: 13),
-                          snapshot
-                                  .data![0]
-                                  .lectureParagraphs![_currentLectureIndex]
-                                  .lectureParagraphBody ??
-                              '',
+                          (snapshot.data!.isEmpty ||
+                                  snapshot.data![_currentLectureIndex]
+                                              .lectureParagraphs !=
+                                          null &&
+                                      snapshot.data![_currentLectureIndex]
+                                          .lectureParagraphs!.isEmpty
+                              ? AppLocalizations.of(context)!.listIsEmpty
+                              : snapshot
+                                      .data![_currentLectureIndex]
+                                      .lectureParagraphs![
+                                          _currentLectureParagraphIndex]
+                                      .lectureParagraphBody ??
+                                  AppLocalizations.of(context)!.listIsEmpty),
                           expandText: AppLocalizations.of(context)!.viewMore,
                           maxLines: 4,
                           linkColor: Colors.deepPurple,
@@ -203,7 +206,7 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                         ),
                         Row(children: [
                           const Icon(
-                            Icons.text_snippet_rounded,
+                            Icons.speaker_notes_rounded,
                             color: Colors.black26,
                           ),
                           const Padding(padding: EdgeInsets.only(left: 5)),
@@ -211,10 +214,19 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
                               child: ExpandableText(
                             textAlign: TextAlign.justify,
                             style: PersianFonts.Samim.copyWith(fontSize: 13),
-                            snapshot
-                                .data![0]
-                                .lectureParagraphs![_currentLectureIndex]
-                                .lectureParagraphTitle!,
+                            (snapshot.data!.isEmpty ||
+                                    snapshot.data![_currentLectureIndex]
+                                                .lectureParagraphs !=
+                                            null &&
+                                        snapshot.data![_currentLectureIndex]
+                                            .lectureParagraphs!.isEmpty
+                                ? ''
+                                : snapshot
+                                        .data![_currentLectureIndex]
+                                        .lectureParagraphs![
+                                            _currentLectureParagraphIndex]
+                                        .lectureParagraphTitle ??
+                                    'لیست خالی است'),
                             expandText: 'نمایش بیشتر',
                             maxLines: 4,
                             linkColor: Colors.deepPurple,
@@ -257,10 +269,14 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           setState(() {
-            if (_currentLectureIndex < _lecturesSnapshotData.length - 1) {
-              ++_currentLectureIndex;
+            if (_currentLectureParagraphIndex <
+                _lecturesSnapshotData[_currentLectureIndex]
+                        .lectureParagraphs!
+                        .length -
+                    1) {
+              ++_currentLectureParagraphIndex;
             } else {
-              _currentLectureIndex = 0;
+              _currentLectureParagraphIndex = 0;
             }
           });
         } else {
@@ -269,10 +285,14 @@ class _LecturesGenericWidgetState extends State<LecturesGenericWidget> {
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           setState(() {
-            if (_currentLectureIndex > 0) {
-              --_currentLectureIndex;
+            if (_currentLectureParagraphIndex > 0) {
+              --_currentLectureParagraphIndex;
             } else {
-              _currentLectureIndex = _lecturesSnapshotData.length - 1;
+              _currentLectureParagraphIndex =
+                  _lecturesSnapshotData[_currentLectureIndex]
+                          .lectureParagraphs!
+                          .length -
+                      1;
             }
           });
         }
