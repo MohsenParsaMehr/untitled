@@ -26,7 +26,7 @@ class LecturesRepository<T> /*extends SerializableClass*/ {
         'Content-Type': 'application/json',
         'Accept': '*/*'
       };
-      SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
+      SimpleRequest simpleRequest = SimpleRequest(-1, Settings.locale);
       LectureSearchCriterias? searchCriterias = LectureSearchCriterias();
       Envelope envelope = Envelope<SimpleRequest, LectureSearchCriterias>(
           simpleRequest,

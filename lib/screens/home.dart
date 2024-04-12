@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/widgets/books_widget.dart';
-import 'package:untitled/widgets/lectures_generic.dart';
 import 'package:untitled/widgets/narrations_widget.dart';
 import 'package:untitled/widgets/poems_widget.dart';
 import 'package:untitled/widgets/slideshowWidget.dart';
 import 'package:untitled/widgets/eulogy_compact_widget.dart';
-import 'package:untitled/widgets/lectures_widget.dart';
 import '../widgets/qa_widget.dart';
 import 'package:untitled/widgets/photosWidget.dart';
 

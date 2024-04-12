@@ -6,6 +6,7 @@ import 'package:untitled/screens/search.dart';
 import 'package:untitled/settings/settings_controller.dart';
 import 'package:untitled/settings/settings_service.dart';
 import 'package:untitled/settings/settings_view.dart';
+import 'package:untitled/utilities/settings.dart';
 import 'greenlight_theme.dart';
 import 'screens/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -46,8 +47,11 @@ class GreenLightApp extends StatefulWidget {
   State<GreenLightApp> createState() => _GreenLightAppState();
 }
 
+Locale _locale = Locale(Settings.language, Settings.country);
+
 class _GreenLightAppState extends State<GreenLightApp> {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,7 +62,7 @@ class _GreenLightAppState extends State<GreenLightApp> {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: const Locale('fa', 'IR'), // const Locale('en', 'US'), //
+        locale: _locale,
         theme:
             theme, // theme.copyWith(colorScheme: theme.colorScheme.copyWith(primary: Colors.green[900],      secondary: Colors.green[700]))
         //ThemeData(
@@ -320,7 +324,22 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
               onPressed: () => Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => const Search())),
-              icon: const Icon(Icons.search))
+              icon: const Icon(Icons.search)),
+          IconButton(
+              onPressed: () => ({
+                    if (Settings.language == 'fa')
+                      {
+                        Settings.language = 'en',
+                        Settings.country = 'US',
+                      }
+                    else
+                      {
+                        Settings.language = 'fa',
+                        Settings.country = 'IR',
+                      },
+                    setState(() => _locale = Locale(Settings.locale)),
+                  }),
+              icon: const Icon(Icons.language_rounded))
         ],
       ),
       body: const SafeArea(
