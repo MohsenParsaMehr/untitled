@@ -22,6 +22,9 @@
   "selectPoemBook": "Select Poem Book",
   "hierarchy": "lineage of elders of the Tariqat",
   "counter": "Zekr Counter",
+  "home": "Home",
+  "profile": "Profile",
+  "web": "Web",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

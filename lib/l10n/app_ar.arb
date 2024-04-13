@@ -22,6 +22,9 @@
   "selectPoemBook": "حدد كتاب القصائد",
   "hierarchy": "نسب شيوخ الطريقة",
   "counter": "تسبیح",
+  "home": "بيت",
+  "profile": "حساب تعريفي",
+  "web": "الويب",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

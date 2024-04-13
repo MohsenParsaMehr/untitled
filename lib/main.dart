@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:untitled/screens/questionAndAnswers.dart';
 import 'package:untitled/screens/search.dart';
+import 'package:untitled/screens/web_view.dart';
 import 'package:untitled/settings/settings_controller.dart';
 import 'package:untitled/settings/settings_service.dart';
 import 'package:untitled/settings/settings_view.dart';
@@ -116,7 +117,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   //int _counter = 0;
-
+  int _currentIndex = 0;
+  final List<Widget> _screens = [
+    const Home(Key('home')),
+    const WebView(Key('Web View')),
+    const Home(Key('home')),
+  ];
   void _onTipPressed() {
     setState(() {});
   }
@@ -473,10 +479,33 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.language_rounded))
         ],
       ),
-      body: const SafeArea(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: Home(Key('1'))),
+      body: SafeArea(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: _screens[_currentIndex],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home_filled),
+            label: AppLocalizations.of(context)!.home,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.web_rounded),
+            label: AppLocalizations.of(context)!.web,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person_2_rounded),
+            label: AppLocalizations.of(context)!.profile,
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _onTipPressed,
         tooltip: 'نکته روز',

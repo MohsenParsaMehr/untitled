@@ -22,6 +22,9 @@
   "selectPoemBook": "کتێبی شیعر هەڵبژێرە",
   "hierarchy": "ڕەچەڵەکی گەورەکانی تەریقەت",
   "counter": "باسی ژمێریار بکە",
+  "home": "ماڵەوە",
+  "profile": "پرۆفایل",
+  "web": "وێب",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

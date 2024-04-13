@@ -21,5 +21,8 @@
     "selectBook": "انتخاب کتاب",
     "selectPoemBook": "انتخاب کتاب شعر",
     "hierarchy": "سلسله",
-    "counter": "شمارنده"
+    "counter": "شمارنده",
+    "home": "صفحه اصلی",
+  "profile": "پروفایل",
+  "web": "سامانه وب"
 }
