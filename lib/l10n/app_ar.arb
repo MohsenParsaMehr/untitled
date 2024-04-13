@@ -1,0 +1,28 @@
+{
+  "helloWorld": "Hello World!",
+   "greenLight": "طریقة العلوية القادرية الصادقية",
+  "videos": "أشرطة فيديو",
+  "guest": "ضيف",
+  "signUp": "اشتراك",  
+  "books": "كتب",
+  "lectures": "محاضرات",
+  "faqs": "الأسئلة الشائعة",
+  "favourites": "المفضلة",
+  "gallery": "صالة عرض",
+  "interprets": "تفاسير القرآن",
+  "concepts": "المفاهيم",
+  "questionAndAnswers": "السؤال",
+  "listIsEmpty": "القائمة فارغة",
+  "eulogies": "التأبين",
+  "poems": "قصائد",
+  "settings": "إعدادات",
+  "viewMore": "عرض المزيد",
+  "selectNarration": "حدد السرد",
+  "selectBook": "حدد كتاب",
+  "selectPoemBook": "حدد كتاب القصائد",
+  "hierarchy": "نسب شيوخ الطريقة",
+  "counter": "تسبیح",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  }
+}

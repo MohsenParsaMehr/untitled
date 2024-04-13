@@ -42,7 +42,12 @@ class _PoemsWidgetState extends State<PoemsWidget> {
           elevation: 7,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
-          child: Padding(
+          child: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    opacity: 0.1,
+                    image: AssetImage('assets/images/art-back (3).jpg'))),
             padding: const EdgeInsets.all(12),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -226,8 +231,7 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                                         .lectureParagraphs![
                                             _currentLectureParagraphIndex]
                                         .lectureParagraphBody!
-                                        .replaceAll(
-                                            RegExp(r'\t'), '          ') ??
+                                        .replaceAll(RegExp(r'\t'), '\n') ??
                                     'لیست خالی است'),
                             expandText: 'نمایش بیشتر',
                             maxLines: 6,

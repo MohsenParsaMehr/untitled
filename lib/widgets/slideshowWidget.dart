@@ -42,19 +42,25 @@ class SlideShowWidget extends StatelessWidget {
           /// The widgets to display in the [ImageSlideshow].
           /// Add the sample image file into the images folder
           children: [
-            CachedNetworkImage(
-              alignment: Alignment.topCenter,
-              imageUrl:
-                  "${Settings.protocol}://${Settings.baseUrl}/images/logo.jpg",
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-              imageBuilder: (context, imageProvider) {
-                return Ink.image(
-                    image: imageProvider,
-                    //fit: BoxFit.contain,
-                    width: 480,
-                    height: 260);
-              },
-              placeholder: (context, url) => const CircularProgressIndicator(),
+            // CachedNetworkImage(
+            //   alignment: Alignment.topCenter,
+            //   imageUrl:
+            //       "${Settings.protocol}://${Settings.baseUrl}/images/logo.jpg",
+            //   errorWidget: (context, url, error) => const Icon(Icons.error),
+            //   imageBuilder: (context, imageProvider) {
+            //     return Ink.image(
+            //         image: imageProvider,
+            //         //fit: BoxFit.contain,
+            //         width: 480,
+            //         height: 260);
+            //   },
+            //   placeholder: (context, url) => const CircularProgressIndicator(),
+            // ),
+            Image.asset(
+              'assets/images/hazrat.png',
+              width: 480,
+              height: 260,
+              //fit: BoxFit.cover,
             ),
             Image.asset(
               'assets/images/library.png',

@@ -2,7 +2,7 @@
     "helloWorld": "سلام",
     "greenLight": "اپلیکیشن",
     "videos": "ویدیوها",
-    "guest": "مهمان",
+    "guest": "کاربر مهمان",
     "signUp": "ثبت نام کاربری",
     "books": "کتاب‌ها",
     "lectures": "سخنرانی‌ها",
@@ -19,5 +19,7 @@
     "viewMore": "مشاهده ادامه",
     "selectNarration": "انتخاب سخنرانی",
     "selectBook": "انتخاب کتاب",
-    "selectPoemBook": "انتخاب کتاب شعر"
+    "selectPoemBook": "انتخاب کتاب شعر",
+    "hierarchy": "سلسله",
+    "counter": "شمارنده"
 }

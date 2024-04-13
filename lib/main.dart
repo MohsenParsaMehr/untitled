@@ -131,180 +131,227 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: const EdgeInsets.all(0),
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  image: const DecorationImage(
-                      isAntiAlias: true,
-                      image: AssetImage('assets/images/logo.png'))),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    IconButton.outlined(
-                      onPressed: () => {
-                        Navigator.restorablePushNamed(
-                            context, SettingsView.routeName)
-                      },
-                      icon: const Icon(Icons.account_circle_rounded),
-                    ),
-                    const SizedBox(width: 10),
-                    Text(AppLocalizations.of(context)!.guest),
-                    IconButton.outlined(
-                      onPressed: () => {
-                        Navigator.restorablePushNamed(
-                            context, SettingsView.routeName)
-                      },
-                      icon: const Icon(Icons.settings_rounded),
-                    ),
-                  ]),
-            ),
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.menu_book_rounded,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Books'),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.books)
-              ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
+        child: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('Assets/images/art-back.jpg'),
+                  fit: BoxFit.cover,
+                  opacity: 0.2)),
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: const EdgeInsets.all(0),
+            children: [
+              DrawerHeader(
+                margin: const EdgeInsets.only(top: 30),
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fitHeight,
+                        image: AssetImage('assets/images/logo.png'))),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      IconButton.outlined(
+                        onPressed: () => {
+                          Navigator.restorablePushNamed(
+                              context, SettingsView.routeName)
+                        },
+                        icon: const Icon(Icons.account_circle_rounded),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 30),
+                      ),
+                      Text(AppLocalizations.of(context)!.guest),
+                      IconButton.outlined(
+                        onPressed: () => {
+                          Navigator.restorablePushNamed(
+                              context, SettingsView.routeName)
+                        },
+                        icon: const Icon(Icons.settings_rounded),
+                      ),
+                    ]),
+              ),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.menu_book_rounded,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'Books'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.books)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
 
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.mic_external_on_rounded,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Lectures'),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.lectures)
-              ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.question_answer_rounded,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'FAQs'),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.questionAndAnswers)
-              ]),
-              onTap: () {
-                // Update the state of the app.
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => questionAndAnswers()));
-              },
-            ),
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.favorite_rounded,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Favourites'),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.favourites)
-              ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.mic_external_on_rounded,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'Lectures'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.lectures)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.question_answer_rounded,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'FAQs'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.questionAndAnswers)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => questionAndAnswers()));
+                },
+              ),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.favorite_rounded,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'Favourites'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.favourites)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
 
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.interpreter_mode_rounded,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Interprets'),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.interpreter_mode_rounded,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'Interprets'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.interprets)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.add_comment_rounded,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'Poems'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.poems)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.photo_album_rounded,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'Gallery'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.gallery)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.pix_outlined,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'Concepts'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.concepts)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.account_tree_rounded,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'Hierarchy'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.hierarchy)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.kebab_dining_outlined,
+                      color: Theme.of(context).primaryColor,
+                      size: 24.0,
+                      semanticLabel: 'Hierarchy'),
+                  const SizedBox(width: 10),
+                  Text(AppLocalizations.of(context)!.counter)
+                ]),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              //ListTile(
+              //title:
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                IconButton.outlined(
+                    onPressed: () => {},
+                    icon: Icon(
+                      Icons.telegram_rounded,
+                      color: Theme.of(context).primaryColor,
+                    )),
                 const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.interprets)
-              ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.add_comment_rounded,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Poems'),
+                IconButton.outlined(
+                    onPressed: () => {},
+                    icon: Icon(
+                      Icons.telegram_rounded,
+                      color: Theme.of(context).primaryColor,
+                    )),
                 const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.poems)
+                IconButton.outlined(
+                    onPressed: () => {},
+                    icon: Icon(
+                      Icons.share_rounded,
+                      color: Theme.of(context).primaryColor,
+                    )),
+                const SizedBox(width: 10)
               ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.photo_album_rounded,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Gallery'),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.gallery)
-              ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.pix_outlined,
-                    color: Theme.of(context).primaryColor,
-                    size: 24.0,
-                    semanticLabel: 'Concepts'),
-                const SizedBox(width: 10),
-                Text(AppLocalizations.of(context)!.concepts)
-              ]),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            //ListTile(
-            //title:
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              IconButton.outlined(
-                  onPressed: () => {},
-                  icon: Icon(
-                    Icons.telegram_rounded,
-                    color: Theme.of(context).primaryColor,
-                  )),
-              const SizedBox(width: 10),
-              IconButton.outlined(
-                  onPressed: () => {},
-                  icon: Icon(
-                    Icons.telegram_rounded,
-                    color: Theme.of(context).primaryColor,
-                  )),
-              const SizedBox(width: 10),
-              IconButton.outlined(
-                  onPressed: () => {},
-                  icon: Icon(
-                    Icons.share_rounded,
-                    color: Theme.of(context).primaryColor,
-                  )),
-              const SizedBox(width: 10)
-            ]),
-            //onTap: () {                 },
-          ],
+              //onTap: () {                 },
+            ],
+          ),
         ),
       ),
       appBar: AppBar(
@@ -337,6 +384,90 @@ class _MyHomePageState extends State<MyHomePage> {
                         Settings.language = 'fa',
                         Settings.country = 'IR',
                       },
+                    showModalBottomSheet(
+                      showDragHandle: true,
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(12)), //for the round edges
+                      builder: (context) {
+                        return ListView(
+                          scrollDirection: Axis.vertical,
+                          children: [
+                            ListTile(
+                              title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.translate_sharp,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 24.0,
+                                        semanticLabel: 'Concepts'),
+                                    const SizedBox(width: 10),
+                                    const Text('فارسی')
+                                  ]),
+                              onTap: () {
+                                // Update the state of the app.
+                                // ...
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.translate_sharp,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 24.0,
+                                        semanticLabel: 'Concepts'),
+                                    const SizedBox(width: 10),
+                                    const Text('English')
+                                  ]),
+                              onTap: () {
+                                // Update the state of the app.
+                                // ...
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.translate_sharp,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 24.0,
+                                        semanticLabel: 'Concepts'),
+                                    const SizedBox(width: 10),
+                                    const Text('کوردی')
+                                  ]),
+                              onTap: () {
+                                // Update the state of the app.
+                                // ...
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.translate_sharp,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 24.0,
+                                        semanticLabel: 'Concepts'),
+                                    const SizedBox(width: 10),
+                                    const Text('اللغة العربية')
+                                  ]),
+                              onTap: () {
+                                // Update the state of the app.
+                                // ...
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                      context: context,
+                      isDismissible: true,
+                      isScrollControlled: false,
+                    ),
                     setState(() => _locale = Locale(Settings.locale)),
                   }),
               icon: const Icon(Icons.language_rounded))

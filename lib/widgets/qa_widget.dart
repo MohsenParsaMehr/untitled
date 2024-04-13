@@ -23,7 +23,12 @@ class _QaWidgetState extends State<QaWidget> {
           elevation: 7,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
-          child: Padding(
+          child: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    opacity: 0.1,
+                    image: AssetImage('assets/images/art-back (1).png'))),
             padding: const EdgeInsets.all(12),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -104,7 +109,7 @@ class _QaWidgetState extends State<QaWidget> {
                             style: PersianFonts.Samim.copyWith(fontSize: 13),
                             snapshot.data![_currentQuestionIndex].answer,
                             expandText: 'نمایش بیشتر',
-                            maxLines: 4,
+                            maxLines: 3,
                             linkColor: Colors.deepPurple,
                             animation: true,
                             collapseOnTextTap: true,

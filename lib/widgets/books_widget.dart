@@ -42,7 +42,12 @@ class _BooksWidgetState extends State<BooksWidget> {
           elevation: 7,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
-          child: Padding(
+          child: Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    opacity: 0.1,
+                    image: AssetImage('assets/images/art-back.jpg'))),
             padding: const EdgeInsets.all(12),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -178,10 +183,10 @@ class _BooksWidgetState extends State<BooksWidget> {
                                       .data![_currentLectureIndex]
                                       .lectureParagraphs![
                                           _currentLectureParagraphIndex]
-                                      .lectureParagraphBody ??
+                                      .lectureParagraphTitle ??
                                   AppLocalizations.of(context)!.listIsEmpty),
                           expandText: AppLocalizations.of(context)!.viewMore,
-                          maxLines: 4,
+                          maxLines: 5,
                           linkColor: Colors.deepPurple,
                           animation: true,
                           collapseOnTextTap: true,
@@ -225,10 +230,10 @@ class _BooksWidgetState extends State<BooksWidget> {
                                         .data![_currentLectureIndex]
                                         .lectureParagraphs![
                                             _currentLectureParagraphIndex]
-                                        .lectureParagraphTitle ??
+                                        .lectureParagraphBody ??
                                     'لیست خالی است'),
                             expandText: 'نمایش بیشتر',
-                            maxLines: 4,
+                            maxLines: 5,
                             linkColor: Colors.deepPurple,
                             animation: true,
                             collapseOnTextTap: true,

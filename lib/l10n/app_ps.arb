@@ -1,0 +1,28 @@
+{  
+  "helloWorld": "Hello World!",
+  "greenLight": "شێوازی عەلاڤیە قادریە",
+  "videos": "ڤیدیۆ",
+  "guest": "میوان",
+  "signUp": "خۆت تۆمار بکە",  
+  "books": "کتێب",
+  "lectures": "وتارەکان",
+  "faqs": "پرسیارە بەردەوامەکان",
+  "favourites": "دڵخوازەکان",
+  "gallery": "گەلەری",
+  "interprets": "لێکدانەوەکانی قورئان",
+  "concepts": "چەمکەکان",
+  "questionAndAnswers": "پرسیار و وەڵام",
+  "listIsEmpty": "لیستەکە بەتاڵە",
+  "eulogies": "ستایش و ستایش",
+  "poems": "شیعرەکان",
+  "settings": "دانانەوە",
+  "viewMore": "زیاتر ببینە",
+  "selectNarration": "گێڕانەوە هەڵبژێرە",
+  "selectBook": "کتێب هەڵبژێرە",
+  "selectPoemBook": "کتێبی شیعر هەڵبژێرە",
+  "hierarchy": "ڕەچەڵەکی گەورەکانی تەریقەت",
+  "counter": "باسی ژمێریار بکە",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  }
+}
