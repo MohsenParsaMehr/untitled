@@ -1,6 +1,5 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/network/green_light_service.dart';
 import 'package:untitled/network/qa_model.dart';

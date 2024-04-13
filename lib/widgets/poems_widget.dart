@@ -225,7 +225,7 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                                         .data![_currentLectureIndex]
                                         .lectureParagraphs![
                                             _currentLectureParagraphIndex]
-                                        .lectureParagraphTitle!
+                                        .lectureParagraphBody!
                                         .replaceAll(
                                             RegExp(r'\t'), '          ') ??
                                     'لیست خالی است'),

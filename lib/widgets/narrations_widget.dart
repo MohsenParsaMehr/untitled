@@ -178,7 +178,7 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                                       .data![_currentLectureIndex]
                                       .lectureParagraphs![
                                           _currentLectureParagraphIndex]
-                                      .lectureParagraphBody ??
+                                      .lectureParagraphTitle ??
                                   AppLocalizations.of(context)!.listIsEmpty),
                           expandText: AppLocalizations.of(context)!.viewMore,
                           maxLines: 4,
@@ -225,7 +225,7 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                                         .data![_currentLectureIndex]
                                         .lectureParagraphs![
                                             _currentLectureParagraphIndex]
-                                        .lectureParagraphTitle ??
+                                        .lectureParagraphBody ??
                                     'لیست خالی است'),
                             expandText: 'نمایش بیشتر',
                             maxLines: 4,
