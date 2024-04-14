@@ -1,9 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled/data/APILecturesQuery.dart';
+import 'package:untitled/data/lecture_dto.dart';
+import 'package:untitled/utilities/settings.dart';
 
 class BottomSheetPopUp {
-  static Future<int?> show(
-      BuildContext context, List<APILecturesQuery> thumbs) {
+  static Future<int?> show(BuildContext context, List<LectureDto> thumbs) {
     Future<int?> result = showModalBottomSheet<int>(
       showDragHandle: true,
       shape: RoundedRectangleBorder(
@@ -13,11 +14,26 @@ class BottomSheetPopUp {
           itemCount: thumbs.length,
           itemBuilder: (context2, index) => (ListTile(
             title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Icon(Icons.translate_sharp,
+              Icon(Icons.menu_book,
                   color: Theme.of(context).primaryColor,
                   size: 24.0,
-                  semanticLabel: 'Concepts'),
+                  semanticLabel: 'Books'),
               const SizedBox(width: 10),
+              CachedNetworkImage(
+                alignment: Alignment.topCenter,
+                imageUrl:
+                    "${Settings.protocol}://${Settings.baseUrl}/Images/Covers/${thumbs[index].captionImageUrl!}",
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                imageBuilder: (context, imageProvider) {
+                  return Ink.image(
+                      image: imageProvider,
+                      //fit: BoxFit.contain,
+                      width: 128,
+                      height: 128);
+                },
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+              ),
               Text(thumbs[index].topic)
             ]),
             onTap: () {

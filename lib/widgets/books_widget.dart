@@ -1,12 +1,14 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:persian_fonts/persian_fonts.dart';
+import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/data/lecture_dto.dart';
 import 'package:untitled/data/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:untitled/utilities/settings.dart';
 import "package:untitled/data/api_lecture_search_criterias.dart";
 import 'package:untitled/widgets/lectures_widget.dart';
+import 'package:untitled/widgets/bottom_sheet_popup.dart';
 
 class BooksWidget extends StatefulWidget {
   const BooksWidget(Key key) : super(key: key);
@@ -47,7 +49,7 @@ class _BooksWidgetState extends State<BooksWidget> {
                 image: DecorationImage(
                     fit: BoxFit.fill,
                     //colorFilter: ColorFilter.mode(
-                      //  Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                    //  Colors.black.withOpacity(0.1), BlendMode.dstATop),
                     opacity: 0.1,
                     image: const AssetImage('assets/images/art-back.jpg'))),
             padding: const EdgeInsets.all(12),
@@ -76,19 +78,13 @@ class _BooksWidgetState extends State<BooksWidget> {
                               PersianFonts.Yekan.copyWith(color: Colors.teal),
                           alignment: Alignment.topRight,
                           value: _selectedBookItem,
-                          items: data
-                              .map((e) => e.topic)
-                              //  <String>[
-                              //   'کتاب 4',
-                              //   'کتاب 3',
-                              //   'کتاب 2',
-                              //   'کتاب 1'   ]
-                              .map((String value) {
+                          items: data.map((e) => e.topic).map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
                             );
                           }).toList(),
+                          onTap: () => (BottomSheetPopUp.show(context, data)),
                           onChanged: (String? value) => setState(() {
                             _selectedBookItem = value ?? "";
                           }),

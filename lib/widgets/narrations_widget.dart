@@ -86,10 +86,8 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                           }).toList(),
                           onChanged: (String? value) => setState(() {
                             _selectedBookItem = value ?? "";
-                            List<APILecturesQuery> thumbs = [
-                              APILecturesQuery(topic: 'topic')
-                            ];
-                            BottomSheetPopUp.show(context, thumbs);
+
+                            BottomSheetPopUp.show(context, data);
                           }),
                         );
                       } else {
