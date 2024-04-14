@@ -21,10 +21,10 @@ class _WebViewState extends State<WebView> {
         child: Padding(
             padding: const EdgeInsets.all(12),
             child: Expanded(
-                child: IndexedStack(index: _stackIndex, children: [
-              InAppWebView(
+              child: // IndexedStack(index: _stackIndex, children: [
+                  InAppWebView(
                 initialUrlRequest:
-                    URLRequest(url: WebUri('https://www.google.com')),
+                    URLRequest(url: WebUri('http://app.sadeghieh.com')),
                 initialOptions: InAppWebViewGroupOptions(
                   crossPlatform:
                       InAppWebViewOptions(useShouldOverrideUrlLoading: true),
@@ -33,20 +33,23 @@ class _WebViewState extends State<WebView> {
                   setState(() {
                     _stackIndex = 0;
                   });
+                  throw Exception('Error');
                 },
                 onLoadError: (_, __, ___, ____) {
                   setState(() {
                     _stackIndex = 0;
                   });
-                  //TODO: Show error alert message (Error in receive data from server)
+                  throw Exception('Error');
                 },
                 onLoadHttpError: (_, __, ___, ____) {
                   setState(() {
                     _stackIndex = 0;
                   });
                   //TODO: Show error alert message (Error in receive data from server)
+                  throw Exception('Error');
                 },
               ),
-            ]))));
+              //] )
+            )));
   }
 }

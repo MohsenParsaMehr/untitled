@@ -138,9 +138,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: Drawer(
         child: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('Assets/images/art-back.jpg'),
+                  image: const AssetImage('Assets/images/art-back.jpg'),
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.1), BlendMode.dstATop),
                   fit: BoxFit.cover,
                   opacity: 0.2)),
           child: ListView(

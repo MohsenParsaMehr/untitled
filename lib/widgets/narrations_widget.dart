@@ -1,11 +1,13 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:persian_fonts/persian_fonts.dart';
+import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/data/lecture_dto.dart';
 import 'package:untitled/data/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:untitled/utilities/settings.dart';
 import "package:untitled/data/api_lecture_search_criterias.dart";
+import 'package:untitled/widgets/bottom_sheet_popup.dart';
 import 'package:untitled/widgets/lectures_widget.dart';
 
 class NarrationsWidget extends StatefulWidget {
@@ -43,11 +45,13 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.fill,
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.1), BlendMode.dstATop),
                     opacity: 0.1,
-                    image: AssetImage('assets/images/art-back.jpg'))),
+                    image: const AssetImage('assets/images/art-back.jpg'))),
             padding: const EdgeInsets.all(12),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -74,14 +78,7 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                               PersianFonts.Yekan.copyWith(color: Colors.teal),
                           alignment: Alignment.topRight,
                           value: _selectedBookItem,
-                          items: data
-                              .map((e) => e.topic)
-                              //  <String>[
-                              //   'کتاب 4',
-                              //   'کتاب 3',
-                              //   'کتاب 2',
-                              //   'کتاب 1'   ]
-                              .map((String value) {
+                          items: data.map((e) => e.topic).map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -89,19 +86,17 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                           }).toList(),
                           onChanged: (String? value) => setState(() {
                             _selectedBookItem = value ?? "";
+                            List<APILecturesQuery> thumbs = [
+                              APILecturesQuery(topic: 'topic')
+                            ];
+                            BottomSheetPopUp.show(context, thumbs);
                           }),
                         );
                       } else {
                         return const CircularProgressIndicator();
                       }
                     },
-                  )
-                  //  : Text(
-                  //      AppLocalizations.of(context)!.lectures,
-                  //      style: const TextStyle(
-                  //          fontSize: 14, fontWeight: FontWeight.bold),
-                  //   ))
-                  ,
+                  ),
                   Expanded(
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,

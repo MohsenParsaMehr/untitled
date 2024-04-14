@@ -43,11 +43,13 @@ class _PoemsWidgetState extends State<PoemsWidget> {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.fill,
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.1), BlendMode.dstATop),
                     opacity: 0.1,
-                    image: AssetImage('assets/images/art-back (3).jpg'))),
+                    image: const AssetImage('assets/images/art-back (3).jpg'))),
             padding: const EdgeInsets.all(12),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -74,14 +76,7 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                               PersianFonts.Yekan.copyWith(color: Colors.teal),
                           alignment: Alignment.topRight,
                           value: _selectedBookItem,
-                          items: data
-                              .map((e) => e.topic)
-                              //  <String>[
-                              //   'کتاب 4',
-                              //   'کتاب 3',
-                              //   'کتاب 2',
-                              //   'کتاب 1'   ]
-                              .map((String value) {
+                          items: data.map((e) => e.topic).map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),

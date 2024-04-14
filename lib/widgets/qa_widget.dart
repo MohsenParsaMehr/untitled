@@ -24,11 +24,13 @@ class _QaWidgetState extends State<QaWidget> {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.fill,
                     opacity: 0.1,
-                    image: AssetImage('assets/images/art-back (1).png'))),
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                    image: const AssetImage('assets/images/art-back.jpg'))),
             padding: const EdgeInsets.all(12),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [

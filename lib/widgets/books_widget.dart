@@ -43,11 +43,13 @@ class _BooksWidgetState extends State<BooksWidget> {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.fill,
+                    //colorFilter: ColorFilter.mode(
+                      //  Colors.black.withOpacity(0.1), BlendMode.dstATop),
                     opacity: 0.1,
-                    image: AssetImage('assets/images/art-back.jpg'))),
+                    image: const AssetImage('assets/images/art-back.jpg'))),
             padding: const EdgeInsets.all(12),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
