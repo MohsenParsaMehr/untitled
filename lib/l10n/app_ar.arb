@@ -25,6 +25,9 @@
   "home": "بيت",
   "profile": "حساب تعريفي",
   "web": "الويب",
+  "bookDescription": "وصف الكتاب",
+  "bookSummary": "ملخص كتاب",
+  "Author": "مؤلف",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

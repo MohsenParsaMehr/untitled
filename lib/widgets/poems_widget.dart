@@ -90,13 +90,7 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                         return const CircularProgressIndicator();
                       }
                     },
-                  )
-                  //  : Text(
-                  //      AppLocalizations.of(context)!.lectures,
-                  //      style: const TextStyle(
-                  //          fontSize: 14, fontWeight: FontWeight.bold),
-                  //   ))
-                  ,
+                  ),
                   Expanded(
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,

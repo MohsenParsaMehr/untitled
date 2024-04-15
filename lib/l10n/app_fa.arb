@@ -24,5 +24,8 @@
     "counter": "شمارنده",
     "home": "صفحه اصلی",
   "profile": "پروفایل",
-  "web": "سامانه وب"
+  "web": "سامانه وب",
+  "bookDescription": "شرح کتاب",
+  "bookSummary": "خلاصه‌ای از کتاب",
+  "author": "مؤلف"
 }

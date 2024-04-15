@@ -24,7 +24,10 @@
   "counter": "باسی ژمێریار بکە",
   "home": "ماڵەوە",
   "profile": "پرۆفایل",
+  "bookDescription": "وەسفکردنی کتێبەکە",
   "web": "وێب",
+  "bookSummary": "پوختەی کتێب",
+  "author": "نووسەر",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

@@ -12,12 +12,16 @@ import 'package:untitled/widgets/bottom_sheet_popup.dart';
 
 class BooksWidget extends StatefulWidget {
   const BooksWidget(Key key) : super(key: key);
+
   @override
   State<BooksWidget> createState() => _BooksWidgetState();
+  // @override
+  //void initState() => focusNode = FocusNode();
 }
 
 class _BooksWidgetState extends State<BooksWidget> {
   int _currentLectureIndex = 0, _currentLectureParagraphIndex = 0;
+  FocusNode focusNode = FocusNode();
   Future<List<LectureDto>> _lectures = Future.value([]);
 //  var _lectures = LecturesRepository<APILectureSearchCriterias>().getLectures(
   //     Settings.getLecturesUrl,
@@ -48,8 +52,8 @@ class _BooksWidgetState extends State<BooksWidget> {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    //colorFilter: ColorFilter.mode(
-                    //  Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.1), BlendMode.dstATop),
                     opacity: 0.1,
                     image: const AssetImage('assets/images/art-back.jpg'))),
             padding: const EdgeInsets.all(12),
@@ -63,14 +67,14 @@ class _BooksWidgetState extends State<BooksWidget> {
                     color: Colors.black26,
                   ),
                   const Padding(padding: EdgeInsets.only(left: 5)),
-                  // (_type == LectureType.book || _type == LectureType.poem
-                  // ?
                   FutureBuilder<List<LectureDto>>(
                     future: _lectures,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         var data = snapshot.data!;
-                        return DropdownButton<String>(
+                        return DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                          focusNode: focusNode,
                           hint: Text(_selectedBookItem ??
                               AppLocalizations.of(context)!.selectBook),
                           //isExpanded: true,
@@ -84,22 +88,19 @@ class _BooksWidgetState extends State<BooksWidget> {
                               child: Text(value),
                             );
                           }).toList(),
-                          onTap: () => (BottomSheetPopUp.show(context, data)),
+                          onTap: () => {
+                            focusNode.unfocus(),
+                            BottomSheetPopUp.show(context, data)
+                          },
                           onChanged: (String? value) => setState(() {
                             _selectedBookItem = value ?? "";
                           }),
-                        );
+                        ));
                       } else {
                         return const CircularProgressIndicator();
                       }
                     },
-                  )
-                  //  : Text(
-                  //      AppLocalizations.of(context)!.lectures,
-                  //      style: const TextStyle(
-                  //          fontSize: 14, fontWeight: FontWeight.bold),
-                  //   ))
-                  ,
+                  ),
                   Expanded(
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,

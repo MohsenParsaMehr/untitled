@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:untitled/data/QuestionsAndAnswers.dart';
 import 'package:untitled/data/api_lecture_search_criterias.dart';
@@ -25,7 +24,7 @@ class GreenLightService {
       };
       //final response =
       // await get(Uri.https(url, 'qa/GetAllQAs'), headers: headers);
-      SimpleRequest simpleRequest = SimpleRequest(-1, "fa-IR");
+      SimpleRequest simpleRequest = SimpleRequest(-1, Settings.locale);
       Envelope<SimpleRequest, SimpleRequest> qaEnvelope = Envelope(
           simpleRequest,
           null,

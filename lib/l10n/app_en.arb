@@ -25,6 +25,9 @@
   "home": "Home",
   "profile": "Profile",
   "web": "Web",
+  "bookDescription": "Book Description",
+  "bookSummary": "Book Summary",
+  "author": "Author",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }
