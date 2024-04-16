@@ -58,20 +58,23 @@ class SlideShowWidget extends StatelessWidget {
             // ),
             Image.asset(
               'assets/images/hazrat.png',
+              errorBuilder: (ctx, error, stackTrace) =>
+                  const FlutterLogo() /*Image.asset('fallback.png')*/,
               width: 480,
               height: 260,
               //fit: BoxFit.cover,
             ),
             Image.asset(
               'assets/images/library.png',
+              errorBuilder: (ctx, error, stackTrace) => const FlutterLogo(),
               width: 480,
               height: 260,
               //fit: BoxFit.cover,
             ),
-            Image.asset(
-              'assets/images/speeches.png',
-              //fit: BoxFit.cover,
-            ),
+            Image.asset('assets/images/speeches.png',
+                errorBuilder: (ctx, error, stackTrace) => const FlutterLogo()
+                //fit: BoxFit.cover,
+                ),
           ],
         ));
   }

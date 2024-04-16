@@ -85,7 +85,15 @@ flutter:
    - assets/
    - assets/images/
 
-
+  fonts:
+  - family: Mirza
+    fonts:
+    - asset: assets/fonts/Mirza.ttf
+    - asset: assets/fonts/Mirza-Bold.ttf
+      weight: 700    
+  - family: Loghman
+    fonts:
+    - asset: assets/fonts/Loghman.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

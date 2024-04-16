@@ -215,44 +215,50 @@ class _BooksWidgetState extends State<BooksWidget> {
                           ),
                           const Padding(padding: EdgeInsets.only(left: 5)),
                           Expanded(
-                              child: ExpandableText(
-                            textAlign: TextAlign.justify,
-                            style: PersianFonts.Samim.copyWith(fontSize: 13),
-                            (snapshot.data!.isEmpty ||
-                                    snapshot.data![_currentLectureIndex]
-                                                .lectureParagraphs !=
-                                            null &&
-                                        snapshot.data![_currentLectureIndex]
-                                            .lectureParagraphs!.isEmpty
-                                ? ''
-                                : snapshot
-                                        .data![_currentLectureIndex]
-                                        .lectureParagraphs![
-                                            _currentLectureParagraphIndex]
-                                        .lectureParagraphBody ??
-                                    'لیست خالی است'),
-                            expandText: 'نمایش بیشتر',
-                            maxLines: 5,
-                            linkColor: Colors.deepPurple,
-                            animation: true,
-                            collapseOnTextTap: true,
-                            //prefixText: 'Pref',
-                            onPrefixTap: () => {},
-                            prefixStyle:
-                                const TextStyle(fontWeight: FontWeight.bold),
-                            onHashtagTap: (name) => {},
-                            hashtagStyle: const TextStyle(
-                              color: Color(0xFF30B6F9),
-                            ),
-                            onMentionTap: (username) => {},
-                            mentionStyle: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                            ),
-                            onUrlTap: (url) => {},
-                            urlStyle: const TextStyle(
-                              decoration: TextDecoration.underline,
-                            ),
-                          )),
+                            child: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: ExpandableText(
+                                  textAlign: TextAlign.justify,
+                                  style:
+                                      PersianFonts.Samim.copyWith(fontSize: 13),
+                                  (snapshot.data!.isEmpty ||
+                                          snapshot.data![_currentLectureIndex]
+                                                      .lectureParagraphs !=
+                                                  null &&
+                                              snapshot
+                                                  .data![_currentLectureIndex]
+                                                  .lectureParagraphs!
+                                                  .isEmpty
+                                      ? ''
+                                      : snapshot
+                                              .data![_currentLectureIndex]
+                                              .lectureParagraphs![
+                                                  _currentLectureParagraphIndex]
+                                              .lectureParagraphBody ??
+                                          'لیست خالی است'),
+                                  expandText: 'نمایش بیشتر',
+                                  maxLines: 5,
+                                  linkColor: Colors.deepPurple,
+                                  animation: true,
+                                  collapseOnTextTap: true,
+                                  //prefixText: 'Pref',
+                                  onPrefixTap: () => {},
+                                  prefixStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  onHashtagTap: (name) => {},
+                                  hashtagStyle: const TextStyle(
+                                    color: Color(0xFF30B6F9),
+                                  ),
+                                  onMentionTap: (username) => {},
+                                  mentionStyle: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  onUrlTap: (url) => {},
+                                  urlStyle: const TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                )),
+                          )
                         ])
                       ]);
                     }

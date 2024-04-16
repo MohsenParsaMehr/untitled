@@ -37,8 +37,8 @@ class _PoemsWidgetState extends State<PoemsWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Card(
-          color: Colors.blueGrey.withOpacity(0.8),
-          surfaceTintColor: Colors.blueAccent,
+          color: Colors.redAccent.withOpacity(0.8),
+          surfaceTintColor: Colors.redAccent,
           elevation: 7,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
@@ -205,45 +205,55 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                           ),
                           const Padding(padding: EdgeInsets.only(left: 5)),
                           Expanded(
-                              child: ExpandableText(
-                            textAlign: TextAlign.center,
-                            style: PersianFonts.Shabnam.copyWith(fontSize: 14),
-                            (snapshot.data!.isEmpty ||
-                                    snapshot.data![_currentLectureIndex]
-                                                .lectureParagraphs !=
-                                            null &&
-                                        snapshot.data![_currentLectureIndex]
-                                            .lectureParagraphs!.isEmpty
-                                ? ''
-                                : snapshot
-                                        .data![_currentLectureIndex]
-                                        .lectureParagraphs![
-                                            _currentLectureParagraphIndex]
-                                        .lectureParagraphBody!
-                                        .replaceAll(RegExp(r'\t'), '\n') ??
-                                    'لیست خالی است'),
-                            expandText: 'نمایش بیشتر',
-                            maxLines: 6,
-                            linkColor: Colors.deepPurple,
-                            animation: true,
-                            collapseOnTextTap: true,
-                            //prefixText: 'Pref',
-                            onPrefixTap: () => {},
-                            prefixStyle:
-                                const TextStyle(fontWeight: FontWeight.bold),
-                            onHashtagTap: (name) => {},
-                            hashtagStyle: const TextStyle(
-                              color: Color(0xFF30B6F9),
-                            ),
-                            onMentionTap: (username) => {},
-                            mentionStyle: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                            ),
-                            onUrlTap: (url) => {},
-                            urlStyle: const TextStyle(
-                              decoration: TextDecoration.underline,
-                            ),
-                          )),
+                            child: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: ExpandableText(
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Loghman',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                  (snapshot.data!.isEmpty ||
+                                          snapshot.data![_currentLectureIndex]
+                                                      .lectureParagraphs !=
+                                                  null &&
+                                              snapshot
+                                                  .data![_currentLectureIndex]
+                                                  .lectureParagraphs!
+                                                  .isEmpty
+                                      ? ''
+                                      : snapshot
+                                              .data![_currentLectureIndex]
+                                              .lectureParagraphs![
+                                                  _currentLectureParagraphIndex]
+                                              .lectureParagraphBody!
+                                              .replaceAll(
+                                                  RegExp(r'\t'), '\n') ??
+                                          'لیست خالی است'),
+                                  expandText: 'نمایش بیشتر',
+                                  maxLines: 6,
+                                  linkColor: Colors.deepPurple,
+                                  animation: true,
+                                  collapseOnTextTap: true,
+                                  //prefixText: 'Pref',
+                                  onPrefixTap: () => {},
+                                  prefixStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  onHashtagTap: (name) => {},
+                                  hashtagStyle: const TextStyle(
+                                    color: Color(0xFF30B6F9),
+                                  ),
+                                  onMentionTap: (username) => {},
+                                  mentionStyle: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  onUrlTap: (url) => {},
+                                  urlStyle: const TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                )),
+                          )
                         ])
                       ]);
                     }
