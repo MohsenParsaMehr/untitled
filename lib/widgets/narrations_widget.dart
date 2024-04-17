@@ -65,31 +65,41 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                   const Padding(padding: EdgeInsets.only(left: 5)),
                   // (_type == LectureType.book || _type == LectureType.poem
                   // ?
+                  Text(AppLocalizations.of(context)!.lectures,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.lime,
+                      )),
                   FutureBuilder<List<LectureDto>>(
                     future: _lectures,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         var data = snapshot.data!;
-                        return DropdownButton<String>(
-                          hint: Text(_selectedBookItem ??
-                              AppLocalizations.of(context)!.selectNarration),
-                          //isExpanded: true,
-                          style:
-                              PersianFonts.Yekan.copyWith(color: Colors.teal),
-                          alignment: Alignment.topRight,
-                          value: _selectedBookItem,
-                          items: data.map((e) => e.topic).map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) => setState(() {
-                            _selectedBookItem = value ?? "";
+                        return IconButton(
+                            onPressed: () =>
+                                BottomSheetPopUp.show(context, data),
+                            icon: const Icon(Icons.arrow_drop_down));
+                        //  DropdownButton<String>(
+                        //   hint: Text(_selectedBookItem ??
+                        //       AppLocalizations.of(context)!.selectNarration),
+                        //   //isExpanded: true,
+                        //   style:
+                        //       PersianFonts.Yekan.copyWith(color: Colors.teal),
+                        //   alignment: Alignment.topRight,
+                        //   value: _selectedBookItem,
+                        //   items: data.map((e) => e.topic).map((String value) {
+                        //     return DropdownMenuItem<String>(
+                        //       value: value,
+                        //       child: Text(value),
+                        //     );
+                        //   }).toList(),
+                        //   onChanged: (String? value) => setState(() {
+                        //     _selectedBookItem = value ?? "";
 
-                            BottomSheetPopUp.show(context, data);
-                          }),
-                        );
+                        //     BottomSheetPopUp.show(context, data);
+                        //   }),
+                        // );
                       } else {
                         return const CircularProgressIndicator();
                       }

@@ -30,7 +30,8 @@ class BottomSheetPopUp {
                 alignment: Alignment.topCenter,
                 imageUrl:
                     "${Settings.protocol}://${Settings.baseUrl}/Images/Covers/${thumbs[index].captionImageUrl!}",
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+                errorWidget: (context, url, error) =>
+                    const Icon(Icons.error, size: 40),
                 imageBuilder: (context, imageProvider) {
                   return Ink.image(
                       image: imageProvider,

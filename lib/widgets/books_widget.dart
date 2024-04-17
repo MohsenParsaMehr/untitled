@@ -68,35 +68,45 @@ class _BooksWidgetState extends State<BooksWidget> {
                     color: Colors.black26,
                   ),
                   const Padding(padding: EdgeInsets.only(left: 5)),
+                  Text(AppLocalizations.of(context)!.books,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.lime,
+                      )),
                   FutureBuilder<List<LectureDto>>(
                     future: _lectures,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         var data = snapshot.data!;
-                        return DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                          focusNode: focusNode,
-                          hint: Text(_selectedBookItem ??
-                              AppLocalizations.of(context)!.selectBook),
-                          //isExpanded: true,
-                          style:
-                              PersianFonts.Yekan.copyWith(color: Colors.teal),
-                          alignment: Alignment.topRight,
-                          value: _selectedBookItem,
-                          items: data.map((e) => e.topic).map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onTap: () => {
-                            focusNode.unfocus(),
-                            BottomSheetPopUp.show(context, data)
-                          },
-                          onChanged: (String? value) => setState(() {
-                            _selectedBookItem = value ?? "";
-                          }),
-                        ));
+                        return IconButton(
+                            onPressed: () =>
+                                BottomSheetPopUp.show(context, data),
+                            icon: const Icon(Icons.arrow_drop_down));
+                        // DropdownButtonHideUnderline(
+                        //     child: DropdownButton<String>(
+                        //   focusNode: focusNode,
+                        //   hint: Text(_selectedBookItem ??
+                        //       AppLocalizations.of(context)!.selectBook),
+                        //   //isExpanded: true,
+                        //   style:
+                        //       PersianFonts.Yekan.copyWith(color: Colors.teal),
+                        //   alignment: Alignment.topRight,
+                        //   value: _selectedBookItem,
+                        //   items: data.map((e) => e.topic).map((String value) {
+                        //     return DropdownMenuItem<String>(
+                        //       value: value,
+                        //       child: Text(value),
+                        //     );
+                        //   }).toList(),
+                        //   onTap: () => {
+                        //     focusNode.unfocus(),
+                        //     BottomSheetPopUp.show(context, data)
+                        //   },
+                        //   onChanged: (String? value) => setState(() {
+                        //     _selectedBookItem = value ?? "";
+                        //   }),
+                        // ));
                       } else {
                         return const CircularProgressIndicator();
                       }
