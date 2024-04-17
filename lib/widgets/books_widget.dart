@@ -34,6 +34,7 @@ class _BooksWidgetState extends State<BooksWidget> {
         Settings.getLecturesUrl,
         LectureDto(),
         LectureSearchCriterias(
+            locale: Settings.locale,
             type: LectureType.book
                 .toString()
                 .replaceFirst(RegExp(r'LectureType.'), '')));

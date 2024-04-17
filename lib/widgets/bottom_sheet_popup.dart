@@ -14,7 +14,9 @@ class BottomSheetPopUp {
       builder: (context) {
         return ListView.separated(
           itemCount: thumbs.length,
-          separatorBuilder: (context, index) => (const SizedBox(
+          separatorBuilder: (context, index) => (const Divider(
+            thickness: 1,
+            color: Colors.black38,
             height: 5,
           )),
           itemBuilder: (context2, index) => (ListTile(
@@ -48,11 +50,14 @@ class BottomSheetPopUp {
                   Text(
                     '${AppLocalizations.of(context)!.bookDescription}: ',
                   ),
-                  Text(
+                  Expanded(
+                      child: Text(
                     thumbs[index].description ?? '-',
                     style: PersianFonts.Sahel.copyWith(
                         fontSize: 12, color: Colors.grey),
-                  )
+                    overflow: TextOverflow.visible,
+                    softWrap: true,
+                  ))
                 ]),
                 Row(children: [
                   Text(
