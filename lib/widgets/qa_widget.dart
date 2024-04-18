@@ -46,7 +46,7 @@ class _QaWidgetState extends State<QaWidget> {
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.lime,
                       )),
                   Expanded(
                       child: Row(

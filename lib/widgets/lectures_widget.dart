@@ -70,6 +70,12 @@ class _LecturesWidgetState extends State<LecturesWidget> {
                     color: Colors.black26,
                   ),
                   const Padding(padding: EdgeInsets.only(left: 5)),
+                  Text(AppLocalizations.of(context)!.questionAndAnswers,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.amber,
+                      )),
                   (_type == LectureType.book || _type == LectureType.poem
                       ? DropdownButton<String>(
                           hint: const Text('کتاب 1'),
