@@ -1,6 +1,6 @@
 {
     "helloWorld": "سلام",
-    "greenLight": "اپلیکیشن",
+    "greenLight": "اپلیکیشن عرفان صادقیه",
     "videos": "ویدیوها",
     "guest": "کاربر مهمان",
     "signUp": "ثبت نام کاربری",
@@ -10,7 +10,7 @@
     "favourites": "علاقه‌مندی‌ها",
     "gallery": "گالری تصاویر",
     "interprets": "تفاسیر کلام‌الله",
-    "poems": "اشعار",
+    "poems": "دیوان شعر پیران طریقت",
     "concepts": "مفاهیم طریقت",
     "questionAndAnswers": "پرسش‌ها و پاسخ‌ها از پیر طریقت",
     "listIsEmpty": "لیست خالی است",
@@ -20,12 +20,13 @@
     "selectNarration": "انتخاب سخنرانی",
     "selectBook": "انتخاب کتاب",
     "selectPoemBook": "انتخاب کتاب شعر",
-    "hierarchy": "سلسله",
-    "counter": "شمارنده",
+    "hierarchy": "سلسله پیران طریقت",
+    "counter": "ذکر شمار",
     "home": "صفحه اصلی",
   "profile": "پروفایل",
-  "web": "سامانه وب",
+  "web": "عرفان صادقیه",
   "bookDescription": "شرح کتاب",
   "bookSummary": "خلاصه‌ای از کتاب",
-  "author": "مؤلف"
+  "author": "مؤلف",
+  "myDeeds": "اعمال من"
 }

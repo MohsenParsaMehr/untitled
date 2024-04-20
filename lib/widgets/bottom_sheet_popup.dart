@@ -26,22 +26,27 @@ class BottomSheetPopUp {
               //     size: 24.0,
               //     semanticLabel: 'Books'),
               // const SizedBox(width: 10),
-              CachedNetworkImage(
-                alignment: Alignment.topCenter,
-                imageUrl:
-                    "${Settings.protocol}://${Settings.baseUrl}/Images/Covers/${thumbs[index].captionImageUrl!}",
-                errorWidget: (context, url, error) =>
-                    const Icon(Icons.error, size: 40),
-                imageBuilder: (context, imageProvider) {
-                  return Ink.image(
-                      image: imageProvider,
-                      //fit: BoxFit.contain,
-                      width: 128,
-                      height: 128);
-                },
-                placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-              ),
+              Image(
+                  height: 128,
+                  width: 128,
+                  image: AssetImage(
+                      "assets/images/${thumbs[index].captionImageUrl!}")),
+              // CachedNetworkImage(
+              //   alignment: Alignment.topCenter,
+              //   imageUrl:
+              //       "${Settings.protocol}://${Settings.baseUrl}/Images/Covers/${thumbs[index].captionImageUrl!}",
+              //   errorWidget: (context, url, error) =>
+              //       const Icon(Icons.error, size: 40),
+              //   imageBuilder: (context, imageProvider) {
+              //     return Ink.image(
+              //         image: imageProvider,
+              //         //fit: BoxFit.contain,
+              //         width: 128,
+              //         height: 128);
+              //   },
+              //   placeholder: (context, url) =>
+              //       const CircularProgressIndicator(),
+              // ),
               Expanded(
                   child: Column(children: [
                 Text(

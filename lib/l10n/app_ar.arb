@@ -24,10 +24,11 @@
   "counter": "تسبیح",
   "home": "بيت",
   "profile": "حساب تعريفي",
-  "web": "الويب",
+  "web": "عرفان صادقية",
   "bookDescription": "وصف الكتاب",
   "bookSummary": "ملخص كتاب",
-  "Author": "مؤلف",
+  "author": "مؤلف",
+  "myDeeds": "أفعالي",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

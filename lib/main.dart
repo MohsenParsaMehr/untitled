@@ -137,231 +137,238 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       drawer: Drawer(
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: const AssetImage('Assets/images/art-back.jpg'),
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.1), BlendMode.dstATop),
-                  fit: BoxFit.cover,
-                  opacity: 0.2)),
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: const EdgeInsets.all(0),
-            children: [
-              DrawerHeader(
-                margin: const EdgeInsets.only(top: 30),
-                decoration: const BoxDecoration(
+        //child: Container(
+        // decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //         image: const AssetImage('assets/images/logo.png'),
+        //         colorFilter: ColorFilter.mode(
+        //             Colors.black.withOpacity(0.05), BlendMode.dstATop),
+        //         fit: BoxFit.fill,
+        //         opacity: 0.2)),
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          //padding: const EdgeInsets.all(0),
+          children: [
+            const DrawerHeader(
+                margin: EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.fitHeight,
                         image: AssetImage('assets/images/logo.png'))),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      IconButton.outlined(
-                        onPressed: () => {
-                          Navigator.restorablePushNamed(
-                              context, SettingsView.routeName)
-                        },
-                        icon: const Icon(Icons.account_circle_rounded),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 30),
-                      ),
-                      Text(AppLocalizations.of(context)!.guest),
-                      IconButton.outlined(
-                        onPressed: () => {
-                          Navigator.restorablePushNamed(
-                              context, SettingsView.routeName)
-                        },
-                        icon: const Icon(Icons.settings_rounded),
-                      ),
-                    ]),
-              ),
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.menu_book_rounded,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'Books'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.books)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
+                child: Padding(
+                  padding: EdgeInsets.all(0),
+                )),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  //const Padding(padding: EdgeInsets.only(top: 50)),
+                  IconButton.outlined(
+                    onPressed: () => {
+                      Navigator.restorablePushNamed(
+                          context, SettingsView.routeName)
+                    },
+                    icon: Icon(Icons.account_circle_rounded,
+                        color: Colors.green[100]),
+                  ),
 
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.mic_external_on_rounded,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'Lectures'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.lectures)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.question_answer_rounded,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'FAQs'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.questionAndAnswers)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => questionAndAnswers()));
-                },
-              ),
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.favorite_rounded,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'Favourites'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.favourites)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.interpreter_mode_rounded,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'Interprets'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.interprets)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.add_comment_rounded,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'Poems'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.poems)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.photo_album_rounded,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'Gallery'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.gallery)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.pix_outlined,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'Concepts'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.concepts)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.account_tree_rounded,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'Hierarchy'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.hierarchy)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Icon(Icons.kebab_dining_outlined,
-                      color: Theme.of(context).primaryColor,
-                      size: 24.0,
-                      semanticLabel: 'Hierarchy'),
-                  const SizedBox(width: 10),
-                  Text(AppLocalizations.of(context)!.counter)
-                ]),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              //ListTile(
-              //title:
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                IconButton.outlined(
-                    onPressed: () => {},
+                  Text(AppLocalizations.of(context)!.guest),
+                  IconButton.outlined(
+                    onPressed: () => {
+                      Navigator.restorablePushNamed(
+                          context, SettingsView.routeName)
+                    },
                     icon: Icon(
-                      Icons.telegram_rounded,
-                      color: Theme.of(context).primaryColor,
-                    )),
+                      Icons.settings_rounded,
+                      color: Colors.green[100],
+                    ),
+                  ),
+                  Text(AppLocalizations.of(context)!.settings),
+                  IconButton.outlined(
+                    onPressed: () => {
+                      Navigator.restorablePushNamed(
+                          context, SettingsView.routeName)
+                    },
+                    icon: Icon(
+                      Icons.favorite_outline_outlined,
+                      color: Colors.green[100],
+                    ),
+                  ),
+                  Text(AppLocalizations.of(context)!.favourites),
+                ]),
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.menu_book_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Books'),
                 const SizedBox(width: 10),
-                IconButton.outlined(
-                    onPressed: () => {},
-                    icon: Icon(
-                      Icons.telegram_rounded,
-                      color: Theme.of(context).primaryColor,
-                    )),
-                const SizedBox(width: 10),
-                IconButton.outlined(
-                    onPressed: () => {},
-                    icon: Icon(
-                      Icons.share_rounded,
-                      color: Theme.of(context).primaryColor,
-                    )),
-                const SizedBox(width: 10)
+                Text(AppLocalizations.of(context)!.books)
               ]),
-              //onTap: () {                 },
-            ],
-          ),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.mic_external_on_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Lectures'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.lectures)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.question_answer_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'FAQs'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.questionAndAnswers)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => questionAndAnswers()));
+              },
+            ),
+
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.interpreter_mode_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Interprets'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.interprets)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.format_align_center_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Poems'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.poems)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.photo_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Gallery'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.gallery)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.pix_outlined,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Concepts'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.concepts)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.account_tree_rounded,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Hierarchy'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.hierarchy)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.kebab_dining_outlined,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'Hierarchy'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.counter)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Icon(Icons.man,
+                    color: Theme.of(context).primaryColor,
+                    size: 24.0,
+                    semanticLabel: 'My Deeds'),
+                const SizedBox(width: 10),
+                Text(AppLocalizations.of(context)!.myDeeds)
+              ]),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            //ListTile(
+            //title:
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              IconButton.outlined(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.telegram_rounded,
+                    color: Theme.of(context).primaryColor,
+                  )),
+              const SizedBox(width: 10),
+              IconButton.outlined(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.telegram_rounded,
+                    color: Theme.of(context).primaryColor,
+                  )),
+              const SizedBox(width: 10),
+              IconButton.outlined(
+                  onPressed: () => {},
+                  icon: Icon(
+                    Icons.share_rounded,
+                    color: Theme.of(context).primaryColor,
+                  )),
+              const SizedBox(width: 10)
+            ]),
+            //onTap: () {                 },
+          ],
         ),
       ),
+
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
@@ -408,7 +415,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     Icon(Icons.translate_sharp,
                                         color: Theme.of(context).primaryColor,
                                         size: 24.0,
-                                        semanticLabel: 'Concepts'),
+                                        semanticLabel: 'Persian'),
                                     const SizedBox(width: 10),
                                     const Text('فارسی')
                                   ]),
@@ -425,7 +432,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     Icon(Icons.translate_sharp,
                                         color: Theme.of(context).primaryColor,
                                         size: 24.0,
-                                        semanticLabel: 'Concepts'),
+                                        semanticLabel: 'English'),
                                     const SizedBox(width: 10),
                                     const Text('English')
                                   ]),
@@ -442,7 +449,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     Icon(Icons.translate_sharp,
                                         color: Theme.of(context).primaryColor,
                                         size: 24.0,
-                                        semanticLabel: 'Concepts'),
+                                        semanticLabel: 'Kurdi'),
                                     const SizedBox(width: 10),
                                     const Text('کوردی')
                                   ]),
@@ -459,9 +466,77 @@ class _MyHomePageState extends State<MyHomePage> {
                                     Icon(Icons.translate_sharp,
                                         color: Theme.of(context).primaryColor,
                                         size: 24.0,
-                                        semanticLabel: 'Concepts'),
+                                        semanticLabel: 'Arabic'),
                                     const SizedBox(width: 10),
                                     const Text('اللغة العربية')
+                                  ]),
+                              onTap: () {
+                                // Update the state of the app.
+                                // ...
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.translate_sharp,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 24.0,
+                                        semanticLabel: 'chiness'),
+                                    const SizedBox(width: 10),
+                                    const Text('中国人')
+                                  ]),
+                              onTap: () {
+                                // Update the state of the app.
+                                // ...
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.translate_sharp,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 24.0,
+                                        semanticLabel: 'French'),
+                                    const SizedBox(width: 10),
+                                    const Text('Français')
+                                  ]),
+                              onTap: () {
+                                // Update the state of the app.
+                                // ...
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.translate_sharp,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 24.0,
+                                        semanticLabel: 'Indian'),
+                                    const SizedBox(width: 10),
+                                    const Text('भारतीय')
+                                  ]),
+                              onTap: () {
+                                // Update the state of the app.
+                                // ...
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.translate_sharp,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 24.0,
+                                        semanticLabel: 'Deutsch'),
+                                    const SizedBox(width: 10),
+                                    const Text('Deutsch')
                                   ]),
                               onTap: () {
                                 // Update the state of the app.

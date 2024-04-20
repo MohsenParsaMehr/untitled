@@ -25,9 +25,10 @@
   "home": "ماڵەوە",
   "profile": "پرۆفایل",
   "bookDescription": "وەسفکردنی کتێبەکە",
-  "web": "وێب",
+  "web": "عیرفان سادقیه",
   "bookSummary": "پوختەی کتێب",
   "author": "نووسەر",
+  "myDeeds": "کردەوەکانم",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }
