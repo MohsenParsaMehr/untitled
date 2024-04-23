@@ -32,28 +32,28 @@ class GreenLightTheme {
 
   static TextTheme darkTextTheme = TextTheme(
     bodyLarge: PersianFonts.Samim.copyWith(
-      fontSize: 14.0,
+      fontSize: 13.0,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     ),
     displayLarge: PersianFonts.Samim.copyWith(
-      fontSize: 32.0,
+      fontSize: 31.0,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
     displayMedium: PersianFonts.Samim.copyWith(
-      fontSize: 21.0,
+      fontSize: 20.0,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     ),
     displaySmall: PersianFonts.Samim.copyWith(
-      fontSize: 16.0,
+      fontSize: 15.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
     titleLarge: PersianFonts.Samim.copyWith(
       //GoogleFonts.openSans(
-      fontSize: 20.0,
+      fontSize: 19.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),

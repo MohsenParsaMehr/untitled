@@ -168,22 +168,25 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.restorablePushNamed(
                           context, SettingsView.routeName)
                     },
-                    icon: Icon(Icons.account_circle_rounded,
-                        color: Colors.green[100]),
+                    icon: Icon(Icons.account_circle, color: Colors.green[100]),
                   ),
 
-                  Text(AppLocalizations.of(context)!.guest),
+                  Text(
+                    AppLocalizations.of(context)!.guest,
+                    style: const TextStyle(fontSize: 12),
+                  ),
                   IconButton.outlined(
                     onPressed: () => {
                       Navigator.restorablePushNamed(
                           context, SettingsView.routeName)
                     },
                     icon: Icon(
-                      Icons.settings_rounded,
+                      Icons.settings,
                       color: Colors.green[100],
                     ),
                   ),
-                  Text(AppLocalizations.of(context)!.settings),
+                  Text(AppLocalizations.of(context)!.settings,
+                      style: const TextStyle(fontSize: 12)),
                   IconButton.outlined(
                     onPressed: () => {
                       Navigator.restorablePushNamed(
@@ -194,13 +197,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.green[100],
                     ),
                   ),
-                  Text(AppLocalizations.of(context)!.favourites),
+                  Text(AppLocalizations.of(context)!.favourites,
+                      style: const TextStyle(fontSize: 12)),
                 ]),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.menu_book_rounded,
+                Icon(Icons.menu_book,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'Books'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.books)
@@ -213,9 +217,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.mic_external_on_rounded,
+                Icon(Icons.mic_external_on,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'Lectures'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.lectures)
@@ -227,9 +231,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.question_answer_rounded,
+                Icon(Icons.question_answer,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'FAQs'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.questionAndAnswers)
@@ -243,9 +247,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.interpreter_mode_rounded,
+                Icon(Icons.interpreter_mode,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'Interprets'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.interprets)
@@ -257,9 +261,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.format_align_center_rounded,
+                Icon(Icons.format_align_center,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'Poems'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.poems)
@@ -271,9 +275,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.photo_rounded,
+                Icon(Icons.photo,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'Gallery'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.gallery)
@@ -287,7 +291,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.pix_outlined,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'Concepts'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.concepts)
@@ -299,9 +303,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.account_tree_rounded,
+                Icon(Icons.account_tree,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'Hierarchy'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.hierarchy)
@@ -315,7 +319,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.kebab_dining_outlined,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'Hierarchy'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.counter)
@@ -329,7 +333,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.man,
                     color: Theme.of(context).primaryColor,
-                    size: 24.0,
+                    size: 22.0,
                     semanticLabel: 'My Deeds'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.myDeeds)
@@ -345,7 +349,7 @@ class _MyHomePageState extends State<MyHomePage> {
               IconButton.outlined(
                   onPressed: () => {},
                   icon: Icon(
-                    Icons.telegram_rounded,
+                    Icons.telegram,
                     color: Theme.of(context).primaryColor,
                   )),
               const SizedBox(width: 10),

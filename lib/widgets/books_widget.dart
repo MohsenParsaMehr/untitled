@@ -231,7 +231,7 @@ class _BooksWidgetState extends State<BooksWidget> {
                                 child: ExpandableText(
                                   textAlign: TextAlign.justify,
                                   style:
-                                      PersianFonts.Samim.copyWith(fontSize: 13),
+                                      PersianFonts.Yekan.copyWith(fontSize: 13),
                                   (snapshot.data!.isEmpty ||
                                           snapshot.data![_currentLectureIndex]
                                                       .lectureParagraphs !=
