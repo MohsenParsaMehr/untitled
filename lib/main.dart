@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:untitled/screens/questionAndAnswers.dart';
@@ -137,14 +138,16 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       drawer: Drawer(
-        //child: Container(
-        // decoration: BoxDecoration(
-        //     image: DecorationImage(
-        //         image: const AssetImage('assets/images/logo.png'),
-        //         colorFilter: ColorFilter.mode(
-        //             Colors.black.withOpacity(0.05), BlendMode.dstATop),
-        //         fit: BoxFit.fill,
-        //         opacity: 0.2)),
+          //child: Container(
+          // decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //         image: const AssetImage('assets/images/logo.png'),
+          //         colorFilter: ColorFilter.mode(
+          //             Colors.black.withOpacity(0.05), BlendMode.dstATop),
+          //         fit: BoxFit.fill,
+          //         opacity: 0.2)),
+          child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10.0 * 0.15, sigmaY: 10.0 * 0.15),
         child: ListView(
           // Important: Remove any padding from the ListView.
           //padding: const EdgeInsets.all(0),
@@ -158,9 +161,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Padding(
                   padding: EdgeInsets.all(0),
                 )),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+            Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                direction: Axis.horizontal,
                 children: [
                   //const Padding(padding: EdgeInsets.only(top: 50)),
                   IconButton.outlined(
@@ -371,7 +375,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //onTap: () {                 },
           ],
         ),
-      ),
+      )),
 
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
