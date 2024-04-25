@@ -38,8 +38,8 @@ class _PoemsWidgetState extends State<PoemsWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Card(
-          color: Colors.redAccent.withOpacity(0.8),
-          surfaceTintColor: Colors.redAccent,
+          color: Colors.grey.withOpacity(0.8),
+          surfaceTintColor: Colors.grey,
           elevation: 7,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),

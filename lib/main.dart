@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:untitled/screens/questionAndAnswers.dart';
@@ -137,6 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      drawerScrimColor: Colors.white.withOpacity(0.2),
       drawer: Drawer(
           //child: Container(
           // decoration: BoxDecoration(
@@ -147,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //         fit: BoxFit.fill,
           //         opacity: 0.2)),
           child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10.0 * 0.15, sigmaY: 10.0 * 0.15),
+        filter: ImageFilter.blur(sigmaX: 17.0 * 0.12, sigmaY: 17.0 * 0.12),
         child: ListView(
           // Important: Remove any padding from the ListView.
           //padding: const EdgeInsets.all(0),
@@ -208,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.menu_book,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'Books'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.books)
@@ -223,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.mic_external_on,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'Lectures'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.lectures)
@@ -235,9 +237,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.question_answer,
+                Icon(CupertinoIcons.bubble_left_bubble_right_fill,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'FAQs'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.questionAndAnswers)
@@ -253,7 +255,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.interpreter_mode,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'Interprets'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.interprets)
@@ -267,7 +269,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.format_align_center,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'Poems'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.poems)
@@ -281,7 +283,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.photo,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'Gallery'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.gallery)
@@ -295,7 +297,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.pix_outlined,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'Concepts'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.concepts)
@@ -309,7 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.account_tree,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'Hierarchy'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.hierarchy)
@@ -323,7 +325,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.kebab_dining_outlined,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'Hierarchy'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.counter)
@@ -337,7 +339,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Icon(Icons.man,
                     color: Theme.of(context).primaryColor,
-                    size: 22.0,
+                    size: 24.0,
                     semanticLabel: 'My Deeds'),
                 const SizedBox(width: 10),
                 Text(AppLocalizations.of(context)!.myDeeds)
@@ -561,7 +563,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     setState(() => _locale = Locale(Settings.locale)),
                   }),
-              icon: const Icon(Icons.language_rounded))
+              icon: const Icon(CupertinoIcons.globe))
         ],
       ),
       body: SafeArea(
@@ -569,28 +571,35 @@ class _MyHomePageState extends State<MyHomePage> {
         // in the middle of the parent.
         child: _screens[_currentIndex],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home_filled),
-            label: AppLocalizations.of(context)!.home,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.web_rounded),
-            label: AppLocalizations.of(context)!.web,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person_2_rounded),
-            label: AppLocalizations.of(context)!.profile,
-          ),
-        ],
-      ),
+      bottomNavigationBar: SizedBox(
+          height: 50,
+          child: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            selectedFontSize: 10,
+            unselectedFontSize: 10,
+            iconSize: 25,
+            currentIndex: _currentIndex,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.home_filled),
+                label: AppLocalizations.of(context)!.home,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.web_rounded),
+                label: AppLocalizations.of(context)!.web,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.person_2_rounded),
+                label: AppLocalizations.of(context)!.profile,
+              ),
+            ],
+          )),
       floatingActionButton: FloatingActionButton(
         onPressed: _onTipPressed,
         tooltip: 'نکته روز',

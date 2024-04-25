@@ -1,7 +1,6 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:persian_fonts/persian_fonts.dart';
-import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/data/lecture_dto.dart';
 import 'package:untitled/data/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -133,7 +132,9 @@ class _BooksWidgetState extends State<BooksWidget> {
                               color: Colors.black45,
                             )),
                         IconButton.outlined(
-                            onPressed: () {},
+                            onPressed: () {
+                              //Share.share(AppLocalizations.of(context)!.share);
+                            },
                             icon: const Icon(
                               Icons.share_rounded,
                               size: 18,
