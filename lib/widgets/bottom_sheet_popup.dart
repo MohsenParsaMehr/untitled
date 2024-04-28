@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/data/lecture_dto.dart';
-import 'package:untitled/utilities/settings.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomSheetPopUp {
@@ -26,11 +25,15 @@ class BottomSheetPopUp {
               //     size: 24.0,
               //     semanticLabel: 'Books'),
               // const SizedBox(width: 10),
-              Image(
-                  height: 128,
-                  width: 128,
-                  image: AssetImage(
-                      "assets/images/${thumbs[index].captionImageUrl!}")),
+
+              Image.asset(
+                width: 128,
+                height: 128,
+                errorBuilder: (context, exception, stackTrace) {
+                  return const Icon(Icons.error);
+                },
+                "assets/images/${thumbs[index].captionImageUrl!}",
+              ),
               // CachedNetworkImage(
               //   alignment: Alignment.topCenter,
               //   imageUrl:
@@ -53,9 +56,12 @@ class BottomSheetPopUp {
                   thumbs[index].topic,
                 ),
                 Row(children: [
-                  Text(
-                    '${AppLocalizations.of(context)!.bookDescription}: ',
-                  ),
+                  RotatedBox(
+                      quarterTurns: 3,
+                      child: Text(
+                        style: const TextStyle(fontSize: 11),
+                        '${AppLocalizations.of(context)!.bookDescription}: ',
+                      )),
                   Expanded(
                       child: Text(
                     thumbs[index].description ?? '-',
@@ -66,9 +72,12 @@ class BottomSheetPopUp {
                   ))
                 ]),
                 Row(children: [
-                  Text(
-                    '${AppLocalizations.of(context)!.bookSummary}: ',
-                  ),
+                  RotatedBox(
+                      quarterTurns: 3,
+                      child: Text(
+                        style: const TextStyle(fontSize: 11),
+                        '${AppLocalizations.of(context)!.bookSummary}: ',
+                      )),
                   Expanded(
                       child: Text(
                     thumbs[index].lectureBody ?? '-',
@@ -80,6 +89,7 @@ class BottomSheetPopUp {
                 ]),
                 Row(children: [
                   Text(
+                    style: const TextStyle(fontSize: 11),
                     '${AppLocalizations.of(context)!.author}: ',
                   ),
                   Expanded(

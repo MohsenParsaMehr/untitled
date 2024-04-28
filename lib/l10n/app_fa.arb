@@ -12,7 +12,7 @@
     "interprets": "تفاسیر کلام‌الله",
     "poems": "دیوان شعر پیران طریقت",
     "concepts": "مفاهیم طریقت",
-    "questionAndAnswers": "پرسش‌ها و پاسخ‌ها از پیر طریقت",
+    "questionAndAnswers": "پرسش‌ و پاسخ‌ از پیر طریقت",
     "listIsEmpty": "لیست خالی است",
     "eulogies": "مداحی‌ها",
     "settings": "تنظیمات",
@@ -26,7 +26,8 @@
   "profile": "پروفایل",
   "web": "عرفان صادقیه",
   "bookDescription": "شرح کتاب",
-  "bookSummary": "خلاصه‌ای از کتاب",
+  "bookSummary": "خلاصه ",
   "author": "مؤلف",
-  "myDeeds": "اعمال من"
+  "myDeeds": "اعمال من",
+  "share": "به شتراک گذاری"
 }

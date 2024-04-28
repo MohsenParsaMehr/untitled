@@ -29,6 +29,7 @@
   "bookSummary": "ملخص كتاب",
   "author": "مؤلف",
   "myDeeds": "أفعالي",
+  "share": "يشارك",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

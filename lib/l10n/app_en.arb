@@ -29,6 +29,7 @@
   "bookSummary": "Book Summary",
   "author": "Author",
   "myDeeds": "My Deeds",
+  "share": "ُShare",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }
