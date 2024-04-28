@@ -24,7 +24,7 @@ class _WebViewState extends State<WebView> {
               child: // IndexedStack(index: _stackIndex, children: [
                   InAppWebView(
                 initialUrlRequest:
-                    URLRequest(url: WebUri('http://app.sadeghieh.com')),
+                    URLRequest(url: WebUri('https://app.sadeghieh.com')),
                 initialOptions: InAppWebViewGroupOptions(
                   crossPlatform:
                       InAppWebViewOptions(useShouldOverrideUrlLoading: true),
