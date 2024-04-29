@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:untitled/data/APILecturesQuery.dart';
-import 'package:untitled/data/api_lecture_paragraph.dart';
+import 'package:untitled/data/dto/api_lectures_query.dart';
+import 'package:untitled/data/dto/api_lecture_paragraph.dart';
 part 'lecture_dto.g.dart';
 
 @JsonSerializable()

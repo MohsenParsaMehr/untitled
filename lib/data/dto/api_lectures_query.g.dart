@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'APILecturesQuery.dart';
+part of 'api_lectures_query.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

@@ -1,11 +1,11 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:persian_fonts/persian_fonts.dart';
-import 'package:untitled/data/lecture_dto.dart';
-import 'package:untitled/data/lectures_repository.dart';
+import 'package:untitled/data/dto/api_lecture_search_criterias.dart';
+import 'package:untitled/data/dto/lecture_dto.dart';
+import 'package:untitled/data/repositories/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:untitled/utilities/settings.dart';
-import "package:untitled/data/api_lecture_search_criterias.dart";
 import 'package:untitled/widgets/lectures_widget.dart';
 import 'package:untitled/widgets/bottom_sheet_popup.dart';
 

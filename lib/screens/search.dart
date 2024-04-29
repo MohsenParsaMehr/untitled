@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
-
+  static const routeName = '/Search';
   @override
   searchWidgetState createState() => searchWidgetState();
 }
@@ -27,6 +27,8 @@ class searchWidgetState extends State<Search> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Container(), );
+    return Scaffold(
+      body: Container(),
+    );
   }
 }

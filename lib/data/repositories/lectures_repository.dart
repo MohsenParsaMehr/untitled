@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart';
-import 'package:untitled/data/lecture_dto.dart';
+import 'package:untitled/data/dto/api_lectures_query.dart';
+import 'package:untitled/data/dto/api_lecture_search_criterias.dart';
+import 'package:untitled/data/dto/lecture_dto.dart';
 import 'package:untitled/data/simple_request.dart';
 import 'package:untitled/network/envelope.dart';
-import 'package:untitled/data/APILecturesQuery.dart';
 import 'package:untitled/utilities/settings.dart';
-import "package:untitled/data/api_lecture_search_criterias.dart";
 
 const String apiKey = '<Your Key>';
 const String apiId = '<your ID>';

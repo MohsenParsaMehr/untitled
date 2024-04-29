@@ -3,6 +3,10 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:untitled/screens/books.dart';
+import 'package:untitled/screens/favourites.dart';
+import 'package:untitled/screens/narrations.dart';
+import 'package:untitled/screens/poems.dart';
 import 'package:untitled/screens/questionAndAnswers.dart';
 import 'package:untitled/screens/search.dart';
 import 'package:untitled/screens/web_view.dart';
@@ -93,6 +97,16 @@ class _GreenLightAppState extends State<GreenLightApp> {
             settings: routeSettings,
             builder: (BuildContext context) {
               switch (routeSettings.name) {
+                case Favourites.routeName:
+                  return const Favourites(Key('favourites'));
+                case Books.routeName:
+                  return const Books(Key('books'));
+                case Search.routeName:
+                  return const Search();
+                case Narrations.routeName:
+                  return const Narrations(Key('narrations'));
+                case Poems.routeName:
+                  return const Poems(Key('poems'));
                 case SettingsView.routeName:
                   return SettingsView(controller: widget.settingsController);
                 default:
@@ -181,22 +195,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     AppLocalizations.of(context)!.guest,
                     style: const TextStyle(fontSize: 12),
                   ),
+
                   IconButton.outlined(
                     onPressed: () => {
                       Navigator.restorablePushNamed(
-                          context, SettingsView.routeName)
-                    },
-                    icon: Icon(
-                      Icons.settings,
-                      color: Colors.green[100],
-                    ),
-                  ),
-                  Text(AppLocalizations.of(context)!.settings,
-                      style: const TextStyle(fontSize: 12)),
-                  IconButton.outlined(
-                    onPressed: () => {
-                      Navigator.restorablePushNamed(
-                          context, SettingsView.routeName)
+                          context, Favourites.routeName)
                     },
                     icon: Icon(
                       Icons.favorite_outline_outlined,
@@ -205,6 +208,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Text(AppLocalizations.of(context)!.favourites,
                       style: const TextStyle(fontSize: 12)),
+                  IconButton.outlined(
+                    onPressed: () => {
+                      Navigator.restorablePushNamed(
+                          context, SettingsView.routeName)
+                    },
+                    icon: Icon(
+                      Icons.settings_rounded,
+                      color: Colors.green[100],
+                    ),
+                  ),
+                  // Text(AppLocalizations.of(context)!.settings,
+                  //     style: const TextStyle(fontSize: 12)),
                 ]),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -216,8 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(AppLocalizations.of(context)!.books)
               ]),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.restorablePushNamed(context, Books.routeName);
               },
             ),
 
@@ -231,8 +245,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(AppLocalizations.of(context)!.lectures)
               ]),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.restorablePushNamed(context, Narrations.routeName);
               },
             ),
             ListTile(
@@ -275,8 +288,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(AppLocalizations.of(context)!.poems)
               ]),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.restorablePushNamed(context, Poems.routeName);
               },
             ),
             ListTile(
@@ -309,7 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Icon(Icons.account_tree,
+                Icon(Icons.account_tree_rounded,
                     color: Theme.of(context).primaryColor,
                     size: 24.0,
                     semanticLabel: 'Hierarchy'),

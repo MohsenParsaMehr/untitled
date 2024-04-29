@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart';
-import 'package:untitled/data/QuestionsAndAnswers.dart';
-import 'package:untitled/data/api_lecture_search_criterias.dart';
 import 'package:untitled/data/simple_request.dart';
 import 'package:untitled/network/qa_model.dart';
 import 'package:untitled/network/envelope.dart';

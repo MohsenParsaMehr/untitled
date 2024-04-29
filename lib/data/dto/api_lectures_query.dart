@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:untitled/data/serializable_class.dart';
-part 'APILecturesQuery.g.dart';
+part 'api_lectures_query.g.dart';
 
 @JsonSerializable()
 class APILecturesQuery extends SerializableClass {
