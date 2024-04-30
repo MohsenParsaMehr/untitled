@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/widgets/books_widget.dart';
+import 'package:untitled/widgets/concepts.dart';
 import 'package:untitled/widgets/narrations_widget.dart';
 import 'package:untitled/widgets/poems_widget.dart';
 import 'package:untitled/widgets/slideshowWidget.dart';
@@ -34,6 +35,15 @@ class _HomeState extends State<Home> {
                   SlideShowWidget(),
                   QaWidget(Key('3')),
                   NarrationsWidget(Key('4')),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ConceptsWidget(),
+                      ConceptsWidget(),
+                    ],
+                  ),
+
                   BooksWidget(Key('5')),
                   PoemsWidget(Key('6')),
                   //const Text('Eulogy'),
@@ -45,5 +55,22 @@ class _HomeState extends State<Home> {
                     //)
                   ])
                 ])));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //if (state == AppLifecycleState.paused) {
+
+    //}
   }
 }

@@ -9,6 +9,7 @@ import 'package:untitled/data/repositories/lectures_repository.dart';
 import 'package:untitled/screens/search.dart';
 import 'package:untitled/settings/settings_view.dart';
 import 'package:untitled/utilities/settings.dart';
+import 'package:untitled/widgets/book_selection.dart';
 import 'package:untitled/widgets/bottom_sheet_popup.dart';
 import 'package:untitled/widgets/lectures_widget.dart';
 
@@ -63,19 +64,12 @@ class _BooksState extends State<Books> {
                 AppLocalizations.of(context)!.books,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              FutureBuilder<List<LectureDto>>(
-                future: _lectures,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    var data = snapshot.data!;
-                    return IconButton(
-                        onPressed: () => BottomSheetPopUp.show(context, data),
-                        icon: const Icon(Icons.arrow_drop_down));
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-              ),
+              IconButton(
+                  onPressed: () => BottomSheetPopUp.show(
+                      context,
+                      BookSelectionWidget(
+                          const Key('book_selection'), LectureType.book)),
+                  icon: const Icon(Icons.arrow_drop_down))
             ]),
             actions: [
               IconButton(
@@ -341,5 +335,22 @@ class _BooksState extends State<Books> {
             }
           },
         )));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //if (state == AppLifecycleState.paused) {
+
+    //}
   }
 }

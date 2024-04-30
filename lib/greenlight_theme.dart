@@ -9,7 +9,7 @@ class GreenLightTheme {
       color: Colors.black,
     ),
     displayLarge: PersianFonts.Samim.copyWith(
-      fontSize: 32.0,
+      fontSize: 28.0,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),
@@ -37,7 +37,7 @@ class GreenLightTheme {
       color: Colors.white,
     ),
     displayLarge: PersianFonts.Samim.copyWith(
-      fontSize: 31.0,
+      fontSize: 28.0,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
@@ -75,13 +75,18 @@ class GreenLightTheme {
         error: Colors.grey,
         onError: Colors.grey,
       ),
-      fontFamily: PersianFonts.Yekan.fontFamily,
+      fontFamily: PersianFonts.Sahel.fontFamily,
       primaryColor: Colors.green,
       brightness: Brightness.light,
       checkboxTheme: CheckboxThemeData(
+        checkColor: MaterialStateColor.resolveWith(
+          (states) {
+            return Colors.green;
+          },
+        ),
         fillColor: MaterialStateColor.resolveWith(
           (states) {
-            return Colors.black;
+            return Colors.white;
           },
         ),
       ),
@@ -118,9 +123,21 @@ class GreenLightTheme {
         error: Colors.grey,
         onError: Colors.grey,
       ),
-      fontFamily: PersianFonts.Yekan.fontFamily,
+      fontFamily: PersianFonts.Sahel.fontFamily,
       primaryColor: Colors.green,
       brightness: Brightness.dark,
+      checkboxTheme: CheckboxThemeData(
+        checkColor: MaterialStateColor.resolveWith(
+          (states) {
+            return Colors.green;
+          },
+        ),
+        fillColor: MaterialStateColor.resolveWith(
+          (states) {
+            return Colors.black38;
+          },
+        ),
+      ),
       appBarTheme: const AppBarTheme(
         foregroundColor: Colors.white,
         backgroundColor: Colors.green,

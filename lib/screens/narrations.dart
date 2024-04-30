@@ -1,12 +1,15 @@
 import 'package:expandable_text/expandable_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/data/dto/api_lecture_search_criterias.dart';
 import 'package:untitled/data/dto/lecture_dto.dart';
 import 'package:untitled/data/repositories/lectures_repository.dart';
+import 'package:untitled/screens/search.dart';
 import 'package:untitled/settings/settings_view.dart';
 import 'package:untitled/utilities/settings.dart';
+import 'package:untitled/widgets/book_selection.dart';
 import 'package:untitled/widgets/bottom_sheet_popup.dart';
 import 'package:untitled/widgets/lectures_widget.dart';
 
@@ -41,24 +44,87 @@ class _NarrationsState extends State<Narrations> {
                 .replaceFirst(RegExp(r'LectureType.'), '')));
   }
   String? _selectedBookItem;
+  bool isShuffleEnabled = false, isBookmarked = false;
+  void handleClick(int item) {
+    switch (item) {
+      case 0:
+        break;
+      case 1:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).primaryColor,
-          title: Text(
-            AppLocalizations.of(context)!.lectures,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
+          title: Row(children: [
+            Text(
+              AppLocalizations.of(context)!.lectures,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            IconButton(
+                onPressed: () => BottomSheetPopUp.show(
+                    context,
+                    BookSelectionWidget(const Key('narration_selection'),
+                        LectureType.narration)),
+                icon: const Icon(Icons.arrow_drop_down))
+          ]),
           actions: [
             IconButton(
-              icon: const Icon(Icons.settings),
+              iconSize: 18,
+              icon: const Icon(Icons.search),
               onPressed: () {
-                // Navigate to the settings page. If the user leaves and returns
-                // to the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(context, SettingsView.routeName);
+                Navigator.restorablePushNamed(context, Search.routeName);
               },
+            ),
+            IconButton(
+              iconSize: 18,
+              icon: const Icon(Icons.download),
+              onPressed: () {
+                //Navigator.restorablePushNamed(context, SettingsView.routeName);
+              },
+            ),
+            IconButton(
+              iconSize: 18,
+              icon: const Icon(Icons.share),
+              onPressed: () {
+                //Navigator.restorablePushNamed(context, SettingsView.routeName);
+              },
+            ),
+            IconButton(
+                iconSize: 18,
+                padding: const EdgeInsets.only(left: 4, right: 4, top: 0),
+                icon: isShuffleEnabled == true
+                    ? const Icon(Icons.shuffle_on)
+                    : const Icon(Icons.shuffle),
+                onPressed: () {
+                  setState(() {
+                    isShuffleEnabled = !isShuffleEnabled;
+                  });
+                }),
+            IconButton(
+                iconSize: 18,
+                padding: const EdgeInsets.only(left: 4, right: 4, top: 0),
+                icon: isBookmarked == true
+                    ? const Icon(CupertinoIcons.bookmark_fill)
+                    : const Icon(CupertinoIcons.bookmark),
+                onPressed: () {
+                  setState(() {
+                    isBookmarked = !isBookmarked;
+                  });
+                }),
+            PopupMenuButton<int>(
+              onSelected: (item) => handleClick(item),
+              itemBuilder: (context) => [
+                PopupMenuItem<int>(
+                    value: 0,
+                    child: Text(AppLocalizations.of(context)!.author)),
+                PopupMenuItem<int>(
+                    value: 1,
+                    child: Text(AppLocalizations.of(context)!.author)),
+              ],
             ),
           ],
         ),
@@ -82,96 +148,6 @@ class _NarrationsState extends State<Narrations> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Icons.mic_external_on_rounded,
-                            color: Colors.black26,
-                          ),
-                          const Padding(padding: EdgeInsets.only(left: 5)),
-                          // (_type == LectureType.book || _type == LectureType.poem
-                          // ?
-                          Text(AppLocalizations.of(context)!.lectures,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.lime,
-                              )),
-                          FutureBuilder<List<LectureDto>>(
-                            future: _lectures,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                var data = snapshot.data!;
-                                return IconButton(
-                                    onPressed: () =>
-                                        BottomSheetPopUp.show(context, data),
-                                    icon: const Icon(Icons.arrow_drop_down));
-                                //  DropdownButton<String>(
-                                //   hint: Text(_selectedBookItem ??
-                                //       AppLocalizations.of(context)!.selectNarration),
-                                //   //isExpanded: true,
-                                //   style:
-                                //       PersianFonts.Yekan.copyWith(color: Colors.teal),
-                                //   alignment: Alignment.topRight,
-                                //   value: _selectedBookItem,
-                                //   items: data.map((e) => e.topic).map((String value) {
-                                //     return DropdownMenuItem<String>(
-                                //       value: value,
-                                //       child: Text(value),
-                                //     );
-                                //   }).toList(),
-                                //   onChanged: (String? value) => setState(() {
-                                //     _selectedBookItem = value ?? "";
-
-                                //     BottomSheetPopUp.show(context, data);
-                                //   }),
-                                // );
-                              } else {
-                                return const CircularProgressIndicator();
-                              }
-                            },
-                          ),
-                          Expanded(
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                IconButton.outlined(
-                                    onPressed: () {
-                                      var snackBar = SnackBar(
-                                        content: Text(_lecturesSnapshotData[
-                                                _currentLectureIndex]
-                                            .mediaUrl
-                                            .toString()),
-                                      );
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackBar);
-                                    },
-                                    icon: const Icon(
-                                      Icons.download_rounded,
-                                      size: 18,
-                                      color: Colors.black45,
-                                    )),
-                                IconButton.outlined(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.share_rounded,
-                                      size: 18,
-                                      color: Colors.black45,
-                                    )),
-                                IconButton.outlined(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                        Icons.favorite_outline_rounded,
-                                        size: 18,
-                                        color: Colors.black45)),
-                                IconButton.outlined(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.shuffle_rounded,
-                                        size: 18, color: Colors.black45)),
-                              ]))
-                        ],
-                      ),
                       FutureBuilder<List<LectureDto>>(
                           future:
                               _lectures, // LecturesRepository().getData(""),
@@ -362,5 +338,22 @@ class _NarrationsState extends State<Narrations> {
             }
           },
         )));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //if (state == AppLifecycleState.paused) {
+
+    //}
   }
 }

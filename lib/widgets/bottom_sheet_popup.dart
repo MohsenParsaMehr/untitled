@@ -1,114 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:persian_fonts/persian_fonts.dart';
-import 'package:untitled/data/dto/lecture_dto.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomSheetPopUp {
-  static Future<int?> show(BuildContext context, List<LectureDto> thumbs) {
+  static Future<int?> show(BuildContext context, Widget widgetToShow) {
     Future<int?> result = showModalBottomSheet<int>(
       showDragHandle: true,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)), //for the round edges
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       builder: (context) {
-        return ListView.separated(
-          itemCount: thumbs.length,
-          separatorBuilder: (context, index) => (const Divider(
-            thickness: 1,
-            color: Colors.black38,
-            height: 5,
-          )),
-          itemBuilder: (context2, index) => (ListTile(
-            title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              // Icon(Icons.menu_book,
-              //     color: Theme.of(context).primaryColor,
-              //     size: 24.0,
-              //     semanticLabel: 'Books'),
-              // const SizedBox(width: 10),
-
-              Image.asset(
-                width: 128,
-                height: 128,
-                errorBuilder: (context, exception, stackTrace) {
-                  return const Icon(Icons.error);
-                },
-                "assets/images/${thumbs[index].captionImageUrl!}",
-              ),
-              // CachedNetworkImage(
-              //   alignment: Alignment.topCenter,
-              //   imageUrl:
-              //       "${Settings.protocol}://${Settings.baseUrl}/Images/Covers/${thumbs[index].captionImageUrl!}",
-              //   errorWidget: (context, url, error) =>
-              //       const Icon(Icons.error, size: 40),
-              //   imageBuilder: (context, imageProvider) {
-              //     return Ink.image(
-              //         image: imageProvider,
-              //         //fit: BoxFit.contain,
-              //         width: 128,
-              //         height: 128);
-              //   },
-              //   placeholder: (context, url) =>
-              //       const CircularProgressIndicator(),
-              // ),
-              Expanded(
-                  child: Column(children: [
-                Text(
-                  thumbs[index].topic,
-                ),
-                Row(children: [
-                  RotatedBox(
-                      quarterTurns: 3,
-                      child: Text(
-                        style: const TextStyle(fontSize: 11),
-                        '${AppLocalizations.of(context)!.bookDescription}: ',
-                      )),
-                  Expanded(
-                      child: Text(
-                    thumbs[index].description ?? '-',
-                    style: PersianFonts.Sahel.copyWith(
-                        fontSize: 12, color: Colors.grey),
-                    overflow: TextOverflow.visible,
-                    softWrap: true,
-                  ))
-                ]),
-                Row(children: [
-                  RotatedBox(
-                      quarterTurns: 3,
-                      child: Text(
-                        style: const TextStyle(fontSize: 11),
-                        '${AppLocalizations.of(context)!.bookSummary}: ',
-                      )),
-                  Expanded(
-                      child: Text(
-                    thumbs[index].lectureBody ?? '-',
-                    overflow: TextOverflow.visible,
-                    softWrap: true,
-                    style: PersianFonts.Sahel.copyWith(
-                        fontSize: 12, color: Colors.grey),
-                  ))
-                ]),
-                Row(children: [
-                  Text(
-                    style: const TextStyle(fontSize: 11),
-                    '${AppLocalizations.of(context)!.author}: ',
-                  ),
-                  Expanded(
-                      child: Text(
-                    thumbs[index].author ?? '-',
-                    overflow: TextOverflow.visible,
-                    softWrap: true,
-                    style: PersianFonts.Sahel.copyWith(
-                        fontSize: 12, color: Colors.grey),
-                  ))
-                ])
-              ])),
-            ]),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          )),
-          scrollDirection: Axis.vertical,
-        );
+        return BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 7.0 * 0.14, sigmaY: 7.0 * 0.14),
+            child: widgetToShow);
       },
       context: context,
       isDismissible: true,

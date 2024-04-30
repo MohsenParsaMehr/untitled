@@ -30,6 +30,11 @@
   "author": "نووسەر",
   "myDeeds": "کردەوەکانم",
   "share": "هاوبەشکردن",
+  "search": "search",
+  "allContent": "AllContent",
+  "prays": "prays",
+  "searchIn": "SearchIn",
+  "selectLanguage": "Select Language",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

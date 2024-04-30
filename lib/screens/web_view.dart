@@ -27,7 +27,7 @@ class _WebViewState extends State<WebView> {
                   child: // IndexedStack(index: _stackIndex, children: [
                       InAppWebView(
                     initialUrlRequest:
-                        URLRequest(url: WebUri('http://app.sadeghieh.com')),
+                        URLRequest(url: WebUri('https://app.sadeghieh.com')),
                     initialOptions: InAppWebViewGroupOptions(
                       crossPlatform: InAppWebViewOptions(
                           useShouldOverrideUrlLoading: true),
@@ -56,5 +56,22 @@ class _WebViewState extends State<WebView> {
                 )
               : const Text('Please visit app.***.com')),
         ));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //if (state == AppLifecycleState.paused) {
+
+    //}
   }
 }

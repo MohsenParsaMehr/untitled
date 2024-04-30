@@ -7,13 +7,14 @@ import 'package:untitled/screens/books.dart';
 import 'package:untitled/screens/favourites.dart';
 import 'package:untitled/screens/narrations.dart';
 import 'package:untitled/screens/poems.dart';
-import 'package:untitled/screens/questionAndAnswers.dart';
 import 'package:untitled/screens/search.dart';
 import 'package:untitled/screens/web_view.dart';
 import 'package:untitled/settings/settings_controller.dart';
 import 'package:untitled/settings/settings_service.dart';
 import 'package:untitled/settings/settings_view.dart';
 import 'package:untitled/utilities/settings.dart';
+import 'package:untitled/widgets/bottom_sheet_popup.dart';
+import 'package:untitled/widgets/lanaguage_select.dart';
 import 'greenlight_theme.dart';
 import 'screens/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -259,8 +260,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ]),
               onTap: () {
                 // Update the state of the app.
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => questionAndAnswers()));
+                // Navigator.of(context).push(
+                //     MaterialPageRoute(builder: (_) => questionAndAnswers()));
               },
             ),
 
@@ -411,169 +412,8 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.search)),
           IconButton(
               onPressed: () => ({
-                    if (Settings.language == 'fa')
-                      {
-                        Settings.language = 'en',
-                        Settings.country = 'US',
-                      }
-                    else
-                      {
-                        Settings.language = 'fa',
-                        Settings.country = 'IR',
-                      },
-                    showModalBottomSheet(
-                      showDragHandle: true,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(12)), //for the round edges
-                      builder: (context) {
-                        return ListView(
-                          scrollDirection: Axis.vertical,
-                          children: [
-                            ListTile(
-                              title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.translate_sharp,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 24.0,
-                                        semanticLabel: 'Persian'),
-                                    const SizedBox(width: 10),
-                                    const Text('فارسی')
-                                  ]),
-                              onTap: () {
-                                // Update the state of the app.
-                                // ...
-                                Navigator.pop(context);
-                              },
-                            ),
-                            ListTile(
-                              title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.translate_sharp,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 24.0,
-                                        semanticLabel: 'English'),
-                                    const SizedBox(width: 10),
-                                    const Text('English')
-                                  ]),
-                              onTap: () {
-                                // Update the state of the app.
-                                // ...
-                                Navigator.pop(context);
-                              },
-                            ),
-                            ListTile(
-                              title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.translate_sharp,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 24.0,
-                                        semanticLabel: 'Kurdi'),
-                                    const SizedBox(width: 10),
-                                    const Text('کوردی')
-                                  ]),
-                              onTap: () {
-                                // Update the state of the app.
-                                // ...
-                                Navigator.pop(context);
-                              },
-                            ),
-                            ListTile(
-                              title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.translate_sharp,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 24.0,
-                                        semanticLabel: 'Arabic'),
-                                    const SizedBox(width: 10),
-                                    const Text('اللغة العربية')
-                                  ]),
-                              onTap: () {
-                                // Update the state of the app.
-                                // ...
-                                Navigator.pop(context);
-                              },
-                            ),
-                            ListTile(
-                              title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.translate_sharp,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 24.0,
-                                        semanticLabel: 'chiness'),
-                                    const SizedBox(width: 10),
-                                    const Text('中国人')
-                                  ]),
-                              onTap: () {
-                                // Update the state of the app.
-                                // ...
-                                Navigator.pop(context);
-                              },
-                            ),
-                            ListTile(
-                              title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.translate_sharp,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 24.0,
-                                        semanticLabel: 'French'),
-                                    const SizedBox(width: 10),
-                                    const Text('Français')
-                                  ]),
-                              onTap: () {
-                                // Update the state of the app.
-                                // ...
-                                Navigator.pop(context);
-                              },
-                            ),
-                            ListTile(
-                              title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.translate_sharp,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 24.0,
-                                        semanticLabel: 'Indian'),
-                                    const SizedBox(width: 10),
-                                    const Text('भारतीय')
-                                  ]),
-                              onTap: () {
-                                // Update the state of the app.
-                                // ...
-                                Navigator.pop(context);
-                              },
-                            ),
-                            ListTile(
-                              title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(Icons.translate_sharp,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 24.0,
-                                        semanticLabel: 'Deutsch'),
-                                    const SizedBox(width: 10),
-                                    const Text('Deutsch')
-                                  ]),
-                              onTap: () {
-                                // Update the state of the app.
-                                // ...
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                      context: context,
-                      isDismissible: true,
-                      isScrollControlled: false,
-                    ),
-                    setState(() => _locale = Locale(Settings.locale)),
+                    BottomSheetPopUp.show(context,
+                        const LanguageSelectWidget(Key('Language_Select')))
                   }),
               icon: const Icon(CupertinoIcons.globe))
         ],
@@ -590,7 +430,7 @@ class _MyHomePageState extends State<MyHomePage> {
             showUnselectedLabels: false,
             selectedFontSize: 10,
             unselectedFontSize: 10,
-            iconSize: 25,
+            iconSize: 24,
             currentIndex: _currentIndex,
             onTap: (index) {
               setState(() {
