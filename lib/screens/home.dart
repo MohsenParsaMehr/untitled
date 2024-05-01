@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
                         child: const Text('Install')),
                   if (error != null) Text(error!),
                   //Column(children: <Widget>[
-                  //SlideShowWidget(),
+                  const SlideShowWidget(),
                   const QaWidget(Key('3')),
                   const NarrationsWidget(Key('4')),
 
