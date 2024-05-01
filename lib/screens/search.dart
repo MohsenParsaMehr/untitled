@@ -43,7 +43,7 @@ class SearchWidgetState extends State<Search> {
             ),
             IconButton(
                 onPressed: () => BottomSheetPopUp.show(
-                    context, const SearchOptionsWidget(Key('Search_Options'))),
+                    context, SearchOptionsWidget(const Key('Search_Options'))),
                 icon: const Icon(Icons.arrow_drop_down))
           ]),
           actions: [

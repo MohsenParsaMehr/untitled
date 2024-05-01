@@ -41,7 +41,7 @@ class BookSelectionWidget extends StatelessWidget {
                   errorBuilder: (context, exception, stackTrace) {
                     return const Icon(Icons.error);
                   },
-                  "assets/images/${thumbs[index].captionImageUrl!}",
+                  "assets/images/${thumbs[index].captionImageUrl}",
                 ),
                 // CachedNetworkImage(
                 //   alignment: Alignment.topCenter,

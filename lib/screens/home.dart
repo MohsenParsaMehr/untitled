@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pwa_install/pwa_install.dart';
 import 'package:untitled/widgets/books_widget.dart';
 import 'package:untitled/widgets/concepts.dart';
 import 'package:untitled/widgets/narrations_widget.dart';
@@ -20,6 +21,7 @@ class _HomeState extends State<Home> {
     setState(() {});
   }
 
+  String? error;
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -30,13 +32,26 @@ class _HomeState extends State<Home> {
                 scrollDirection: Axis.vertical,
                 primary: true,
                 shrinkWrap: true,
-                children: const <Widget>[
+                children: <Widget>[
+                  if (PWAInstall().installPromptEnabled)
+                    ElevatedButton(
+                        onPressed: () {
+                          try {
+                            PWAInstall().promptInstall_();
+                          } catch (e) {
+                            setState(() {
+                              error = e.toString();
+                            });
+                          }
+                        },
+                        child: const Text('Install')),
+                  if (error != null) Text(error!),
                   //Column(children: <Widget>[
-                  SlideShowWidget(),
-                  QaWidget(Key('3')),
-                  NarrationsWidget(Key('4')),
+                  //SlideShowWidget(),
+                  const QaWidget(Key('3')),
+                  const NarrationsWidget(Key('4')),
 
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ConceptsWidget(),
@@ -44,11 +59,11 @@ class _HomeState extends State<Home> {
                     ],
                   ),
 
-                  BooksWidget(Key('5')),
-                  PoemsWidget(Key('6')),
+                  const BooksWidget(Key('5')),
+                  const PoemsWidget(Key('6')),
                   //const Text('Eulogy'),
-                  EulogyCompactWidget(),
-                  Row(children: <Widget>[
+                  const EulogyCompactWidget(),
+                  const Row(children: <Widget>[
                     photosWidget(),
                     //Expanded(child: videosWidget())
                     // ],

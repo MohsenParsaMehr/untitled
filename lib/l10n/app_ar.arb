@@ -35,6 +35,7 @@
   "prays": "ادعیه",
   "searchIn": "بحث فی",
   "selectLanguage": "Select Language",
+  "sortOptions": "Select Language",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }

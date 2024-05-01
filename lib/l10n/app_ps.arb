@@ -35,6 +35,7 @@
   "prays": "prays",
   "searchIn": "SearchIn",
   "selectLanguage": "Select Language",
+  "sortOptions": "Sort Options",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   }
