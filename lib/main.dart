@@ -452,11 +452,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _onTipPressed,
-        tooltip: 'نکته روز',
-        child: const Icon(Icons.tips_and_updates),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: (_currentIndex != 1
+          ? FloatingActionButton(
+              onPressed: _onTipPressed,
+              tooltip: 'نکته روز',
+              child: const Icon(Icons.tips_and_updates),
+            )
+          : null), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

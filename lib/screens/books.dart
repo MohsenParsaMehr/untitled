@@ -8,6 +8,7 @@ import 'package:untitled/data/dto/lecture_dto.dart';
 import 'package:untitled/data/repositories/lectures_repository.dart';
 import 'package:untitled/screens/search.dart';
 import 'package:untitled/settings/settings_view.dart';
+import 'package:untitled/utilities/helpers.dart';
 import 'package:untitled/utilities/settings.dart';
 import 'package:untitled/widgets/book_selection.dart';
 import 'package:untitled/widgets/bottom_sheet_popup.dart';
@@ -43,6 +44,8 @@ class _BooksState extends State<Books> {
                 .toString()
                 .replaceFirst(RegExp(r'LectureType.'), '')));
   }
+  double _scaleFactor = 1.0;
+  double _baseScaleFactor = 1.0;
   String? _selectedBookItem;
   bool isShuffleEnabled = false, isBookmarked = false;
   void handleClick(int item) {
@@ -236,57 +239,97 @@ class _BooksState extends State<Books> {
                                   const Padding(
                                       padding: EdgeInsets.only(left: 5)),
                                   Expanded(
-                                    child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        child: ExpandableText(
-                                          textAlign: TextAlign.justify,
-                                          style: PersianFonts.Yekan.copyWith(
-                                              fontSize: 13),
-                                          (snapshot.data!.isEmpty ||
-                                                  snapshot
-                                                              .data![
-                                                                  _currentLectureIndex]
-                                                              .lectureParagraphs !=
-                                                          null &&
-                                                      snapshot
-                                                          .data![
-                                                              _currentLectureIndex]
-                                                          .lectureParagraphs!
-                                                          .isEmpty
-                                              ? ''
-                                              : snapshot
-                                                      .data![
-                                                          _currentLectureIndex]
-                                                      .lectureParagraphs![
-                                                          _currentLectureParagraphIndex]
-                                                      .lectureParagraphBody ??
-                                                  'لیست خالی است'),
-                                          expandText: 'نمایش بیشتر',
-                                          maxLines: 5,
-                                          linkColor: Colors.deepPurple,
-                                          animation: true,
-                                          collapseOnTextTap: true,
-                                          //prefixText: 'Pref',
-                                          onPrefixTap: () => {},
-                                          prefixStyle: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                          onHashtagTap: (name) => {},
-                                          hashtagStyle: const TextStyle(
-                                            color: Color(0xFF30B6F9),
-                                          ),
-                                          onMentionTap: (username) => {},
-                                          mentionStyle: const TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                          onUrlTap: (url) => {},
-                                          urlStyle: const TextStyle(
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                        )),
-                                  )
-                                ])
+                                      child: GestureDetector(
+                                          onScaleStart: (details) {
+                                            _baseScaleFactor = _scaleFactor;
+                                          },
+                                          onScaleUpdate: (details) {
+                                            setState(() {
+                                              _scaleFactor = _baseScaleFactor *
+                                                  details.scale;
+                                            });
+                                          },
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                                AnimatedNightReader(
+            tint: Colors.blue,
+            value: value1,
+            duration: const Duration(seconds: 2),
+            child:
+                                            child: RichText(
+                                                textScaleFactor: _scaleFactor,
+                                                textAlign:
+                                                    (Helpers.isHostPlatformWeb()
+                                                        ? TextAlign.start
+                                                        : TextAlign.justify),
+                                                text: TextSpan(
+                                                    style: PersianFonts.Samim.copyWith(
+                                                        fontSize: 13),
+                                                    text: snapshot.data!.isEmpty ||
+                                                            snapshot.data![_currentLectureIndex].lectureParagraphs !=
+                                                                    null &&
+                                                                snapshot
+                                                                    .data![
+                                                                        _currentLectureIndex]
+                                                                    .lectureParagraphs!
+                                                                    .isEmpty
+                                                        ? ''
+                                                        : snapshot
+                                                                .data![_currentLectureIndex]
+                                                                .lectureParagraphs![_currentLectureParagraphIndex]
+                                                                .lectureParagraphBody ??
+                                                            'لیست خالی است')),
+
+                                            //        ExpandableText(
+                                            //         textAlign: TextAlign.justify,
+                                            //         style: PersianFonts.Yekan.copyWith(
+                                            //             fontSize: 13),
+                                            //         (snapshot.data!.isEmpty ||
+                                            //                 snapshot
+                                            //                             .data![
+                                            //                                 _currentLectureIndex]
+                                            //                             .lectureParagraphs !=
+                                            //                         null &&
+                                            //                     snapshot
+                                            //                         .data![
+                                            //                             _currentLectureIndex]
+                                            //                         .lectureParagraphs!
+                                            //                         .isEmpty
+                                            //             ? ''
+                                            //             : snapshot
+                                            //                     .data![
+                                            //                         _currentLectureIndex]
+                                            //                     .lectureParagraphs![
+                                            //                         _currentLectureParagraphIndex]
+                                            //                     .lectureParagraphBody ??
+                                            //                 'لیست خالی است'),
+                                            //         expandText: 'نمایش بیشتر',
+                                            //         maxLines: 5,
+                                            //         linkColor: Colors.deepPurple,
+                                            //         animation: true,
+                                            //         collapseOnTextTap: true,
+                                            //         prefixText: 'Pref',
+                                            //         onPrefixTap: () => {},
+                                            //         prefixStyle: const TextStyle(
+                                            //             fontWeight: FontWeight.bold),
+                                            //         onHashtagTap: (name) => {},
+                                            //         hashtagStyle: const TextStyle(
+                                            //           color: Color(0xFF30B6F9),
+                                            //         ),
+                                            //         onMentionTap: (username) => {},
+                                            //         mentionStyle: const TextStyle(
+                                            //           fontWeight: FontWeight.w600,
+                                            //         ),
+                                            //         onUrlTap: (url) => {},
+                                            //         urlStyle: const TextStyle(
+                                            //           decoration:
+                                            //               TextDecoration.underline,
+                                            //         ),
+                                            //       )),
+                                            // )
+                                          )))
+                                )])
                               ]);
                             }
                           })

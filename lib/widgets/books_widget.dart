@@ -5,6 +5,7 @@ import 'package:untitled/data/dto/api_lecture_search_criterias.dart';
 import 'package:untitled/data/dto/lecture_dto.dart';
 import 'package:untitled/data/repositories/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:untitled/utilities/helpers.dart';
 import 'package:untitled/utilities/settings.dart';
 import 'package:untitled/widgets/book_selection.dart';
 import 'package:untitled/widgets/lectures_widget.dart';
@@ -199,7 +200,9 @@ class _BooksWidgetState extends State<BooksWidget> {
                             child: Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: ExpandableText(
-                                  textAlign: TextAlign.justify,
+                                  textAlign: (Helpers.isHostPlatformWeb()
+                                      ? TextAlign.start
+                                      : TextAlign.justify),
                                   style:
                                       PersianFonts.Yekan.copyWith(fontSize: 13),
                                   (snapshot.data!.isEmpty ||
@@ -218,7 +221,7 @@ class _BooksWidgetState extends State<BooksWidget> {
                                               .lectureParagraphBody ??
                                           'لیست خالی است'),
                                   expandText: 'نمایش بیشتر',
-                                  maxLines: 5,
+                                  maxLines: 3,
                                   linkColor: Colors.deepPurple,
                                   animation: true,
                                   collapseOnTextTap: true,

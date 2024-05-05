@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class WebView extends StatefulWidget {
   const WebView(Key key) : super(key: key);
@@ -16,46 +17,43 @@ class _WebViewState extends State<WebView> {
   int _stackIndex = 1;
   @override
   Widget build(BuildContext context) {
-    bool isRunningOnWindows =
-        Theme.of(context).platform == TargetPlatform.windows;
     return RefreshIndicator(
-        onRefresh: _pullRefresh,
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: (!isRunningOnWindows
-              ? Expanded(
-                  child: // IndexedStack(index: _stackIndex, children: [
-                      InAppWebView(
-                    initialUrlRequest:
-                        URLRequest(url: WebUri('https://app.sadeghieh.com')),
-                    initialOptions: InAppWebViewGroupOptions(
-                      crossPlatform: InAppWebViewOptions(
-                          useShouldOverrideUrlLoading: true),
+      onRefresh: _pullRefresh,
+      child: (kIsWeb ||
+              Theme.of(context).platform == TargetPlatform.android ||
+              Theme.of(context).platform == TargetPlatform.iOS
+          ? Expanded(
+              child: // IndexedStack(index: _stackIndex, children: [
+                  InAppWebView(
+                initialUrlRequest:
+                    URLRequest(url: WebUri('https://app.sadeghieh.com')),
+                initialSettings: InAppWebViewSettings(
+                    //crossPlatform: InAppWebViewOptions(
+                    //useShouldOverrideUrlLoading: true),
                     ),
-                    onLoadStop: (_, __) {
-                      setState(() {
-                        _stackIndex = 0;
-                      });
-                      throw Exception('Error');
-                    },
-                    onLoadError: (_, __, ___, ____) {
-                      setState(() {
-                        _stackIndex = 0;
-                      });
-                      throw Exception('Error');
-                    },
-                    onLoadHttpError: (_, __, ___, ____) {
-                      setState(() {
-                        _stackIndex = 0;
-                      });
-                      //TODO: Show error alert message (Error in receive data from server)
-                      throw Exception('Error');
-                    },
-                  ),
-                  //] )
-                )
-              : const Text('Please visit app.***.com')),
-        ));
+                onLoadStop: (_, __) {
+                  setState(() {
+                    _stackIndex = 0;
+                  });
+                  throw Exception('Error');
+                },
+                onReceivedError: (controller, request, error) => {
+                  setState(() {
+                    _stackIndex = 0;
+                  }),
+                  throw Exception('Error'),
+                },
+                onReceivedHttpError: (controller, request, errorResponse) => {
+                  setState(() {
+                    _stackIndex = 0;
+                  }),
+                  throw Exception('Error')
+                },
+              ),
+              //] )
+            )
+          : const Text('Please visit app.***.com')),
+    );
   }
 
   @override

@@ -6,6 +6,7 @@ import 'package:untitled/data/dto/api_lecture_search_criterias.dart';
 import 'package:untitled/data/dto/lecture_dto.dart';
 import 'package:untitled/data/repositories/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:untitled/utilities/helpers.dart';
 import 'package:untitled/utilities/settings.dart';
 
 class LecturesWidget extends StatefulWidget {
@@ -200,7 +201,9 @@ class _LecturesWidgetState extends State<LecturesWidget> {
                           const Padding(padding: EdgeInsets.only(left: 5)),
                           Expanded(
                               child: ExpandableText(
-                            textAlign: TextAlign.justify,
+                            textAlign: (Helpers.isHostPlatformWeb()
+                                ? TextAlign.start
+                                : TextAlign.justify),
                             style: PersianFonts.Samim.copyWith(fontSize: 13),
                             (snapshot.data!.isNotEmpty
                                 ? snapshot

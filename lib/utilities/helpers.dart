@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:untitled/utilities/settings.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class Helpers {
   static Future<bool> isNetworkAvailable() async {
@@ -13,6 +15,14 @@ class Helpers {
       return false;
     }
     return false;
+  }
+
+  static bool isHostPlatformWeb() {
+    return kIsWeb;
+  }
+
+  static TargetPlatform getHostPlatform(BuildContext context) {
+    return Theme.of(context).platform;
   }
 
   static Jalali convertToJalali(DateTime gregorianDateTime) {

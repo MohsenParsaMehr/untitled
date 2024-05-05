@@ -218,7 +218,7 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                                                   RegExp(r'\t'), '\n') ??
                                           'لیست خالی است'),
                                   expandText: 'نمایش بیشتر',
-                                  maxLines: 6,
+                                  maxLines: 5,
                                   linkColor: Colors.deepPurple,
                                   animation: true,
                                   collapseOnTextTap: true,

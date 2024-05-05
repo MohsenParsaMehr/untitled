@@ -210,7 +210,6 @@ class _NarrationsState extends State<Narrations> {
                                   animation: true,
                                   collapseOnTextTap: true,
                                   //prefixText:
-                                  // (_type == LectureType.lecture ? '' : ''),
                                   onPrefixTap: () => {},
                                   prefixStyle: const TextStyle(
                                       fontWeight: FontWeight.bold),

@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
     return RefreshIndicator(
         onRefresh: _pullRefresh,
         child: Padding(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(1),
             child: ListView(
                 scrollDirection: Axis.vertical,
                 primary: true,
@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
                         child: const Text('Install')),
                   if (error != null) Text(error!),
                   //Column(children: <Widget>[
-                  //SlideShowWidget(),
+                  const SlideShowWidget(),
                   const QaWidget(Key('3')),
                   const NarrationsWidget(Key('4')),
 
