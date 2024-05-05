@@ -71,6 +71,9 @@ class _FavouritesState extends State<Favourites> {
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
+                        onError: (exception, stackTrace) {
+                          print(exception.toString());
+                        },
                         fit: BoxFit.fill,
                         colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.1), BlendMode.dstATop),
