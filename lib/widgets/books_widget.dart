@@ -41,6 +41,15 @@ class _BooksWidgetState extends State<BooksWidget> {
                 .replaceFirst(RegExp(r'LectureType.'), '')));
   }
   String? _selectedBookItem;
+  void handleMenuClick(int item) {
+    switch (item) {
+      case 0:
+        break;
+      case 1:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -58,7 +67,7 @@ class _BooksWidgetState extends State<BooksWidget> {
                         Colors.black.withOpacity(0.1), BlendMode.dstATop),
                     opacity: 0.1,
                     image: const AssetImage('assets/images/art-back.jpg'))),
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(8),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Row(
@@ -87,22 +96,6 @@ class _BooksWidgetState extends State<BooksWidget> {
                           children: [
                         IconButton.outlined(
                             onPressed: () {
-                              var snackBar = SnackBar(
-                                content: Text(
-                                    _lecturesSnapshotData[_currentLectureIndex]
-                                        .mediaUrl
-                                        .toString()),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            },
-                            icon: const Icon(
-                              Icons.download_rounded,
-                              size: 18,
-                              color: Colors.black45,
-                            )),
-                        IconButton.outlined(
-                            onPressed: () {
                               //Share.share(AppLocalizations.of(context)!.share);
                             },
                             icon: const Icon(
@@ -114,10 +107,42 @@ class _BooksWidgetState extends State<BooksWidget> {
                             onPressed: () {},
                             icon: const Icon(Icons.favorite_outline_rounded,
                                 size: 18, color: Colors.black45)),
-                        IconButton.outlined(
-                            onPressed: () {},
-                            icon: const Icon(Icons.shuffle_rounded,
-                                size: 18, color: Colors.black45)),
+                        PopupMenuButton<int>(
+                          color: Colors.black,
+                          // onOpened: () => {
+                          //   BottomSheetPopUp.show(
+                          //       context,
+                          //       SearchOptionsWidget(
+                          //           const Key('bookSearchOptions')))
+                          // },
+                          onSelected: (item) => handleMenuClick(item),
+                          itemBuilder: (context) => [
+                            PopupMenuItem<int>(
+                                value: 0,
+                                child: IconButton.outlined(
+                                    onPressed: () {
+                                      var snackBar = SnackBar(
+                                        content: Text(_lecturesSnapshotData[
+                                                _currentLectureIndex]
+                                            .mediaUrl
+                                            .toString()),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    },
+                                    icon: const Icon(
+                                      Icons.download_rounded,
+                                      size: 18,
+                                      color: Colors.white,
+                                    ))),
+                            PopupMenuItem<int>(
+                                value: 1,
+                                child: IconButton.outlined(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.shuffle_rounded,
+                                        size: 18, color: Colors.white))),
+                          ],
+                        ),
                       ]))
                 ],
               ),
@@ -191,11 +216,6 @@ class _BooksWidgetState extends State<BooksWidget> {
                           //)
                         ),
                         Row(children: [
-                          const Icon(
-                            Icons.speaker_notes_rounded,
-                            color: Colors.black26,
-                          ),
-                          const Padding(padding: EdgeInsets.only(left: 5)),
                           Expanded(
                             child: Padding(
                                 padding: const EdgeInsets.only(left: 10),

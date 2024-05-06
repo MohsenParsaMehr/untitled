@@ -6,9 +6,11 @@ import 'package:untitled/data/dto/lecture_dto.dart';
 import 'package:untitled/data/repositories/lectures_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:untitled/utilities/settings.dart';
+import 'package:untitled/widgets/book_options_widget.dart';
 import 'package:untitled/widgets/book_selection.dart';
 import 'package:untitled/widgets/bottom_sheet_popup.dart';
 import 'package:untitled/widgets/lectures_widget.dart';
+import 'package:untitled/widgets/search_options_widget.dart';
 
 class NarrationsWidget extends StatefulWidget {
   const NarrationsWidget(Key key) : super(key: key);
@@ -18,6 +20,7 @@ class NarrationsWidget extends StatefulWidget {
 
 class _NarrationsWidgetState extends State<NarrationsWidget> {
   int _currentLectureIndex = 0, _currentLectureParagraphIndex = 0;
+  IconData _narrationPlayIcon = Icons.play_arrow_rounded;
   Future<List<LectureDto>> _lectures = Future.value([]);
 //  var _lectures = LecturesRepository<APILectureSearchCriterias>().getLectures(
   //     Settings.getLecturesUrl,
@@ -35,6 +38,15 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                 .replaceFirst(RegExp(r'LectureType.'), '')));
   }
   String? _selectedBookItem;
+  void handleMenuClick(int item) {
+    switch (item) {
+      case 0:
+        break;
+      case 1:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -52,7 +64,7 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                         Colors.black.withOpacity(0.1), BlendMode.dstATop),
                     opacity: 0.1,
                     image: const AssetImage('assets/images/art-back.jpg'))),
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(8),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Row(
@@ -82,22 +94,6 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                         IconButton.outlined(
-                            onPressed: () {
-                              var snackBar = SnackBar(
-                                content: Text(
-                                    _lecturesSnapshotData[_currentLectureIndex]
-                                        .mediaUrl
-                                        .toString()),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            },
-                            icon: const Icon(
-                              Icons.download_rounded,
-                              size: 18,
-                              color: Colors.black45,
-                            )),
-                        IconButton.outlined(
                             onPressed: () {},
                             icon: const Icon(
                               Icons.share_rounded,
@@ -108,10 +104,42 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                             onPressed: () {},
                             icon: const Icon(Icons.favorite_outline_rounded,
                                 size: 18, color: Colors.black45)),
-                        IconButton.outlined(
-                            onPressed: () {},
-                            icon: const Icon(Icons.shuffle_rounded,
-                                size: 18, color: Colors.black45)),
+                        PopupMenuButton<int>(
+                          color: Colors.black,
+                          // onOpened: () => {
+                          //   BottomSheetPopUp.show(
+                          //       context,
+                          //       SearchOptionsWidget(
+                          //           const Key('bookSearchOptions')))
+                          // },
+                          onSelected: (item) => handleMenuClick(item),
+                          itemBuilder: (context) => [
+                            PopupMenuItem<int>(
+                                value: 0,
+                                child: IconButton.outlined(
+                                    onPressed: () {
+                                      var snackBar = SnackBar(
+                                        content: Text(_lecturesSnapshotData[
+                                                _currentLectureIndex]
+                                            .mediaUrl
+                                            .toString()),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    },
+                                    icon: const Icon(
+                                      Icons.download_rounded,
+                                      size: 18,
+                                      color: Colors.white,
+                                    ))),
+                            PopupMenuItem<int>(
+                                value: 1,
+                                child: IconButton.outlined(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.shuffle_rounded,
+                                        size: 18, color: Colors.white))),
+                          ],
+                        ),
                       ]))
                 ],
               ),
@@ -184,14 +212,11 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                           ),
                           //)
                         ),
-                        Row(children: [
-                          const Icon(
-                            Icons.speaker_notes_rounded,
-                            color: Colors.black26,
-                          ),
-                          const Padding(padding: EdgeInsets.only(left: 5)),
-                          Expanded(
-                            child: Padding(
+                        Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                  child: Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: ExpandableText(
                                   textAlign: TextAlign.justify,
@@ -235,9 +260,31 @@ class _NarrationsWidgetState extends State<NarrationsWidget> {
                                   urlStyle: const TextStyle(
                                     decoration: TextDecoration.underline,
                                   ),
-                                )),
-                          )
-                        ])
+                                ),
+                              )),
+                              ClipOval(
+                                child: Material(
+                                  color: Colors.orangeAccent, // Button color
+                                  child: InkWell(
+                                    splashColor:
+                                        Colors.orangeAccent, // Splash color
+                                    onTap: () {
+                                      setState(() {
+                                        _narrationPlayIcon =
+                                            (_narrationPlayIcon ==
+                                                    Icons.play_arrow_rounded
+                                                ? Icons.pause_rounded
+                                                : Icons.play_arrow_rounded);
+                                      });
+                                    },
+                                    child: SizedBox(
+                                        width: 40,
+                                        height: 40,
+                                        child: Icon(_narrationPlayIcon)),
+                                  ),
+                                ),
+                              )
+                            ])
                       ]);
                     }
                   })

@@ -59,7 +59,7 @@ class _LecturesWidgetState extends State<LecturesWidget> {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(1),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Row(

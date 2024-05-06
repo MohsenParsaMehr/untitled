@@ -34,6 +34,15 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                 .toString()
                 .replaceFirst(RegExp(r'LectureType.'), '')));
   }
+  void handleMenuClick(int item) {
+    switch (item) {
+      case 0:
+        break;
+      case 1:
+        break;
+    }
+  }
+
   String? _selectedBookItem;
   @override
   Widget build(BuildContext context) {
@@ -82,22 +91,6 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                         IconButton.outlined(
-                            onPressed: () {
-                              var snackBar = SnackBar(
-                                content: Text(
-                                    _lecturesSnapshotData[_currentLectureIndex]
-                                        .mediaUrl
-                                        .toString()),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            },
-                            icon: const Icon(
-                              Icons.download_rounded,
-                              size: 18,
-                              color: Colors.black45,
-                            )),
-                        IconButton.outlined(
                             onPressed: () {},
                             icon: const Icon(
                               Icons.share_rounded,
@@ -108,10 +101,42 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                             onPressed: () {},
                             icon: const Icon(Icons.favorite_outline_rounded,
                                 size: 18, color: Colors.black45)),
-                        IconButton.outlined(
-                            onPressed: () {},
-                            icon: const Icon(Icons.shuffle_rounded,
-                                size: 18, color: Colors.black45)),
+                        PopupMenuButton<int>(
+                          color: Colors.black,
+                          // onOpened: () => {
+                          //   BottomSheetPopUp.show(
+                          //       context,
+                          //       SearchOptionsWidget(
+                          //           const Key('bookSearchOptions')))
+                          // },
+                          onSelected: (item) => handleMenuClick(item),
+                          itemBuilder: (context) => [
+                            PopupMenuItem<int>(
+                                value: 0,
+                                child: IconButton.outlined(
+                                    onPressed: () {
+                                      var snackBar = SnackBar(
+                                        content: Text(_lecturesSnapshotData[
+                                                _currentLectureIndex]
+                                            .mediaUrl
+                                            .toString()),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    },
+                                    icon: const Icon(
+                                      Icons.download_rounded,
+                                      size: 18,
+                                      color: Colors.white,
+                                    ))),
+                            PopupMenuItem<int>(
+                                value: 1,
+                                child: IconButton.outlined(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.shuffle_rounded,
+                                        size: 18, color: Colors.white))),
+                          ],
+                        ),
                       ]))
                 ],
               ),
@@ -185,11 +210,6 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                         //   //)
                         // ),
                         Row(children: [
-                          const Icon(
-                            Icons.format_align_center_rounded,
-                            color: Colors.black26,
-                          ),
-                          const Padding(padding: EdgeInsets.only(left: 5)),
                           Expanded(
                             child: Padding(
                                 padding: const EdgeInsets.only(left: 10),
@@ -218,7 +238,7 @@ class _PoemsWidgetState extends State<PoemsWidget> {
                                                   RegExp(r'\t'), '\n') ??
                                           'لیست خالی است'),
                                   expandText: 'نمایش بیشتر',
-                                  maxLines: 5,
+                                  maxLines: 4,
                                   linkColor: Colors.deepPurple,
                                   animation: true,
                                   collapseOnTextTap: true,

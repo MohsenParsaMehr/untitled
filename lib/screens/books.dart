@@ -2,6 +2,7 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:night_reader/night_reader.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'package:untitled/data/dto/api_lecture_search_criterias.dart';
 import 'package:untitled/data/dto/lecture_dto.dart';
@@ -13,6 +14,7 @@ import 'package:untitled/utilities/settings.dart';
 import 'package:untitled/widgets/book_selection.dart';
 import 'package:untitled/widgets/bottom_sheet_popup.dart';
 import 'package:untitled/widgets/lectures_widget.dart';
+import 'package:untitled/widgets/search_options_widget.dart';
 
 class Books extends StatefulWidget {
   const Books(Key key) : super(key: key);
@@ -118,17 +120,27 @@ class _BooksState extends State<Books> {
                       isBookmarked = !isBookmarked;
                     });
                   }),
-              PopupMenuButton<int>(
-                onSelected: (item) => handleClick(item),
-                itemBuilder: (context) => [
-                  PopupMenuItem<int>(
-                      value: 0,
-                      child: Text(AppLocalizations.of(context)!.author)),
-                  PopupMenuItem<int>(
-                      value: 1,
-                      child: Text(AppLocalizations.of(context)!.author)),
-                ],
-              ),
+              IconButton(
+                  onPressed: () {
+                    BottomSheetPopUp.show(context,
+                        SearchOptionsWidget(const Key('search_options')));
+                  },
+                  icon: const Icon(Icons.menu_open_rounded)),
+              // PopupMenuButton<int>(
+              //   onOpened: () => {
+              //     BottomSheetPopUp.show(context,
+              //         SearchOptionsWidget(const Key('bookSearchOptions')))
+              //   },
+              //   //onSelected: (item) => handleClick(item),
+              //   itemBuilder: (context) => [
+              //     // PopupMenuItem<int>(
+              //     //     value: 0,
+              //     //     child: Text(AppLocalizations.of(context)!.author)),
+              //     // PopupMenuItem<int>(
+              //     //     value: 1,
+              //     //     child: Text(AppLocalizations.of(context)!.author)),
+              //   ],
+              // ),
             ]),
         body: SingleChildScrollView(
             child: GestureDetector(
@@ -232,12 +244,12 @@ class _BooksState extends State<Books> {
                                   //)
                                 ),
                                 Row(children: [
-                                  const Icon(
-                                    Icons.speaker_notes_rounded,
-                                    color: Colors.black26,
-                                  ),
-                                  const Padding(
-                                      padding: EdgeInsets.only(left: 5)),
+                                  // const Icon(
+                                  //   Icons.speaker_notes_rounded,
+                                  //   color: Colors.black26,
+                                  // ),
+                                  // const Padding(
+                                  //     padding: EdgeInsets.only(left: 5)),
                                   Expanded(
                                       child: GestureDetector(
                                           onScaleStart: (details) {
@@ -250,86 +262,88 @@ class _BooksState extends State<Books> {
                                             });
                                           },
                                           child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 10),
-                                                AnimatedNightReader(
-            tint: Colors.blue,
-            value: value1,
-            duration: const Duration(seconds: 2),
-            child:
-                                            child: RichText(
-                                                textScaleFactor: _scaleFactor,
-                                                textAlign:
-                                                    (Helpers.isHostPlatformWeb()
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: AnimatedNightReader(
+                                                //tint: Colors.black,
+                                                value: 1,
+                                                duration:
+                                                    const Duration(seconds: 2),
+                                                child: RichText(
+                                                    textScaleFactor:
+                                                        _scaleFactor,
+                                                    textAlign: (Helpers.isHostPlatformWeb()
                                                         ? TextAlign.start
                                                         : TextAlign.justify),
-                                                text: TextSpan(
-                                                    style: PersianFonts.Samim.copyWith(
-                                                        fontSize: 13),
-                                                    text: snapshot.data!.isEmpty ||
-                                                            snapshot.data![_currentLectureIndex].lectureParagraphs !=
-                                                                    null &&
-                                                                snapshot
-                                                                    .data![
-                                                                        _currentLectureIndex]
-                                                                    .lectureParagraphs!
-                                                                    .isEmpty
-                                                        ? ''
-                                                        : snapshot
-                                                                .data![_currentLectureIndex]
-                                                                .lectureParagraphs![_currentLectureParagraphIndex]
-                                                                .lectureParagraphBody ??
-                                                            'لیست خالی است')),
+                                                    text: TextSpan(
+                                                        style: PersianFonts.Samim.copyWith(
+                                                            fontSize: 13,
+                                                            color:
+                                                                Colors.black),
+                                                        text: snapshot.data!.isEmpty ||
+                                                                snapshot.data![_currentLectureIndex].lectureParagraphs !=
+                                                                        null &&
+                                                                    snapshot
+                                                                        .data![
+                                                                            _currentLectureIndex]
+                                                                        .lectureParagraphs!
+                                                                        .isEmpty
+                                                            ? ''
+                                                            : snapshot
+                                                                    .data![_currentLectureIndex]
+                                                                    .lectureParagraphs![_currentLectureParagraphIndex]
+                                                                    .lectureParagraphBody ??
+                                                                'لیست خالی است')),
 
-                                            //        ExpandableText(
-                                            //         textAlign: TextAlign.justify,
-                                            //         style: PersianFonts.Yekan.copyWith(
-                                            //             fontSize: 13),
-                                            //         (snapshot.data!.isEmpty ||
-                                            //                 snapshot
-                                            //                             .data![
-                                            //                                 _currentLectureIndex]
-                                            //                             .lectureParagraphs !=
-                                            //                         null &&
-                                            //                     snapshot
-                                            //                         .data![
-                                            //                             _currentLectureIndex]
-                                            //                         .lectureParagraphs!
-                                            //                         .isEmpty
-                                            //             ? ''
-                                            //             : snapshot
-                                            //                     .data![
-                                            //                         _currentLectureIndex]
-                                            //                     .lectureParagraphs![
-                                            //                         _currentLectureParagraphIndex]
-                                            //                     .lectureParagraphBody ??
-                                            //                 'لیست خالی است'),
-                                            //         expandText: 'نمایش بیشتر',
-                                            //         maxLines: 5,
-                                            //         linkColor: Colors.deepPurple,
-                                            //         animation: true,
-                                            //         collapseOnTextTap: true,
-                                            //         prefixText: 'Pref',
-                                            //         onPrefixTap: () => {},
-                                            //         prefixStyle: const TextStyle(
-                                            //             fontWeight: FontWeight.bold),
-                                            //         onHashtagTap: (name) => {},
-                                            //         hashtagStyle: const TextStyle(
-                                            //           color: Color(0xFF30B6F9),
-                                            //         ),
-                                            //         onMentionTap: (username) => {},
-                                            //         mentionStyle: const TextStyle(
-                                            //           fontWeight: FontWeight.w600,
-                                            //         ),
-                                            //         onUrlTap: (url) => {},
-                                            //         urlStyle: const TextStyle(
-                                            //           decoration:
-                                            //               TextDecoration.underline,
-                                            //         ),
-                                            //       )),
-                                            // )
-                                          )))
-                                )])
+                                                //        ExpandableText(
+                                                //         textAlign: TextAlign.justify,
+                                                //         style: PersianFonts.Yekan.copyWith(
+                                                //             fontSize: 13),
+                                                //         (snapshot.data!.isEmpty ||
+                                                //                 snapshot
+                                                //                             .data![
+                                                //                                 _currentLectureIndex]
+                                                //                             .lectureParagraphs !=
+                                                //                         null &&
+                                                //                     snapshot
+                                                //                         .data![
+                                                //                             _currentLectureIndex]
+                                                //                         .lectureParagraphs!
+                                                //                         .isEmpty
+                                                //             ? ''
+                                                //             : snapshot
+                                                //                     .data![
+                                                //                         _currentLectureIndex]
+                                                //                     .lectureParagraphs![
+                                                //                         _currentLectureParagraphIndex]
+                                                //                     .lectureParagraphBody ??
+                                                //                 'لیست خالی است'),
+                                                //         expandText: 'نمایش بیشتر',
+                                                //         maxLines: 5,
+                                                //         linkColor: Colors.deepPurple,
+                                                //         animation: true,
+                                                //         collapseOnTextTap: true,
+                                                //         prefixText: 'Pref',
+                                                //         onPrefixTap: () => {},
+                                                //         prefixStyle: const TextStyle(
+                                                //             fontWeight: FontWeight.bold),
+                                                //         onHashtagTap: (name) => {},
+                                                //         hashtagStyle: const TextStyle(
+                                                //           color: Color(0xFF30B6F9),
+                                                //         ),
+                                                //         onMentionTap: (username) => {},
+                                                //         mentionStyle: const TextStyle(
+                                                //           fontWeight: FontWeight.w600,
+                                                //         ),
+                                                //         onUrlTap: (url) => {},
+                                                //         urlStyle: const TextStyle(
+                                                //           decoration:
+                                                //               TextDecoration.underline,
+                                                //         ),
+                                                //       )),
+                                                // )
+                                              ))))
+                                ])
                               ]);
                             }
                           })

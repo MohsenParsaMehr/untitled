@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
     return RefreshIndicator(
         onRefresh: _pullRefresh,
         child: Padding(
-            padding: const EdgeInsets.all(1),
+            padding: const EdgeInsets.all(0),
             child: ListView(
                 scrollDirection: Axis.vertical,
                 primary: true,

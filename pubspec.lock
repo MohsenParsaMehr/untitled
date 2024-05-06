@@ -613,6 +613,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  night_reader:
+    dependency: "direct main"
+    description:
+      name: night_reader
+      sha256: "5ab80a1b20e1efa3d93b7fb8fe50b0308335699d9fd8d76f314a09bc0a98fcad"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+1"
   octo_image:
     dependency: transitive
     description:

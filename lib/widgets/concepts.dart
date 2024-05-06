@@ -7,7 +7,7 @@ class ConceptsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         child: SizedBox(
-            width: MediaQuery.of(context).size.width / 2 - 6,
+            width: MediaQuery.of(context).size.width / 2 - 1,
             height: 80,
             child: const Card(
                 color: Colors.white60,

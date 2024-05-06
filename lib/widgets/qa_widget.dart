@@ -20,7 +20,7 @@ class _QaWidgetState extends State<QaWidget> {
     return GestureDetector(
       child: Card(
           color: Colors.teal.withOpacity(0.8),
-          elevation: 7,
+          elevation: 4,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
           child: Container(
@@ -31,7 +31,7 @@ class _QaWidgetState extends State<QaWidget> {
                     colorFilter: ColorFilter.mode(
                         Colors.black.withOpacity(0.1), BlendMode.dstATop),
                     image: const AssetImage('assets/images/art-back.jpg'))),
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(8),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Row(
@@ -102,9 +102,6 @@ class _QaWidgetState extends State<QaWidget> {
                           ),
                         ]),
                         Row(children: [
-                          const Icon(Icons.mark_chat_read_rounded,
-                              color: Colors.black26),
-                          const Padding(padding: EdgeInsets.only(left: 5)),
                           Expanded(
                               child: ExpandableText(
                             textAlign: TextAlign.justify,
