@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:untitled/screens/books.dart';
 import 'package:untitled/screens/favourites.dart';
@@ -142,6 +143,61 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   void _onTipPressed() {
     setState(() {});
+  }
+
+  bool _showAppbar = true; //this is to show app bar
+  ScrollController _scrollBottomBarController =
+      ScrollController(); // set controller on scrolling
+  bool isScrollingDown = false;
+  bool _show = true;
+  double bottomBarHeight = 60; // set bottom bar height
+  double _bottomBarOffset = 0;
+  bool _hideFab = false;
+  @override
+  void initState() {
+    super.initState();
+    myScroll();
+  }
+
+  @override
+  void dispose() {
+    _scrollBottomBarController.removeListener(() {});
+    super.dispose();
+  }
+
+  void showBottomBar() {
+    setState(() {
+      _show = true;
+      _hideFab = false;
+    });
+  }
+
+  void hideBottomBar() {
+    setState(() {
+      _show = false;
+      _hideFab = true;
+    });
+  }
+
+  void myScroll() async {
+    _scrollBottomBarController.addListener(() {
+      if (_scrollBottomBarController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        if (!isScrollingDown) {
+          isScrollingDown = true;
+          _showAppbar = false;
+          hideBottomBar();
+        }
+      }
+      if (_scrollBottomBarController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        if (isScrollingDown) {
+          isScrollingDown = false;
+          _showAppbar = true;
+          showBottomBar();
+        }
+      }
+    });
   }
 
   @override
@@ -392,73 +448,87 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       )),
 
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
+      appBar: _showAppbar
+          ? AppBar(
+              // TRY THIS: Try changing the color here to a specific color (to
+              // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+              // change color while the other colors stay the same.
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              // Here we take the value from the MyHomePage object that was created by
+              // the App.build method, and use it to set our appbar title.
 
-        title: Text(
-          AppLocalizations.of(context)!.greenLight,
-          style: theme.textTheme.bodyLarge,
-        ),
+              title: Text(
+                AppLocalizations.of(context)!.greenLight,
+                style: theme.textTheme.bodyLarge,
+              ),
 
-        actions: [
-          IconButton(
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => const Search())),
-              icon: const Icon(Icons.search)),
-          IconButton(
-              onPressed: () => ({
-                    BottomSheetPopUp.show(context,
-                        const LanguageSelectWidget(Key('Language_Select')))
-                  }),
-              icon: const Icon(CupertinoIcons.globe))
-        ],
-      ),
+              actions: [
+                IconButton(
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const Search())),
+                    icon: const Icon(Icons.search)),
+                IconButton(
+                    onPressed: () => ({
+                          BottomSheetPopUp.show(
+                              context,
+                              const LanguageSelectWidget(
+                                  Key('Language_Select')))
+                        }),
+                    icon: const Icon(CupertinoIcons.globe))
+              ],
+            )
+          : PreferredSize(
+              preferredSize: const Size(0.0, 0.0),
+              child: Container(),
+            ),
       body: SafeArea(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: _screens[_currentIndex],
       ),
       bottomNavigationBar: SizedBox(
-          height: 50,
-          child: BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            selectedFontSize: 10,
-            unselectedFontSize: 10,
-            iconSize: 24,
-            currentIndex: _currentIndex,
-            onTap: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            items: [
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.home_filled),
-                label: AppLocalizations.of(context)!.home,
+        height: bottomBarHeight,
+        width: MediaQuery.of(context).size.width,
+        child: _show
+            ? BottomNavigationBar(
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                selectedFontSize: 10,
+                unselectedFontSize: 10,
+                iconSize: 24,
+                currentIndex: _currentIndex,
+                onTap: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                items: [
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.home_filled),
+                    label: AppLocalizations.of(context)!.home,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.web_rounded),
+                    label: AppLocalizations.of(context)!.web,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.person_2_rounded),
+                    label: AppLocalizations.of(context)!.profile,
+                  ),
+                ],
+              )
+            : Container(
+                color: Colors.white,
+                width: MediaQuery.of(context).size.width,
               ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.web_rounded),
-                label: AppLocalizations.of(context)!.web,
-              ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.person_2_rounded),
-                label: AppLocalizations.of(context)!.profile,
-              ),
-            ],
-          )),
-      floatingActionButton: (_currentIndex != 1
-          ? FloatingActionButton(
+      ),
+      floatingActionButton: (_currentIndex == 1 || _hideFab
+          ? null
+          : FloatingActionButton(
               onPressed: _onTipPressed,
               tooltip: 'نکته روز',
               child: const Icon(Icons.tips_and_updates),
-            )
-          : null), // This trailing comma makes auto-formatting nicer for build methods.
+            )), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
